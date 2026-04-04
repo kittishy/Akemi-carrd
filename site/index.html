@@ -567,9 +567,8 @@
       padding: var(--padding-vertical) var(--padding-horizontal);
     }
 
-    #container01 > .wrapper > .inner > :nth-child(1),
-    #container01 > .wrapper > .inner > :nth-child(2) {
-      width: calc(50% + (var(--gutters) / 2));
+    #container01 > .wrapper > .inner > :nth-child(1) {
+      width: 100%;
     }
 
     #container02:not(:first-child) {
@@ -954,31 +953,7 @@
       display: none;
     }
 
-    #icons01 {
-      justify-content: flex-end;
-      font-size: 1.125em;
-      gap: 0.75rem;
-    }
 
-    #icons01 li a {
-      height: 1em;
-      width: 1em;
-      transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
-    }
-
-    #icons01 li a svg {
-      height: 100%;
-      width: 100%;
-      transition: fill 0.25s ease;
-    }
-
-    #icons01 a svg {
-      fill: #fff;
-    }
-
-    #icons01 li a + svg {
-      transition: fill 0.25s ease, stroke 0.25s ease;
-    }
 
     /* ==========================================================================
        8. DIVIDERS
@@ -1543,10 +1518,7 @@
         font-size: 0.75em;
       }
 
-      #icons01 {
-        font-size: 1.125em;
-        gap: 0.75rem;
-      }
+
 
       #divider01::before {
         height: 2rem;
@@ -1710,7 +1682,6 @@
     }
 
     .buttons li a,
-    #icons01 li a,
     #image04 .frame img,
     #image01 .frame img {
       transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease, filter 180ms ease;
@@ -1744,19 +1715,6 @@
       padding-left: 0.875rem;
       padding-right: 0.875rem;
       background: transparent;
-    }
-
-    #icons01 li a {
-      width: 1.8rem;
-      height: 1.8rem;
-      border-radius: 999px;
-      background: linear-gradient(145deg, #f7fbff 0%, #e8f0f9 100%);
-      border: 1px solid #cfdceb;
-      box-shadow: 0 2px 8px rgba(47, 66, 83, 0.1);
-    }
-
-    #icons01 a svg {
-      fill: #4a6785;
     }
 
     /* Back Button (About Section) */
@@ -1806,6 +1764,14 @@
       box-shadow: 0 6px 14px rgba(31, 51, 71, 0.1);
     }
 
+    #image02 {
+      text-align: center;
+    }
+
+    #image02 .frame {
+      width: 2.8rem;
+    }
+
     #container06.columns > .wrapper > .inner {
       align-items: center;
       gap: 0.25rem;
@@ -1828,23 +1794,13 @@
       text-align: right;
     }
 
-    #image02 {
-      text-align: center;
-    }
-
-    #image02 .frame {
-      width: 2.8rem;
-    }
-
     #text04 {
       max-width: none;
       letter-spacing: 0.08em;
     }
 
     .buttons li a:hover,
-    .buttons li a:focus-visible,
-    #icons01 li a:hover,
-    #icons01 li a:focus-visible {
+    .buttons li a:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 10px 18px rgba(45, 73, 100, 0.18);
     }
@@ -1917,11 +1873,6 @@
         line-height: 2.25rem;
         padding: 0 0.75rem;
         font-size: 0.9em;
-      }
-
-      #icons01 li a {
-        width: 2.25rem !important;
-        height: 2.25rem !important;
       }
 
       /* Avatar */
@@ -2002,7 +1953,7 @@
       #container01.columns > .wrapper > .inner {
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         gap: 0;
         padding: 0.25rem 0.25rem;
       }
@@ -2028,15 +1979,6 @@
         font-size: 0.85rem;
         border-radius: 0.375rem;
         background: rgba(79, 115, 152, 0.06);
-      }
-
-      #icons01 {
-        justify-content: flex-end;
-      }
-
-      #icons01 li a {
-        width: 2.5rem !important;
-        height: 2.5rem !important;
       }
 
       /* ── HOME: Profile Header ── */
@@ -2199,29 +2141,9 @@
         text-align: center;
       }
 
-      #image02 {
-        display: none;
-      }
-
       #text06 {
         font-size: 1rem;
         letter-spacing: 0.2em;
-      }
-
-      #text06 .flags {
-        display: none;
-      }
-
-      @media (min-width: 481px) {
-        #text06 .flags {
-          display: inline;
-        }
-      }
-
-      @media (max-width: 480px) {
-        #text06::after {
-          content: "🇧🇷 🇯🇵 🇪🇸 🇪🇳";
-        }
       }
 
       #text04 {
@@ -2371,14 +2293,6 @@
         font-size: 0.92rem;
       }
 
-      #text06 .flags {
-        display: none;
-      }
-
-      #text06::after {
-        content: "🇧🇷 🇯🇵 🇪🇸 🇪🇳";
-      }
-
       #about-section .back-button {
         width: 2.25rem;
         height: 2.25rem;
@@ -2417,7 +2331,6 @@
       #buttons02 li a,
       #buttons03 li a,
       #buttons05 li a,
-      #icons01 li a,
       #about-section .back-button {
         min-height: 44px;
         min-width: 44px;
@@ -2459,10 +2372,7 @@
       <path d="M5.5,19.9c0-0.3,0.1-0.3,0.1-0.4L18.3,6.7c0.1-0.1,0.1-0.1,0.4-0.1c0.3,0,0.3,0.1,0.4,0.1l1.5,1.5c0.1,0.1,0.1,0.1,0.1,0.4 S20.6,8.9,20.6,9l-9.2,9.2h22.4c0.1,0,0.2,0,0.2,0c0,0,0,0,0,0c0.1,0.1,0.1,0.2,0.1,0.4v2.5c0,0.2-0.1,0.4-0.1,0.5c0,0-0.1,0-0.2,0 H11.4l9.2,9.2c0.1,0.1,0.1,0.1,0.1,0.4c0,0.3-0.1,0.3-0.1,0.4l-1.5,1.5c-0.1,0.1-0.1,0.1-0.4,0.1c-0.3,0-0.3-0.1-0.4-0.1L5.6,20.3 C5.6,20.2,5.5,20.2,5.5,19.9z" />
     </symbol>
 
-    <!-- Search -->
-    <symbol id="icon-search" viewBox="0 0 40 40">
-      <path d="M35.8,36.5l-0.1,0.1c-0.6,0.6-1.6,0.6-2.3,0l-9.7-9.7c-1.9,1.2-4.2,1.9-6.6,1.9c-7,0-12.7-5.7-12.7-12.7 S9.9,3.4,17,3.4s12.7,5.7,12.7,12.7c0,3.4-1.3,6.4-3.4,8.7l9.5,9.5C36.4,34.9,36.4,35.9,35.8,36.5z M17,6.5c-5.3,0-9.6,4.3-9.6,9.6 s4.3,9.6,9.6,9.6s9.6-4.3,9.6-9.6S22.2,6.5,17,6.5z" />
-    </symbol>
+
 
     <!-- Heart -->
     <symbol id="icon-heart" viewBox="0 0 40 40">
@@ -2517,19 +2427,7 @@
                     </li>
                   </ul>
                 </div>
-                <div>
-                  <ul id="icons01" class="icons">
-                    <li>
-                      <a class="n01" href="#about" role="button">
-                        <svg aria-labelledby="nav-search-title">
-                          <title id="nav-search-title">Search</title>
-                          <use xlink:href="#icon-search"></use>
-                        </svg>
-                        <span class="label">Search</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+
               </div>
             </div>
           </div>
@@ -2646,7 +2544,7 @@
                   </div>
                 </div>
                 <div>
-                  <p id="text06"><span class="flags">🇧🇷 🇯🇵 🇪🇸 🇪🇳</span></p>
+                  <p id="text06">🇧🇷 🇯🇵 🇪🇸 🇺🇸</p>
                 </div>
                 <div>
                   <p id="text04">●●●</p>
