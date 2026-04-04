@@ -2208,6 +2208,22 @@
         letter-spacing: 0.2em;
       }
 
+      #text06 .flags {
+        display: none;
+      }
+
+      @media (min-width: 481px) {
+        #text06 .flags {
+          display: inline;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #text06::after {
+          content: "🇧🇷 🇯🇵 🇪🇸 🇪🇳";
+        }
+      }
+
       #text04 {
         font-size: 0.75rem;
         letter-spacing: 0.15em;
@@ -2353,6 +2369,14 @@
 
       #text06 {
         font-size: 0.92rem;
+      }
+
+      #text06 .flags {
+        display: none;
+      }
+
+      #text06::after {
+        content: "🇧🇷 🇯🇵 🇪🇸 🇪🇳";
       }
 
       #about-section .back-button {
@@ -2622,7 +2646,7 @@
                   </div>
                 </div>
                 <div>
-                  <p id="text06">🇧🇷 🇯🇵 🇪🇸 🇪🇳</p>
+                  <p id="text06"><span class="flags">🇧🇷 🇯🇵 🇪🇸 🇪🇳</span></p>
                 </div>
                 <div>
                   <p id="text04">●●●</p>
