@@ -212,6 +212,12 @@
       font-size: 17pt;
     }
 
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
+
     body {
       line-height: 1;
       min-height: var(--viewport-height);
@@ -660,12 +666,15 @@
     }
 
     #container08 > .wrapper {
-      background-color: #f5f5f5;
-      border-color: #c7c7c7;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(240, 240, 240, 0.3) 100%);
+      border-color: rgba(255, 255, 255, 0.38);
       border-style: solid;
       border-width: 1px;
       border-top-left-radius: 0.375rem;
       border-top-right-radius: 0.375rem;
+      box-shadow: 0 14px 32px rgba(31, 51, 71, 0.12);
     }
 
     #container08 > .wrapper > .inner {
@@ -686,13 +695,31 @@
     }
 
     #container09 > .wrapper {
-      background-color: #f5f5f5;
-      border-color: #c7c7c7;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(235, 238, 244, 0.28) 100%);
+      border-color: rgba(255, 255, 255, 0.34);
       border-style: solid;
       border-left-width: 1px;
       border-right-width: 1px;
+      border-bottom-width: 1px;
       border-bottom-left-radius: 0.375rem;
       border-bottom-right-radius: 0.375rem;
+      box-shadow: 0 18px 36px rgba(31, 51, 71, 0.14);
+    }
+
+    @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+      #container08 > .wrapper {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(240, 240, 240, 0.3) 100%);
+        -webkit-backdrop-filter: blur(10px) saturate(120%);
+        backdrop-filter: blur(10px) saturate(120%);
+      }
+
+      #container09 > .wrapper {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(235, 238, 244, 0.28) 100%);
+        -webkit-backdrop-filter: blur(10px) saturate(120%);
+        backdrop-filter: blur(10px) saturate(120%);
+      }
     }
 
     #container09 > .wrapper > .inner {
@@ -702,6 +729,29 @@
       padding: var(--padding-vertical) var(--padding-horizontal);
       border-bottom-left-radius: calc(0.375rem - 1px);
       border-bottom-right-radius: calc(0.375rem - 1px);
+    }
+
+    #container08 > .wrapper > .inner,
+    #container09 > .wrapper > .inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    #about-section #container08 > .wrapper::before,
+    #about-section #container09 > .wrapper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(143, 129, 118, 0.08) 100%);
+    }
+
+    #about-section #container08 > .wrapper::before {
+      border-radius: 0.375rem 0.375rem 0 0;
+    }
+
+    #about-section #container09 > .wrapper::before {
+      border-radius: 0 0 0.375rem 0.375rem;
     }
 
     /* ==========================================================================
@@ -1129,6 +1179,18 @@
 
     #text07 span.p:nth-child(n + 2) {
       margin-top: 1rem;
+    }
+
+    #text08 {
+      text-align: center;
+      color: var(--v2-accent);
+      font-family: "Archivo", sans-serif;
+      font-size: clamp(0.72rem, 0.68rem + 0.2vw, 0.82rem);
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      opacity: 0.9;
+      margin-top: 0.35rem;
     }
 
     #text05 {
@@ -1644,7 +1706,7 @@
 
     #container08 > .wrapper,
     #container09 > .wrapper {
-      border: none !important;
+      border-color: rgba(255, 255, 255, 0.34) !important;
     }
 
     #container02 > .wrapper {
@@ -1688,7 +1750,7 @@
     .buttons li a,
     #image04 .frame img,
     #image01 .frame img {
-      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease, filter 180ms ease;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
     }
 
     #buttons02 .button,
@@ -1704,9 +1766,24 @@
       color: #fff;
     }
 
+    #buttons02 .n01:hover,
+    #buttons02 .n01:focus-visible {
+      background: linear-gradient(145deg, #393737 0%, #1f1f1f 100%);
+      border-color: #1f1f1f;
+      box-shadow: 0 14px 26px rgba(22, 22, 22, 0.22);
+    }
+
     #buttons02 .n02 {
       background: linear-gradient(145deg, #f1ece7 0%, #e3ddd8 100%);
       color: var(--v2-ink);
+    }
+
+    #buttons02 .n02:hover,
+    #buttons02 .n02:focus-visible {
+      background: linear-gradient(145deg, #fbf7f3 0%, #ece5df 100%);
+      border-color: rgba(79, 115, 152, 0.22);
+      box-shadow: 0 14px 26px rgba(55, 83, 111, 0.16);
+      color: var(--v2-ink-strong);
     }
 
     #buttons03 .button {
@@ -2432,6 +2509,7 @@
                   </span>
                 </div>
                 <h1 id="text01">Akemi.</h1>
+                <p id="text08">闇に生まれて、星になる</p>
               </div>
             </div>
           </div>
