@@ -31,7 +31,7 @@
   <link rel="canonical" href="https://gxthakemi.carrd.co" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?display=swap&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?display=swap&family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900" rel="stylesheet" />
 
   <!-- ============================================================
        Unified Stylesheet
@@ -1078,6 +1078,82 @@
       text-align: left;
     }
 
+    .profile-avatar {
+      display: inline-block;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .profile-avatar::before {
+      content: "";
+      position: absolute;
+      inset: -0.1875rem;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, rgba(255, 255, 255, 0.92), rgba(240, 225, 222, 0.88), rgba(198, 214, 229, 0.84), rgba(255, 255, 255, 0.92));
+      animation: profile-ring-spin 18s linear infinite;
+      will-change: transform;
+      z-index: 0;
+    }
+
+    .profile-avatar .frame {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .profile-avatar::after {
+      content: attr(data-status-label);
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 0.5rem);
+      transform: translateX(-50%) translateY(-0.2rem);
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      padding: 0.45rem 0.65rem;
+      border-radius: 0.625rem;
+      background: rgba(22, 22, 22, 0.96);
+      color: #fff;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 24px rgba(22, 22, 22, 0.18);
+      transition: opacity 160ms ease, transform 160ms ease;
+      z-index: 3;
+    }
+
+    .profile-avatar:hover::after,
+    .profile-avatar:focus-visible::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .profile-status-dot {
+      position: absolute;
+      right: 0.125rem;
+      bottom: 0.125rem;
+      width: 0.95rem;
+      height: 0.95rem;
+      border-radius: 999px;
+      border: 0.16rem solid rgba(248, 244, 240, 0.96);
+      background: radial-gradient(circle at 30% 30%, #ffe8af 0%, #d5b26d 58%, #9d7b44 100%);
+      box-shadow: 0 4px 12px rgba(22, 22, 22, 0.18);
+      z-index: 2;
+    }
+
+    .profile-avatar--compact::before {
+      inset: -0.125rem;
+    }
+
+    .profile-avatar--compact .profile-status-dot {
+      width: 0.8rem;
+      height: 0.8rem;
+      right: 0.05rem;
+      bottom: 0.05rem;
+    }
+
     #image04 .frame {
       width: 5.5rem;
       border-radius: 100%;
@@ -1157,6 +1233,43 @@
 
     #text01 span.p:nth-child(n + 2) {
       margin-top: 1rem;
+    }
+
+    .profile-heading {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.5rem;
+    }
+
+    .profile-pronouns {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.75rem;
+      padding: 0.3rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(164, 100, 161, 0.12);
+      border: 1px solid rgba(164, 100, 161, 0.18);
+      color: #7a5976;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      text-transform: lowercase;
+      box-shadow: 0 4px 10px rgba(164, 100, 161, 0.08);
+    }
+
+    .profile-heading--compact {
+      gap: 0.35rem;
+    }
+
+    .profile-heading--compact .profile-pronouns {
+      min-height: 1.5rem;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.58rem;
     }
 
     #text07 {
@@ -1651,21 +1764,25 @@
        Custom design tokens and visual polish applied on top of the Carrd base.
        ========================================================================== */
     :root {
-      --v2-bg: #dcdcdb;
-      --v2-bg-soft: #f1f0ef;
-      --v2-card: #f8f6f3;
-      --v2-surface: #ebe7e3;
-      --v2-border: #b8b1ab;
-      --v2-ink: #2a2929;
-      --v2-ink-strong: #161616;
-      --v2-muted: #726b66;
-      --v2-accent: #8f8176;
-      --v2-accent-soft: #e7ddd5;
-      --v2-shadow: 0 20px 45px rgba(22, 22, 22, 0.16);
+      --font-ui: "Noto Sans JP", "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+      --v2-bg: #f3f2ef;
+      --v2-bg-soft: #faf9f7;
+      --v2-card: #ffffff;
+      --v2-surface: #fbfaf8;
+      --v2-border: #e0e0e0;
+      --v2-ink: #2b2b2b;
+      --v2-ink-strong: #171717;
+      --v2-muted: #6f6f6f;
+      --v2-accent: #7a756f;
+      --v2-accent-soft: #f2eee9;
+      --v2-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      --v2-radius: 0.75rem;
+      --v2-status-idle: #f4c84f;
     }
 
     body {
-      background: radial-gradient(120% 110% at 6% 4%, #faf8f6 0%, transparent 48%), radial-gradient(125% 120% at 92% 2%, #e5e0db 0%, transparent 44%), linear-gradient(145deg, var(--v2-bg-soft) 0%, var(--v2-bg) 58%, #d2cec9 100%);
+      font-family: var(--font-ui);
+      background: linear-gradient(180deg, var(--v2-bg-soft) 0%, var(--v2-bg) 100%);
     }
 
     body::before {
@@ -1673,9 +1790,9 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image: radial-gradient(rgba(42, 41, 41, 0.08) 0.5px, transparent 0.5px);
-      background-size: 4px 4px;
-      opacity: 0.28;
+      background-image: radial-gradient(rgba(23, 23, 23, 0.04) 0.5px, transparent 0.5px);
+      background-size: 5px 5px;
+      opacity: 0.18;
       z-index: 0;
     }
 
@@ -1685,13 +1802,18 @@
     }
 
     #main {
-      background: linear-gradient(180deg, #fbf9f7 0%, var(--v2-card) 100%);
+      background: var(--v2-card);
       border-color: var(--v2-border);
       box-shadow: var(--v2-shadow);
+      border-radius: var(--v2-radius);
     }
 
     #main > .inner {
       --width: min(25rem, 92vw);
+      --border-radius-tl: calc(var(--v2-radius) - 1px);
+      --border-radius-tr: calc(var(--v2-radius) - 1px);
+      --border-radius-br: calc(var(--v2-radius) - 1px);
+      --border-radius-bl: calc(var(--v2-radius) - 1px);
     }
 
     #container01 > .wrapper,
@@ -1706,7 +1828,8 @@
 
     #container08 > .wrapper,
     #container09 > .wrapper {
-      border-color: rgba(255, 255, 255, 0.34) !important;
+      border-color: var(--v2-border) !important;
+      box-shadow: none !important;
     }
 
     #container02 > .wrapper {
@@ -1715,29 +1838,107 @@
       background-position: center;
     }
 
+    #container08 > .wrapper,
+    #container09 > .wrapper {
+      background: var(--v2-card) !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+
+    #container08 > .wrapper,
+    #container09 > .wrapper,
+    #buttons05 .button,
+    #buttons02 .button,
+    #buttons03 .button {
+      border-radius: var(--v2-radius);
+    }
+
+    #about-section #container08 > .wrapper::before,
+    #about-section #container09 > .wrapper::before {
+      background: none;
+    }
+
     #container02:not(:first-child) {
       margin-top: 0 !important;
     }
 
+    #container02 > .wrapper > .inner,
+    #container07 > .wrapper > .inner,
+    #container03 > .wrapper > .inner,
+    #container05 > .wrapper > .inner,
+    #container06 > .wrapper > .inner {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    #container07 > .wrapper > .inner,
+    #container03 > .wrapper > .inner,
+    #container05 > .wrapper > .inner,
+    #container06 > .wrapper > .inner {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    #divider01 {
+      min-height: 0;
+      margin-bottom: 0.75rem !important;
+    }
+
     #divider01::before {
+      content: "✦";
+      width: auto;
+      height: auto;
+      color: var(--v2-muted);
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      line-height: 1;
+      letter-spacing: 0.12em;
       background-color: transparent !important;
     }
 
     #main > .inner {
-      --spacing: 0.45rem;
+      --spacing: 0.65rem;
+    }
+
+    #buttons01 li a,
+    #buttons02 li a,
+    #buttons03 li a,
+    #buttons05 li a,
+    #text01,
+    #text02,
+    #text04,
+    #text05,
+    #text06,
+    #text07,
+    #text08 {
+      font-family: var(--font-ui);
     }
 
     #text01 {
-      font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-      letter-spacing: 0.01em;
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      letter-spacing: 0;
       color: var(--v2-ink-strong);
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+      line-height: 1.2;
+      text-shadow: none;
     }
 
     #text05 {
-      line-height: 1.55;
+      line-height: 1.7;
       max-width: 60ch;
       color: var(--v2-ink);
+    }
+
+    #text07 {
+      font-size: 0.84rem;
+      line-height: 1.65;
+      color: var(--v2-muted);
+    }
+
+    #text08 {
+      margin-top: 0.15rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      color: var(--v2-accent);
     }
 
     #text07,
@@ -1745,6 +1946,45 @@
     #text04,
     #text06 {
       color: var(--v2-muted);
+    }
+
+    .profile-heading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .profile-heading--compact {
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0.35rem 0.45rem;
+    }
+
+    .profile-pronouns {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.75rem;
+      padding: 0.3rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(164, 100, 161, 0.12);
+      border: 1px solid rgba(164, 100, 161, 0.18);
+      color: #7a5976;
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      box-shadow: 0 4px 10px rgba(164, 100, 161, 0.08);
+    }
+
+    .profile-meta-divider {
+      color: var(--v2-muted);
+      letter-spacing: 0.08em;
     }
 
     .buttons li a,
@@ -1757,47 +1997,46 @@
     #buttons03 .button,
     #buttons05 .button {
       border: 1px solid var(--v2-border);
-      box-shadow: 0 2px 10px rgba(22, 22, 22, 0.08);
+      box-shadow: var(--v2-shadow);
     }
 
     #buttons02 .n01 {
-      background: linear-gradient(145deg, #2a2929 0%, #161616 100%);
-      border-color: #161616;
+      background: var(--v2-ink-strong);
+      border-color: var(--v2-ink-strong);
       color: #fff;
     }
 
     #buttons02 .n01:hover,
     #buttons02 .n01:focus-visible {
-      background: linear-gradient(145deg, #393737 0%, #1f1f1f 100%);
-      border-color: #1f1f1f;
-      box-shadow: 0 14px 26px rgba(22, 22, 22, 0.22);
+      background: #2a2a2a;
+      border-color: #2a2a2a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
     #buttons02 .n02 {
-      background: linear-gradient(145deg, #f1ece7 0%, #e3ddd8 100%);
+      background: var(--v2-surface);
       color: var(--v2-ink);
     }
 
     #buttons02 .n02:hover,
     #buttons02 .n02:focus-visible {
-      background: linear-gradient(145deg, #fbf7f3 0%, #ece5df 100%);
-      border-color: rgba(79, 115, 152, 0.22);
-      box-shadow: 0 14px 26px rgba(55, 83, 111, 0.16);
+      background: #ffffff;
+      border-color: #d6d6d6;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       color: var(--v2-ink-strong);
     }
 
     #buttons03 .button {
-      background: linear-gradient(145deg, #f4f0ec 0%, #e6e0da 100%);
+      background: var(--v2-surface);
       color: var(--v2-ink);
     }
 
     #buttons05 .button {
-      border: none;
-      box-shadow: none;
-      border-radius: 0.25rem;
+      border: 1px solid var(--v2-border);
+      box-shadow: var(--v2-shadow);
       padding-left: 0.875rem;
       padding-right: 0.875rem;
-      background: transparent;
+      background: var(--v2-card);
     }
 
     /* Back Button (About Section) */
@@ -1815,9 +2054,9 @@
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      background: transparent;
-      border: none;
-      box-shadow: none;
+      background: var(--v2-surface);
+      border: 1px solid var(--v2-border);
+      box-shadow: var(--v2-shadow);
       transition: transform 180ms ease, opacity 180ms ease;
       z-index: 10;
       text-decoration: none;
@@ -1836,15 +2075,15 @@
     }
 
     #image04 .frame {
-      box-shadow: 0 10px 24px rgba(22, 22, 22, 0.18);
+      box-shadow: var(--v2-shadow);
     }
 
     #image01 .frame {
-      box-shadow: 0 6px 16px rgba(22, 22, 22, 0.16);
+      box-shadow: var(--v2-shadow);
     }
 
     #image02 .frame {
-      box-shadow: 0 6px 14px rgba(22, 22, 22, 0.1);
+      box-shadow: var(--v2-shadow);
     }
 
     #image02 {
@@ -1866,8 +2105,8 @@
 
     .buttons li a:hover,
     .buttons li a:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 18px rgba(22, 22, 22, 0.14);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     #buttons05 .button:hover,
@@ -1904,6 +2143,16 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes profile-ring-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
       }
     }
 
@@ -1999,19 +2248,19 @@
       }
 
       #main {
-        border-radius: 0.75rem;
-        box-shadow: 0 12px 36px rgba(55, 83, 111, 0.14);
+        border-radius: var(--v2-radius);
+        box-shadow: var(--v2-shadow);
       }
 
       #main > .inner {
         --width: 100%;
-        --padding-horizontal: 0.875rem;
+        --padding-horizontal: 1rem;
         --padding-vertical: 0.875rem;
-        --spacing: 0.5rem;
-        --border-radius-tl: 0.625rem;
-        --border-radius-tr: 0.625rem;
-        --border-radius-br: 0.625rem;
-        --border-radius-bl: 0.625rem;
+        --spacing: 0.75rem;
+        --border-radius-tl: calc(var(--v2-radius) - 1px);
+        --border-radius-tr: calc(var(--v2-radius) - 1px);
+        --border-radius-br: calc(var(--v2-radius) - 1px);
+        --border-radius-bl: calc(var(--v2-radius) - 1px);
       }
 
       /* ── HOME: Top Nav ── */
@@ -2042,13 +2291,14 @@
         line-height: 2.5rem;
         padding: 0 0.75rem;
         font-size: 0.85rem;
-        border-radius: 0.375rem;
-        background: rgba(79, 115, 152, 0.06);
+        border-radius: 0.75rem;
+        background: var(--v2-surface);
+        border: 1px solid var(--v2-border);
       }
 
       /* ── HOME: Profile Header ── */
       #container02 > .wrapper {
-        border-radius: 0.625rem 0.625rem 0 0;
+        border-radius: var(--v2-radius) var(--v2-radius) 0 0;
       }
 
       #container02 > .wrapper > .inner {
@@ -2061,7 +2311,8 @@
       }
 
       #divider01 {
-        display: none;
+        display: flex;
+        margin-bottom: 0.5rem !important;
       }
 
       #image04 {
@@ -2069,16 +2320,45 @@
         margin-bottom: 0.375rem;
       }
 
+      .profile-avatar {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .profile-avatar::after {
+        position: static;
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
+        padding: 0.35rem 0.7rem;
+        border: 1px solid rgba(184, 177, 171, 0.82);
+        background: rgba(248, 244, 240, 0.96);
+        color: var(--v2-ink);
+        box-shadow: 0 6px 16px rgba(22, 22, 22, 0.08);
+        font-size: 0.72rem;
+      }
+
       #image04 .frame {
         width: 5.25rem;
         border-width: 3px;
-        box-shadow: 0 8px 20px rgba(22, 22, 22, 0.16);
+        box-shadow: var(--v2-shadow);
       }
 
       #text01 {
         text-align: center !important;
-        font-size: 1.45rem !important;
-        letter-spacing: 0.01em;
+        font-size: 1.7rem !important;
+        letter-spacing: 0;
+      }
+
+      .profile-heading {
+        justify-content: center;
+        gap: 0.4rem;
+      }
+
+      .profile-pronouns {
+        font-size: 0.72rem;
       }
 
       /* ── HOME: Bio Line ── */
@@ -2088,12 +2368,12 @@
 
       #text07 {
         text-align: center !important;
-        font-size: 0.82rem;
+        font-size: 0.86rem;
         line-height: 1.65;
         color: var(--v2-muted);
       }
 
-      /* ── HOME: Action Buttons (Add Friend / Message / Status) ── */
+      /* ── HOME: Action Buttons ── */
       #container03.columns > .wrapper > .inner {
         flex-direction: column;
         gap: 0.5rem;
@@ -2131,25 +2411,6 @@
         border-radius: 0.5rem;
       }
 
-      #buttons03 {
-        --flex-alignment: center;
-        justify-content: center;
-      }
-
-      #buttons03 li {
-        width: 100%;
-      }
-
-      #buttons03 li a {
-        display: block;
-        width: 100%;
-        height: 2.5rem;
-        line-height: 2.5rem;
-        text-align: center;
-        font-size: 0.82rem;
-        border-radius: 0.5rem;
-      }
-
       /* ── HOME: Feature Links ── */
       #container05 > .wrapper > .inner {
         padding: 0.25rem 0;
@@ -2167,16 +2428,17 @@
       #buttons05 li a {
         display: flex !important;
         width: 100%;
-        height: 3rem;
-        line-height: 3rem;
+        min-height: 3rem;
         padding: 0 0.875rem;
         font-size: 0.84rem;
         font-weight: 500;
-        border-radius: 0.5rem;
+        border-radius: 0.75rem;
         justify-content: flex-start;
-        background: linear-gradient(145deg, #f4f0ec 0%, #e8e2dc 100%);
-        border: 1px solid #d2cac3;
-        box-shadow: 0 2px 8px rgba(22, 22, 22, 0.06);
+        align-items: center;
+        white-space: normal;
+        background: var(--v2-card);
+        border: 1px solid var(--v2-border);
+        box-shadow: var(--v2-shadow);
       }
 
       #buttons05 li a svg {
@@ -2189,7 +2451,8 @@
       #buttons05 li a .label {
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        white-space: normal;
+        line-height: 1.45;
       }
 
       /* ── HOME: Spotify Player ── */
@@ -2224,8 +2487,8 @@
         right: 0.625rem;
         width: 2.5rem;
         height: 2.5rem;
-        border-radius: 0.5rem;
-        background: rgba(79, 115, 152, 0.06);
+        border-radius: 0.75rem;
+        background: var(--v2-surface);
         opacity: 0.8;
       }
 
@@ -2237,7 +2500,7 @@
       #about-section .back-button:hover,
       #about-section .back-button:active {
         opacity: 1;
-        background: rgba(79, 115, 152, 0.12);
+        background: #ffffff;
         transform: none;
       }
 
@@ -2260,7 +2523,7 @@
       }
 
       #container08 > .wrapper {
-        border-radius: 0.625rem 0.625rem 0 0;
+        border-radius: var(--v2-radius) var(--v2-radius) 0 0;
       }
 
       #image01 {
@@ -2269,7 +2532,7 @@
 
       #image01 .frame {
         width: 3.5rem;
-        box-shadow: 0 4px 12px rgba(31, 51, 71, 0.15);
+        box-shadow: var(--v2-shadow);
       }
 
       #text02 {
@@ -2280,7 +2543,7 @@
 
       /* About body */
       #container09 > .wrapper {
-        border-radius: 0 0 0.625rem 0.625rem;
+        border-radius: 0 0 var(--v2-radius) var(--v2-radius);
       }
 
       #container09 > .wrapper > .inner {
@@ -2403,6 +2666,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="override.css" />
 
   <!-- NoScript Fallback -->
   <noscript>
@@ -2503,12 +2767,28 @@
             <div class="wrapper">
               <div class="inner">
                 <hr id="divider01" />
-                <div id="image04" class="image">
+                <div id="image04" class="image profile-avatar" tabindex="0" data-status-label="Idle" aria-label="Status: Idle">
+                  <span class="avatar-speedlines" aria-hidden="true">
+                    <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                      <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none">
+                        <path d="M18 50 L48 62" />
+                        <path d="M12 80 L46 80" />
+                        <path d="M18 110 L48 98" />
+                        <path d="M142 50 L112 62" />
+                        <path d="M148 80 L114 80" />
+                        <path d="M142 110 L112 98" />
+                      </g>
+                    </svg>
+                  </span>
                   <span class="frame">
                     <img src="assets/images/profile.jpeg" alt="Profile portrait of Akemi" loading="eager" fetchpriority="high" decoding="async" />
                   </span>
+                  <span class="profile-status-dot" aria-hidden="true"></span>
                 </div>
-                <h1 id="text01">Akemi.</h1>
+                <div class="profile-heading" aria-label="Profile name and pronouns">
+                  <h1 id="text01">Akemi.</h1>
+                  <span class="profile-pronouns" aria-label="Pronouns: she her">she/her</span>
+                </div>
                 <p id="text08">闇に生まれて、星になる</p>
               </div>
             </div>
@@ -2519,7 +2799,7 @@
             <div class="wrapper">
               <div class="inner">
                 <p id="text07">
-                  <span class="p">🕊️┆<strong>明美</strong> ， 現実 —She/Her ִ ࣪𖤐<br />˖ ✦ › <img src="assets/images/lesbian-pride-pink-flag.svg" alt="Lesbian pride flag" style="height:.9em;width:auto;vertical-align:-.08em" /> 𓂃 ★ @ak6h <strong>dc</strong></span>
+                  <span class="p"><strong>明美</strong> <span class="decorative-glyph decorative-glyph--soft" aria-hidden="true">𖤐</span> 現実<br /><img src="assets/images/lesbian-pride-pink-flag.svg" alt="Lesbian pride flag" style="height:.9em;width:auto;vertical-align:-.08em" /> <span class="decorative-glyph decorative-glyph--star" aria-hidden="true">★</span> @ak6h <strong>dc</strong></span>
                 </p>
               </div>
             </div>
@@ -2548,13 +2828,6 @@
                         </svg>
                         <span class="label">Message</span>
                       </a>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <ul id="buttons03" class="buttons">
-                    <li>
-                      <a href="#home" class="button n01" role="button">●●●</a>
                     </li>
                   </ul>
                 </div>
@@ -2638,15 +2911,28 @@
             <div class="wrapper">
               <div class="inner">
                 <div>
-                  <div id="image01" class="image">
+                  <div id="image01" class="image profile-avatar profile-avatar--compact" tabindex="0" data-status-label="Idle" aria-label="Status: Idle">
+                    <span class="avatar-speedlines" aria-hidden="true">
+                      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                        <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none">
+                          <path d="M18 50 L48 62" />
+                          <path d="M12 80 L46 80" />
+                          <path d="M18 110 L48 98" />
+                          <path d="M142 50 L112 62" />
+                          <path d="M148 80 L114 80" />
+                          <path d="M142 110 L112 98" />
+                        </g>
+                      </svg>
+                    </span>
                     <a href="#home" class="frame">
                       <img src="assets/images/profile.jpeg" alt="Akemi avatar" loading="lazy" decoding="async" />
                     </a>
+                    <span class="profile-status-dot" aria-hidden="true"></span>
                   </div>
                 </div>
                 <div>
                   <p id="text02">
-                    <span class="p"><strong>Akemi.</strong><br />April 4 · ♡</span>
+                    <span class="p"><span class="profile-heading profile-heading--compact"><strong>Akemi.</strong><span class="profile-pronouns" aria-label="Pronouns: she her">she/her</span></span><br />April 4 <span class="decorative-glyph decorative-glyph--star" aria-hidden="true">★</span> ♡</span>
                   </p>
                 </div>
               </div>
@@ -2658,9 +2944,9 @@
             <div class="wrapper">
               <div class="inner">
                 <p id="text05">
-                  <span class="p"><strong>୨୧ : about me</strong><br />hey! i'm 22, a lesbian, and i've been messing with code since 2016. lately i'm either building in minecraft java, driving around night city in cyberpunk, or trying random games on my phone or pc.</span>
+                  <span class="p"><strong><span class="decorative-glyph decorative-glyph--heart" aria-hidden="true">୨୧</span> about me</strong><br />hey! i'm 22, a lesbian, and i've been messing with code since 2016. lately i'm either building in minecraft java, driving around night city in cyberpunk, or trying random games on my phone or pc.</span>
                   <span class="p">being neurodivergent shapes how i see things: a little chaotic, very curious, and always creative. i grew up speaking spanish at home, and english feels natural to me too.<br />
-                  <strong>୨୧ : socials</strong><br />
+                  <strong><span class="decorative-glyph decorative-glyph--heart" aria-hidden="true">୨୧</span> socials</strong><br />
                   <a href="https://pin.it/23kybn1NE" target="_blank" rel="noopener noreferrer">Pinterest</a>&nbsp;&nbsp;<a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>&nbsp;&nbsp;<a href="https://x.com/kittishysz?t=FwuhwrHI2eqWDfpIUltaoA&s=09" target="_blank" rel="noopener noreferrer">Twitter</a>&nbsp;&nbsp;<a href="https://github.com/kittishy" target="_blank" rel="noopener noreferrer">GitHub</a></span>
                 </p>
               </div>
