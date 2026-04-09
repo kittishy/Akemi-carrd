@@ -1,30 +1,11 @@
 /* ==========================================================================
-   OVERRIDE.CSS — Bug fixes + visual polish
-   Applied AFTER index.html <style>. All selectors override the base theme.
+   override.css — Akemi Carrd
+   Bug fixes + visual polish. Applied AFTER index.html <style>.
    ========================================================================== */
 
-/* ── Global: scroll-behavior (unconditional) ── */
-html {
-  scroll-behavior: smooth;
-}
-
-/* ── Global: text selection ── */
-::selection {
-  background: #f4c0d1;
-  color: #3a3a3a;
-}
-
-/* ── Global: custom scrollbar ── */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #d6cfc9;
-  border-radius: 4px;
-}
-
-/* ── Section visibility (JS .active toggle) ── */
+/* --------------------------------------------------------------------------
+   1. SEÇÕES — esconder inativas
+   -------------------------------------------------------------------------- */
 #main > .inner > section:not(.active) {
   display: none !important;
   opacity: 0 !important;
@@ -37,9 +18,93 @@ html {
   display: block !important;
 }
 
-/* ==========================================================================
-   Profile polish: pronouns badge, status tooltip, animated avatar border.
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   2. SCROLL SUAVE (incondicional)
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --------------------------------------------------------------------------
+   3. SELEÇÃO DE TEXTO
+   -------------------------------------------------------------------------- */
+::selection {
+  background: #f4c0d1;
+  color: #3a3a3a;
+}
+
+/* --------------------------------------------------------------------------
+   4. SCROLLBAR
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d6cfc9;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   5. GLASSMORPHISM — cards do about
+   -------------------------------------------------------------------------- */
+#container08 > .wrapper,
+#container09 > .wrapper {
+  background: rgba(255, 255, 255, 0.65) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(130%) !important;
+  backdrop-filter: blur(12px) saturate(130%) !important;
+  border-color: rgba(255, 255, 255, 0.42) !important;
+  box-shadow: 0 4px 24px rgba(31, 51, 71, 0.08) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. TAGLINE — 闇に生まれて、星になる
+   -------------------------------------------------------------------------- */
+#text08 {
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  color: var(--v2-accent);
+  opacity: 1;
+  display: block;
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   7. HOVER NOS BOTÕES
+   -------------------------------------------------------------------------- */
+#buttons02 li a,
+#buttons03 li a {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#buttons02 .button:hover,
+#buttons02 .button:focus-visible,
+#buttons03 .button:hover,
+#buttons03 .button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+#buttons05 li a {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#buttons05 .button:hover,
+#buttons05 .button:focus-visible {
+  background: #ffffff;
+  border-color: #d0cac5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   8. PROFILE HEADING
+   -------------------------------------------------------------------------- */
 .profile-heading {
   display: inline-flex;
   align-items: center;
@@ -58,7 +123,9 @@ html {
   margin: 0;
 }
 
-/* ── Pronouns badge (pill) ── */
+/* --------------------------------------------------------------------------
+   9. BADGE DE PRONOMES
+   -------------------------------------------------------------------------- */
 .profile-pronouns {
   display: inline-flex;
   align-items: center;
@@ -78,7 +145,43 @@ html {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 4px 10px rgba(112, 95, 122, 0.08);
 }
 
-/* ── Avatar wrapper ── */
+/* --------------------------------------------------------------------------
+   10. STATUS DOTS — forçar visíveis
+   -------------------------------------------------------------------------- */
+.profile-name-status {
+  display: inline-block !important;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #f4c84f;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.92);
+  flex-shrink: 0;
+}
+
+.profile-status-dot {
+  display: block !important;
+  position: absolute;
+  right: 0.25rem;
+  bottom: 0.2rem;
+  width: 0.84rem;
+  height: 0.84rem;
+  border-radius: 999px;
+  border: 2px solid #fbf9f7;
+  background: #f4c84f;
+  box-shadow: 0 2px 8px rgba(180, 140, 30, 0.28);
+  z-index: 3;
+}
+
+.profile-avatar--compact .profile-status-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  right: 0.15rem;
+  bottom: 0.1rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. AVATAR — container e tooltip
+   -------------------------------------------------------------------------- */
 .profile-avatar {
   position: relative;
   width: fit-content;
@@ -86,7 +189,6 @@ html {
   cursor: help;
 }
 
-/* ── Tooltip "ocupada" on hover (::before) ── */
 .profile-avatar::before {
   content: attr(data-status-label);
   position: absolute;
@@ -111,7 +213,74 @@ html {
   z-index: 5;
 }
 
-/* ── Speed lines (BUG FIX: clip to circle) ── */
+/* Fix global: remove ::after que o index.html força como position:static no mobile */
+.profile-avatar::after {
+  display: none !important;
+}
+
+.profile-avatar:hover::before,
+.profile-avatar:focus-visible::before,
+.profile-avatar:focus-within::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.profile-avatar:focus-visible .frame,
+.profile-avatar:focus-within .frame {
+  box-shadow: 0 0 0 2px rgba(143, 129, 118, 0.18), 0 10px 24px rgba(22, 22, 22, 0.16) !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. AVATAR — frame e borda giratória (bugs corrigidos)
+   -------------------------------------------------------------------------- */
+.profile-avatar .frame {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  border: 0 !important;
+  overflow: hidden; /* fix: era visible, causava vazamento */
+}
+
+.profile-avatar .frame::before {
+  content: "";
+  position: absolute;
+  inset: -4px; /* fix: era -7%, causava sobreposição */
+  border-radius: 50%; /* fix: era inherit, ambíguo */
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(143, 129, 118, 0.3),
+    rgba(231, 221, 213, 0.72),
+    rgba(143, 129, 118, 0.24),
+    rgba(255, 255, 255, 0.08)
+  );
+  animation: profile-ring-spin 22s linear infinite;
+  opacity: 0.55;
+  z-index: 0;
+}
+
+.profile-avatar .frame::after {
+  content: "";
+  position: absolute;
+  inset: 4px; /* fix: era 2px, agora simétrico com ::before */
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fbf9f7 0%, var(--v2-card) 100%);
+  z-index: 1;
+}
+
+.profile-avatar .frame img {
+  position: relative;
+  z-index: 2;
+  display: block;
+  border-radius: inherit !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. SPEED LINES — fix: clip para não vazar
+   -------------------------------------------------------------------------- */
 .avatar-speedlines {
   position: absolute;
   inset: -0.7rem;
@@ -129,93 +298,9 @@ html {
   height: 100%;
 }
 
-/* ── Tooltip show on hover/focus ── */
-.profile-avatar:hover::before,
-.profile-avatar:focus-visible::before,
-.profile-avatar:focus-within::before {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-.profile-avatar:focus-visible .frame,
-.profile-avatar:focus-within .frame {
-  box-shadow: 0 0 0 2px rgba(143, 129, 118, 0.18), 0 10px 24px rgba(22, 22, 22, 0.16) !important;
-}
-
-/* ── Frame (BUG FIX: overflow hidden + isolate) ── */
-.profile-avatar .frame {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  isolation: isolate;
-  border: 0 !important;
-  overflow: hidden;
-}
-
-/* ── Rotating conic border (BUG FIX: inset -4px fixed, border-radius 50%) ── */
-.profile-avatar .frame::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, rgba(255, 255, 255, 0.08), rgba(143, 129, 118, 0.3), rgba(231, 221, 213, 0.72), rgba(143, 129, 118, 0.24), rgba(255, 255, 255, 0.08));
-  animation: profile-ring-spin 22s linear infinite;
-  opacity: 0.55;
-  z-index: 0;
-}
-
-.profile-avatar .frame::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  border-radius: inherit;
-  background: linear-gradient(180deg, #fbf9f7 0%, var(--v2-card) 100%);
-  z-index: 1;
-}
-
-.profile-avatar .frame img {
-  position: relative;
-  z-index: 2;
-  display: block;
-  border-radius: inherit !important;
-}
-
-/* ── Status dot (BUG FIX: force display) ── */
-.profile-status-dot {
-  display: block !important;
-  position: absolute;
-  right: 0.25rem;
-  bottom: 0.2rem;
-  width: 0.84rem;
-  height: 0.84rem;
-  border-radius: 999px;
-  border: 2px solid #fbf9f7;
-  background: linear-gradient(180deg, #d0b98b 0%, #ba9b5a 100%);
-  box-shadow: 0 2px 8px rgba(110, 85, 35, 0.28);
-  z-index: 3;
-}
-
-.profile-avatar--compact .profile-status-dot {
-  display: block !important;
-  width: 0.72rem;
-  height: 0.72rem;
-  right: 0.15rem;
-  bottom: 0.1rem;
-}
-
-/* ── Status idle (inline dot next to name) ── */
-.profile-name-status {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: #f4c84f;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-/* ── Decorative glyphs ── */
+/* --------------------------------------------------------------------------
+   14. GLYPHS DECORATIVOS
+   -------------------------------------------------------------------------- */
 .decorative-glyph {
   display: inline-block;
   line-height: 1;
@@ -239,59 +324,17 @@ html {
   font-size: 0.92em;
 }
 
-/* ── Tagline 闇に生まれて、星になる ── */
-#text08 {
-  font-family: var(--font-ui);
-  font-size: 0.74rem;
-  letter-spacing: 0.16em;
-  color: var(--v2-accent);
-  opacity: 1;
-  display: block;
-  text-align: center;
-  margin-top: 0.2rem;
-}
-
-/* ==========================================================================
-   Glassmorphism — About section cards
-   ========================================================================== */
-#container08 > .wrapper,
-#container09 > .wrapper {
-  background: rgba(255, 255, 255, 0.65) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-}
-
-/* ==========================================================================
-   Button hover polish
-   ========================================================================== */
-#buttons02 .button,
-#buttons05 .button {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-#buttons02 .button:hover,
-#buttons05 .button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
-}
-
-/* ==========================================================================
-   Keyframes
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   15. ANIMAÇÃO DA BORDA
+   -------------------------------------------------------------------------- */
 @keyframes profile-ring-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
-/* ==========================================================================
-   Responsive — Mobile (≤ 480px)
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   16. RESPONSIVO — mobile (≤ 480px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
   .profile-heading {
     gap: 0.35rem;
@@ -310,33 +353,33 @@ html {
     text-overflow: ellipsis;
   }
 
-  /* BUG FIX: hide ::after on mobile — index.html forces it to position:static,
-     which conflicts with the real tooltip (::before) from override.css */
-  .profile-avatar::after {
-    display: none !important;
-  }
-
   .avatar-speedlines {
     inset: -0.55rem;
     opacity: 0.08;
   }
 }
 
-/* ── Touch devices: hide tooltip ── */
+/* --------------------------------------------------------------------------
+   17. TOUCH — sem tooltip em dispositivos sem hover
+   -------------------------------------------------------------------------- */
 @media (hover: none), (pointer: coarse) {
   .profile-avatar::before {
     display: none;
   }
 }
 
-/* ── Reduced motion ── */
+/* --------------------------------------------------------------------------
+   18. REDUCED MOTION
+   -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .profile-avatar .frame::before {
     animation: none;
   }
 }
 
-/* ── Extra small (≤ 360px) ── */
+/* --------------------------------------------------------------------------
+   19. EXTRA SMALL (≤ 360px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 360px) {
   .avatar-speedlines {
     display: none;
