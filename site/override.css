@@ -336,10 +336,10 @@
   }
 }
 
-/* Force Add Friend button (#buttons02 .button.n01) to use Spotify green - Override gradient override */
+/* Force Add Friend button (#buttons02 .button.n01) to use #1f1f1f - Override gradient override */
 #buttons02 .button.n01 {
-  background-color: #1DB954 !important;
-  background: #1DB954 !important;
+  background-color: #1f1f1f !important;
+  background: #1f1f1f !important;
   color: #fff !important;
 }
 
@@ -350,8 +350,8 @@
 @media (hover: hover) {
   #buttons02 .button.n01:hover,
   #buttons02 .button.n01:focus-visible {
-    background-color: #1ed760 !important;
-    background: #1ed760 !important;
+    background-color: #2a2a2a !important;
+    background: #2a2a2a !important;
   }
 }
 
