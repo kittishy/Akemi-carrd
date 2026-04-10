@@ -336,6 +336,25 @@
   }
 }
 
+/* Force Add Friend button (#buttons02 .button.n01) to use #141313 dark gray - Override gradient override */
+#buttons02 .button.n01 {
+  background-color: #141313 !important;
+  background: #141313 !important;
+  color: #fff !important;
+}
+
+#buttons02 .button.n01 svg {
+  fill: #fff !important;
+}
+
+@media (hover: hover) {
+  #buttons02 .button.n01:hover,
+  #buttons02 .button.n01:focus-visible {
+    background-color: #1a1a1a !important;
+    background: #1a1a1a !important;
+  }
+}
+
 /* Discord-style idle status indicator (yellow dot) */
 #image04 .frame {
   position: relative;
