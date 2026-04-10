@@ -103,12 +103,73 @@
     }
 
     /* ==========================================================================
-       2. TYPOGRAPHY
-       ========================================================================== */
+        TYPOGRAPHY
+        ========================================================================== */
     a {
       color: inherit;
       text-decoration: underline;
-      transition: color 0.25s ease;
+      transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    a[onclick]:not([href]) {
+      cursor: pointer;
+    }
+
+    unloaded-script {
+      display: none;
+    }
+
+    u {
+      text-decoration: underline;
+    }
+
+    strong {
+      color: inherit;
+      font-weight: bolder;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    s {
+      text-decoration: line-through;
+    }
+
+    sub {
+      font-size: smaller;
+      vertical-align: sub;
+    }
+
+    sup {
+      font-size: smaller;
+      vertical-align: super;
+    }
+
+    code {
+      background-color: rgba(144, 144, 144, 0.25);
+      border-radius: 0.25em;
+      font-family: "Lucida Console", "Courier New", monospace;
+      font-size: 0.9em;
+      font-weight: normal;
+      letter-spacing: 0;
+      margin: 0 0.25em;
+      padding: 0.25em 0.5em;
+      text-indent: 0;
+    }
+
+    spoiler-text {
+      -webkit-text-stroke: 0;
+      background-color: rgba(32, 32, 32, 0.75);
+      text-shadow: none;
+      color: transparent;
+      cursor: pointer;
+      transition: color 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    spoiler-text.active {
+      color: #fff;
+      cursor: text;
     }
 
     a[onclick]:not([href]) {
@@ -284,7 +345,7 @@
       box-shadow: 0 0 0.125rem 0 #bacad9;
       border-radius: var(--border-radius-tl) var(--border-radius-tr) var(--border-radius-br) var(--border-radius-bl);
       border: solid 1px #c3d3e3;
-      transition: opacity 1s ease, transform 1s ease;
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #main > .inner {
@@ -307,7 +368,9 @@
     #main > .inner > header,
     #main > .inner > footer {
       margin-bottom: var(--spacing);
-      transition: opacity 0.25s ease-in-out 0.375s, visibility 0.25s linear 0.375s;
+      transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.375s, 
+                  visibility 0.35s linear 0.375s,
+                  transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #main > .inner > footer {
@@ -396,9 +459,12 @@
 
     #main > .inner > header.hidden,
     #main > .inner > footer.hidden {
-      transition: opacity 0.25s ease-in-out, visibility 0.25s;
+      transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  visibility 0.35s linear,
+                  transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       opacity: 0;
       visibility: hidden;
+      transform: translateY(-4px);
     }
 
     body.is-loading #main {
@@ -875,7 +941,11 @@
       font-size: 0.875em;
       font-weight: 600;
       border-radius: 0;
-      transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+      transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #buttons01 li a svg {
@@ -889,7 +959,7 @@
       width: 1em;
       margin-left: -0.125em;
       margin-right: 0.5em;
-      transition: fill 0.25s ease;
+      transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #buttons01 li a .label {
@@ -921,7 +991,11 @@
       font-size: 0.875em;
       font-weight: 500;
       border-radius: 0.25rem;
-      transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+      transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #buttons02 li a svg {
@@ -935,7 +1009,7 @@
       width: 1em;
       margin-left: -0.125em;
       margin-right: 0.5em;
-      transition: fill 0.25s ease;
+      transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #buttons02 li a .label {
@@ -979,7 +1053,11 @@
       direction: var(--site-language-direction);
       overflow: hidden;
       text-overflow: ellipsis;
-      transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+      transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     #buttons03 .button {
@@ -1113,7 +1191,8 @@
     }
 
     #image04 .frame img {
-      transition: transform 0.25s ease, filter 0.25s ease;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  filter 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transform: scale(1.1125);
     }
 
@@ -1131,7 +1210,8 @@
     }
 
     #image01 .frame img {
-      transition: transform 0.25s ease, filter 0.25s ease;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  filter 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transform: scale(1.1125);
     }
 
@@ -1797,7 +1877,7 @@
     }
 
     #main > .inner > section.active > * {
-      animation: v2-fade-up 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: v2-fade-up 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
 
     #main > .inner > section.active > :nth-child(2) {
@@ -1819,7 +1899,7 @@
     @keyframes v2-fade-up {
       from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(8px);
       }
       to {
         opacity: 1;
