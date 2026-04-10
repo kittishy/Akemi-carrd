@@ -61,6 +61,38 @@
   }
 }
 
+/* ==========================================================================
+    TOGGLE PANEL ANIMATIONS - CREAMY SMOOTH TRANSITIONS
+    Making both Message and About panels open/close smoothly
+    ========================================================================== */
+
+/* Creamy keyframe animation for panel open */
+@keyframes panel-cream-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply wrapper transitions for smooth open/close - matches Message panel timing exactly */
+#container10 > .wrapper,
+#container11 > .wrapper {
+  animation: panel-cream-in 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: opacity var(--duration-normal) var(--ease-cream),
+              transform var(--duration-normal) var(--ease-cream);
+}
+
+/* Ensure hidden panels don't show animation on initial render */
+#container10[hidden] > .wrapper,
+#container11[hidden] > .wrapper {
+  animation: none;
+  opacity: 0;
+}
+
 /* About toggle panel: transparent wrapper like message-panel */
 #container11 > .wrapper {
   background: transparent !important;
