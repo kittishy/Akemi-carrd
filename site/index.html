@@ -2971,6 +2971,13 @@
       };
 
       const openPanel = () => {
+        // Hide About panel if open
+        const aboutContainer = document.getElementById("container11");
+        const aboutButton = document.getElementById("about-button");
+        if (aboutContainer && !aboutContainer.hidden) {
+          aboutContainer.hidden = true;
+          if (aboutButton) aboutButton.setAttribute("aria-expanded", "false");
+        }
         container.hidden = false;
         setExpanded(true);
         panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -3022,6 +3029,13 @@
       };
 
       const openPanel = () => {
+        // Hide Message panel if open
+        const msgContainer = document.getElementById("container10");
+        const msgButton = document.getElementById("message-button");
+        if (msgContainer && !msgContainer.hidden) {
+          msgContainer.hidden = true;
+          if (msgButton) msgButton.setAttribute("aria-expanded", "false");
+        }
         container.hidden = false;
         setExpanded(true);
         panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
