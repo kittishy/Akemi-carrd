@@ -2900,7 +2900,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="mailto:solara.julia.a@gmail.com" class="button n02" role="button">
+                      <a href="#message-panel" id="message-button" class="button n02" role="button" aria-controls="container10" aria-expanded="false">
                         <svg aria-labelledby="btn-message-title">
                           <title id="btn-message-title">Message</title>
                           <use xlink:href="#icon-message"></use>
@@ -2916,6 +2916,29 @@
                       <a href="#home" class="button n01" role="button" aria-label="More options" title="More options">●●●</a>
                     </li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="container10" class="container default" hidden>
+            <div class="wrapper">
+              <div class="inner">
+                <div id="message-panel" class="message-panel" aria-live="polite">
+                  <p id="text08">Send me a message / メッセージを送る</p>
+                  <form id="message-form" class="message-form" action="https://formsubmit.co/solara.julia.a@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New message from Akemi site / Akemiサイトから新しいメッセージ" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_next" value="https://akemi.vercel.app/success.html" />
+                    <input type="hidden" name="_template" value="table" />
+                    <label for="message-name" class="sr-only">Your name / お名前</label>
+                    <input id="message-name" name="name" type="text" placeholder="Your name / お名前" autocomplete="name" maxlength="80" required />
+                    <label for="message-email" class="sr-only">Your email / メールアドレス</label>
+                    <input id="message-email" name="email" type="email" placeholder="Your email / メールアドレス" inputmode="email" autocomplete="email" maxlength="120" required />
+                    <label for="message-text" class="sr-only">Message / メッセージ</label>
+                    <textarea id="message-text" name="message" placeholder="Type your message / メッセージを入力" rows="4" maxlength="1200" required></textarea>
+                    <button type="submit" class="button n02">Send message / 送信</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -3240,6 +3263,58 @@
           iframe.src = iframe.dataset.src;
         }
       }, 3000);
+    })();
+  </script>
+  <script>
+    (() => {
+      const button = document.getElementById("message-button");
+      const container = document.getElementById("container10");
+      const panel = document.getElementById("message-panel");
+      const firstField = document.getElementById("message-name");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!button || !container || !panel) {
+        return;
+      }
+
+      const setExpanded = (isExpanded) => {
+        button.setAttribute("aria-expanded", String(isExpanded));
+      };
+
+      const openPanel = () => {
+        container.hidden = false;
+        setExpanded(true);
+        panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+
+        window.setTimeout(() => {
+          if (firstField) {
+            firstField.focus({ preventScroll: true });
+          }
+        }, reduceMotion ? 0 : 320);
+      };
+
+      const closePanel = () => {
+        container.hidden = true;
+        setExpanded(false);
+      };
+
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (container.hidden) {
+          openPanel();
+        } else {
+          closePanel();
+          button.focus({ preventScroll: true });
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !container.hidden) {
+          closePanel();
+          button.focus({ preventScroll: true });
+        }
+      });
     })();
   </script>
 </body>
