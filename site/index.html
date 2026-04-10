@@ -31,6 +31,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?display=swap&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900" rel="stylesheet" />
+  <link rel="stylesheet" href="override.css" />
+  <link rel="preload" href="assets/images/banner.jpeg" as="image" />
+  <link rel="preconnect" href="https://ws.audioscrobbler.com" />
+  <link rel="preconnect" href="https://open.spotify.com" />
 
   <!-- ============================================================
        Unified Stylesheet
@@ -2182,18 +2186,23 @@
 
       /* ── HOME: Action Buttons (Add Friend / Message / Status) ── */
       #container03.columns > .wrapper > .inner {
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.5rem;
         padding: 0.375rem 0;
-      }
-
-      #container03.columns > .wrapper > .inner > div {
-        width: 100% !important;
-        padding: 0 !important;
+        align-items: center;
       }
 
       #container03.columns > .wrapper > .inner > :first-child {
+        flex: 1;
+        min-width: 0;
+        padding: 0 !important;
         margin-left: 0;
+      }
+
+      #container03.columns > .wrapper > .inner > :nth-child(2) {
+        flex: 0 0 auto;
+        width: auto !important;
+        padding: 0 !important;
       }
 
       #buttons02 {
@@ -2221,7 +2230,6 @@
       #buttons03 {
         --flex-alignment: flex-end;
         justify-content: flex-end;
-        padding-right: 0.125rem;
       }
 
       #buttons03 li {
@@ -2232,7 +2240,7 @@
         display: inline-flex;
         width: 2.4rem;
         min-width: 44px;
-        height: 2.2rem;
+        height: 2.75rem;
         min-height: 44px;
         line-height: 1;
         padding: 0;
@@ -2414,6 +2422,25 @@
         vertical-align: -0.1em;
       }
 
+      /* Social links: organized wrap on mobile */
+      #text05 span.p:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem 0.75rem;
+        text-align: center;
+      }
+
+      #text05 span.p:last-child a {
+        white-space: nowrap;
+      }
+
+      #text05 span.p:last-child strong {
+        width: 100%;
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+
       /* ── Footer ── */
       #footer {
         margin-top: 0.5rem !important;
@@ -2486,6 +2513,10 @@
       #text05 {
         font-size: 0.82rem;
         line-height: 1.7;
+      }
+
+      #text05 span.p:last-child {
+        gap: 0.3rem 0.5rem;
       }
     }
 
@@ -2626,8 +2657,20 @@
 
       #container08 > .wrapper,
       #container09 > .wrapper {
-        background: transparent !important;
-        border: none !important;
+        background: var(--v2-card) !important;
+        border: 1px solid var(--v2-border) !important;
+        max-width: 38rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #container08 > .wrapper {
+        border-bottom: none !important;
+        border-radius: 0.5rem 0.5rem 0 0 !important;
+      }
+
+      #container09 > .wrapper {
+        border-radius: 0 0 0.5rem 0.5rem !important;
       }
 
       #container08.columns > .wrapper > .inner {
@@ -2657,6 +2700,13 @@
 
       #container09 > .wrapper > .inner {
         padding: 0.5rem 0.9rem 1rem !important;
+      }
+
+      #text05 {
+        text-align: center !important;
+        max-width: 52ch;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
 
@@ -2924,7 +2974,8 @@
                   <iframe
                     id="spotify-player"
                     data-testid="embed-iframe"
-                    src="https://open.spotify.com/embed/track/62wMiHeHq8kWkaBA5cLhWv?utm_source=generator&theme=0"
+                    data-src="https://open.spotify.com/embed/track/62wMiHeHq8kWkaBA5cLhWv?utm_source=generator&theme=0"
+                    src="about:blank"
                     width="100%"
                     height="152"
                     frameborder="0"
@@ -3044,6 +3095,14 @@
         }
         mode = nextMode;
         root.classList.toggle("is-now-playing", nextMode === "now-playing");
+
+        // Lazy-load Spotify iframe when switching to spotify mode
+        if (nextMode === "spotify") {
+          const iframe = document.getElementById("spotify-player");
+          if (iframe && iframe.dataset.src && (!iframe.src || iframe.src === "about:blank")) {
+            iframe.src = iframe.dataset.src;
+          }
+        }
       };
 
       const writeTrack = (payload) => {
@@ -3171,6 +3230,14 @@
       window.addEventListener("offline", handleOffline);
 
       runUpdate();
+
+      // Fallback: ensure Spotify iframe loads even if API is slow
+      window.setTimeout(function() {
+        var iframe = document.getElementById("spotify-player");
+        if (iframe && iframe.dataset.src && (!iframe.src || iframe.src === "about:blank")) {
+          iframe.src = iframe.dataset.src;
+        }
+      }, 3000);
     })();
   </script>
 </body>
