@@ -634,17 +634,6 @@
       width: calc(21% + (var(--gutters) / 2));
     }
 
-    #container05 > .wrapper {
-      background-color: #f5f5f5;
-    }
-
-    #container05 > .wrapper > .inner {
-      --gutters: 0.375rem;
-      --padding-horizontal: 0rem;
-      --padding-vertical: 0.125rem;
-      padding: var(--padding-vertical) var(--padding-horizontal);
-    }
-
     #container06 > .wrapper {
       background-color: #f5f5f5;
     }
@@ -911,56 +900,6 @@
     #buttons01 .button {
       background-color: transparent;
       color: #000;
-    }
-
-    #buttons05 {
-      --flex-alignment: flex-start;
-      --alignment: left;
-      gap: 0;
-      flex-direction: column;
-      flex-wrap: nowrap;
-    }
-
-    #buttons05 li a {
-      display: inline-flex;
-      width: auto;
-      height: 1.75rem;
-      line-height: 1.75rem;
-      padding: 0 0.875rem;
-      vertical-align: middle;
-      font-family: "Archivo", sans-serif;
-      font-size: 0.75em;
-      font-weight: 400;
-      border-radius: 0.25rem;
-      transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
-    }
-
-    #buttons05 li a svg {
-      display: block;
-      fill: #6e6e6e;
-      flex-grow: 0;
-      flex-shrink: 0;
-      height: 100%;
-      min-width: 16px;
-      pointer-events: none;
-      width: 1em;
-      margin-left: -0.125em;
-      margin-right: 0.5rem;
-      transition: fill 0.25s ease;
-    }
-
-    #buttons05 li a .label {
-      direction: var(--site-language-direction);
-      overflow: hidden;
-    }
-
-    #buttons05 .button {
-      background-color: transparent;
-      color: #6e6e6e;
-    }
-
-    #buttons05 .button svg {
-      fill: #595959;
     }
 
     #buttons02 {
@@ -1552,20 +1491,6 @@
         --padding-vertical: 0.25rem;
       }
 
-      #container05:not(:first-child) {
-        margin-top: 0.125rem !important;
-      }
-
-      #container05:not(:last-child) {
-        margin-bottom: 0.125rem !important;
-      }
-
-      #container05 > .wrapper > .inner {
-        --gutters: 0.375rem;
-        --padding-horizontal: 0rem;
-        --padding-vertical: 0.125rem;
-      }
-
       #container06:not(:first-child) {
         margin-top: 0.125rem !important;
       }
@@ -1618,19 +1543,6 @@
       }
 
       #buttons01 li a svg {
-        width: 1em;
-      }
-
-      #buttons05 {
-        gap: 0;
-      }
-
-      #buttons05 li a {
-        letter-spacing: 0;
-        font-size: 0.75em;
-      }
-
-      #buttons05 li a svg {
         width: 1em;
       }
 
@@ -1771,7 +1683,6 @@
 
     #container01 > .wrapper,
     #container03 > .wrapper,
-    #container05 > .wrapper,
     #container06 > .wrapper,
     #container07 > .wrapper,
     #container08 > .wrapper,
@@ -1829,70 +1740,9 @@
     }
 
     #buttons02 .button,
-    #buttons03 .button,
-    #buttons05 .button {
-      border: 1px solid var(--v2-border);
-      box-shadow: 0 2px 10px rgba(22, 22, 22, 0.08);
-    }
-
-    #buttons02 .n01 {
-      background: linear-gradient(145deg, #2a2929 0%, #161616 100%);
-      border-color: #161616;
-      color: #fff;
-    }
-
-    #buttons02 .n02 {
-      background: linear-gradient(145deg, #f1ece7 0%, #e3ddd8 100%);
-      color: var(--v2-ink);
-    }
-
     #buttons03 .button {
       background: linear-gradient(145deg, #f4f0ec 0%, #e6e0da 100%);
       color: var(--v2-ink);
-    }
-
-    #buttons05 .button {
-      border: none;
-      box-shadow: none;
-      border-radius: 0.25rem;
-      padding-left: 0.875rem;
-      padding-right: 0.875rem;
-      background: transparent;
-    }
-
-    /* Back Button (About Section) */
-    #about-section {
-      position: relative;
-    }
-
-    #about-section .back-button {
-      position: absolute;
-      top: 0.5rem;
-      right: 1rem;
-      width: 1.75rem;
-      height: 1.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      transition: transform 180ms ease, opacity 180ms ease;
-      z-index: 10;
-      text-decoration: none;
-      opacity: 0.6;
-    }
-
-    #about-section .back-button svg {
-      width: 0.9rem;
-      height: 0.9rem;
-      fill: var(--v2-accent);
-    }
-
-    #about-section .back-button:hover {
-      transform: translateX(-3px);
-      opacity: 1;
     }
 
     #image04 .frame {
@@ -1928,12 +1778,6 @@
     .buttons li a:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 10px 18px rgba(22, 22, 22, 0.14);
-    }
-
-    #buttons05 .button:hover,
-    #buttons05 .button:focus-visible {
-      transform: none;
-      box-shadow: none;
     }
 
     .social-icon {
@@ -2036,24 +1880,6 @@
       #buttons03 li a {
         height: 2.25rem;
         line-height: 2.25rem;
-      }
-
-      /* Feature links */
-      #buttons05 li a {
-        height: 2.25rem;
-        line-height: 2.25rem;
-        font-size: 0.8em;
-      }
-
-      /* About section */
-      #about-section .back-button {
-        width: 2.25rem;
-        height: 2.25rem;
-      }
-
-      #about-section #text05 {
-        font-size: 0.88rem;
-        line-height: 1.65;
       }
     }
 
@@ -2263,48 +2089,6 @@
         box-shadow: 0 1px 4px rgba(22, 22, 22, 0.07);
       }
 
-      /* ── HOME: Feature Links ── */
-      #container05 > .wrapper > .inner {
-        padding: 0.25rem 0;
-      }
-
-      #buttons05 {
-        flex-direction: column;
-        gap: 0.375rem;
-      }
-
-      #buttons05 li {
-        width: 100%;
-      }
-
-      #buttons05 li a {
-        display: flex !important;
-        width: 100%;
-        height: 3rem;
-        line-height: 3rem;
-        padding: 0 0.875rem;
-        font-size: 0.84rem;
-        font-weight: 500;
-        border-radius: 0.5rem;
-        justify-content: flex-start;
-        background: linear-gradient(145deg, #f4f0ec 0%, #e8e2dc 100%);
-        border: 1px solid #d2cac3;
-        box-shadow: 0 2px 8px rgba(22, 22, 22, 0.06);
-      }
-
-      #buttons05 li a svg {
-        width: 1.15em;
-        min-width: 18px;
-        margin-right: 0.6rem;
-        flex-shrink: 0;
-      }
-
-      #buttons05 li a .label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
       /* ── HOME: Spotify Player ── */
       #container06.columns > .wrapper > .inner {
         display: block;
@@ -2329,29 +2113,6 @@
         font-size: 0.75rem;
         letter-spacing: 0.15em;
         opacity: 0.5;
-      }
-
-      /* ── ABOUT SECTION ── */
-      #about-section .back-button {
-        top: 0.625rem;
-        right: 0.625rem;
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 0.5rem;
-        background: rgba(79, 115, 152, 0.06);
-        opacity: 0.8;
-      }
-
-      #about-section .back-button svg {
-        width: 1rem;
-        height: 1rem;
-      }
-
-      #about-section .back-button:hover,
-      #about-section .back-button:active {
-        opacity: 1;
-        background: rgba(79, 115, 152, 0.12);
-        transform: none;
       }
 
       /* About header */
@@ -2491,22 +2252,12 @@
         font-size: 0.82rem;
       }
 
-      #buttons05 li a {
-        height: 2.75rem;
-        font-size: 0.8rem;
-      }
-
       #buttons03 li a {
         height: 2.25rem;
       }
 
       #text06 {
         font-size: 0.92rem;
-      }
-
-      #about-section .back-button {
-        width: 2.25rem;
-        height: 2.25rem;
       }
 
       #image01 .frame {
@@ -2621,40 +2372,12 @@
         text-align: center;
       }
 
-      #container05 > .wrapper > .inner {
-        padding: 0.3rem 0.15rem;
-      }
-
-      #buttons05 {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        gap: 0.4rem;
-      }
-
-      #buttons05 li {
-        flex: 1 1 auto;
-        min-width: 0;
-        width: 100%;
-      }
-
-      #buttons05 li a {
-        width: 100%;
-        height: 2.4rem;
-        line-height: 2.4rem;
-        justify-content: flex-start;
-      }
-
       #container06.columns > .wrapper > .inner {
         padding: 0.2rem;
       }
 
       #spotify-player {
         min-height: 176px;
-      }
-
-      /* about: remove split-panel desktop treatment */
-      #about-section {
-        display: block;
       }
 
       #container08,
@@ -2760,9 +2483,7 @@
     @media (hover: none) and (pointer: coarse) {
       #buttons01 li a,
       #buttons02 li a,
-      #buttons03 li a,
-      #buttons05 li a,
-      #about-section .back-button {
+      #buttons03 li a {
         min-height: 44px;
         min-width: 44px;
       }
@@ -2848,7 +2569,7 @@
                 <div>
                   <ul id="buttons01" class="buttons">
                     <li>
-                      <a href="#about" class="button n01" role="button">
+                      <a href="#home" class="button n01" role="button">
                         <svg aria-labelledby="nav-back-title">
                           <title id="nav-back-title">Arrow Left (Light)</title>
                           <use xlink:href="#icon-arrow-left"></use>
@@ -2918,7 +2639,7 @@
                 <div>
                   <ul id="buttons03" class="buttons">
                     <li>
-                      <a href="#home" class="button n01" role="button" aria-label="More options" title="More options">●●●</a>
+                      <a href="#about-panel" id="about-button" class="button n01" role="button" aria-controls="container11" aria-expanded="false" aria-label="About me" title="About me">●●●</a>
                     </li>
                   </ul>
                 </div>
@@ -2949,42 +2670,51 @@
             </div>
           </div>
 
-          <!-- Feature Links: Queen, Gojo, Gaming -->
-          <div id="container05" class="container default">
+          <div id="container11" class="container default" hidden>
             <div class="wrapper">
               <div class="inner">
-                <ul id="buttons05" class="buttons">
-                  <li>
-                    <a href="#about" class="button n01" role="button">
-                      <svg aria-labelledby="btn-globe-title">
-                        <title id="btn-globe-title">Globe</title>
-                        <use xlink:href="#icon-globe"></use>
-                      </svg>
-                      <span class="label">( click. ) 女王 — know more about me</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" class="button n02" role="button">
-                      <svg aria-labelledby="btn-heart-title">
-                        <title id="btn-heart-title">Heart</title>
-                        <use xlink:href="#icon-heart"></use>
-                      </svg>
-                      <span class="label">五条悟 : quiet chaos, soft heart, deep waters</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" class="button n03" role="button">
-                      <svg aria-labelledby="btn-gamepad-title">
-                        <title id="btn-gamepad-title">Gamepad</title>
-                        <use xlink:href="#icon-gamepad"></use>
-                      </svg>
-                      <span class="label">cyberpunk 2077</span>
-                    </a>
-                  </li>
-                </ul>
+                <div id="about-panel" aria-live="polite">
+
+                  <!-- About Header: Avatar + Name/Date -->
+                  <div id="container08" class="container columns">
+                    <div class="wrapper">
+                      <div class="inner">
+                        <div>
+                          <div id="image01" class="image">
+                            <span class="frame">
+                              <img src="assets/images/profile.jpeg" alt="Akemi avatar" loading="lazy" decoding="async" />
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <p id="text02">
+                            <span class="p"><strong>Akemi.</strong><br />April 4 · ♡</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- About Content: Bio + Socials -->
+                  <div id="container09" class="container default">
+                    <div class="wrapper">
+                      <div class="inner">
+                        <p id="text05">
+                          <span class="p"><strong>୨୧ : about me</strong><br />hey! i'm 22, a lesbian, and i've been messing with code since 2016. lately i'm either building in minecraft java, driving around night city in cyberpunk, or trying random games on my phone or pc.</span>
+                          <span class="p">being neurodivergent shapes how i see things: a little chaotic, very curious, and always creative. i grew up speaking spanish at home, and english feels natural to me too.<br />
+                          <strong>୨୧ : socials</strong><br />
+                           <a href="https://pin.it/23kybn1NE" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/pinterest-rounded-svgrepo-com.svg" alt="" />Pinterest</a>&nbsp;&nbsp;<a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/instagram-logo-facebook-svgrepo-com.svg" alt="" />Instagram</a>&nbsp;&nbsp;<a href="https://x.com/gxth_akemi" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/twitter-rounded-svgrepo-com.svg" alt="" />Twitter</a>&nbsp;&nbsp;<a href="https://github.com/kittishy" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/github-svgrepo-com.svg" alt="" />GitHub</a></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
+
+
 
           <!-- Spotify Player -->
           <div id="container06" class="container columns">
@@ -3016,52 +2746,6 @@
                   </iframe>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-        </section>
-
-        <!-- ===== About Section ===== -->
-        <section id="about-section">
-
-          <!-- Back to Home Button -->
-          <a href="#home" id="back-btn" class="back-button" aria-label="Back to home">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M10.707 17.707L5.293 12.293 10.707 6.807 9.293 5.393 2.686 12l6.607 6.607z"/>
-            </svg>
-          </a>
-
-          <!-- About Header: Avatar + Name/Date -->
-          <div id="container08" class="container columns">
-            <div class="wrapper">
-              <div class="inner">
-                <div>
-                  <div id="image01" class="image">
-                    <a href="#home" class="frame">
-                      <img src="assets/images/profile.jpeg" alt="Akemi avatar" loading="lazy" decoding="async" />
-                    </a>
-                  </div>
-                </div>
-                <div>
-                  <p id="text02">
-                    <span class="p"><strong>Akemi.</strong><br />April 4 · ♡</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- About Content: Bio + Socials + Divider + Action Buttons -->
-          <div id="container09" class="container default">
-            <div class="wrapper">
-              <div class="inner">
-                <p id="text05">
-                  <span class="p"><strong>୨୧ : about me</strong><br />hey! i'm 22, a lesbian, and i've been messing with code since 2016. lately i'm either building in minecraft java, driving around night city in cyberpunk, or trying random games on my phone or pc.</span>
-                  <span class="p">being neurodivergent shapes how i see things: a little chaotic, very curious, and always creative. i grew up speaking spanish at home, and english feels natural to me too.<br />
-                  <strong>୨୧ : socials</strong><br />
-                   <a href="https://pin.it/23kybn1NE" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/pinterest-rounded-svgrepo-com.svg" alt="" />Pinterest</a>&nbsp;&nbsp;<a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/instagram-logo-facebook-svgrepo-com.svg" alt="" />Instagram</a>&nbsp;&nbsp;<a href="https://x.com/gxth_akemi" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/twitter-rounded-svgrepo-com.svg" alt="" />Twitter</a>&nbsp;&nbsp;<a href="https://github.com/kittishy" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/github-svgrepo-com.svg" alt="" />GitHub</a></span>
-                </p>
               </div>
             </div>
           </div>
@@ -3296,6 +2980,51 @@
             firstField.focus({ preventScroll: true });
           }
         }, reduceMotion ? 0 : 320);
+      };
+
+      const closePanel = () => {
+        container.hidden = true;
+        setExpanded(false);
+      };
+
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        if (container.hidden) {
+          openPanel();
+        } else {
+          closePanel();
+          button.focus({ preventScroll: true });
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !container.hidden) {
+          closePanel();
+          button.focus({ preventScroll: true });
+        }
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const button = document.getElementById("about-button");
+      const container = document.getElementById("container11");
+      const panel = document.getElementById("about-panel");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!button || !container || !panel) {
+        return;
+      }
+
+      const setExpanded = (isExpanded) => {
+        button.setAttribute("aria-expanded", String(isExpanded));
+      };
+
+      const openPanel = () => {
+        container.hidden = false;
+        setExpanded(true);
+        panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
       };
 
       const closePanel = () => {
