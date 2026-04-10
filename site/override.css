@@ -9,6 +9,21 @@
 
 #main > .inner > section.active {
   display: block !important;
+  overflow-x: hidden;
+}
+
+/* Mobile: ensure panels don't overflow horizontally */
+@media (max-width: 480px) {
+  #container10,
+  #container11 {
+    overflow-x: hidden;
+  }
+
+  #container10 .wrapper,
+  #container11 .wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 /* About toggle panel: transparent wrapper like message-panel */
@@ -225,6 +240,13 @@
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
   }
+
+  /* Ensure toggle button touch targets work well with tap */
+  #message-button,
+  #about-button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
 }
 
 @media (max-width: 1024px) and (min-width: 481px) {
@@ -267,6 +289,13 @@
 
   .message-form .button {
     font-size: 0.8rem;
+  }
+
+  /* Ensure toggle buttons have responsive tap */
+  #message-button,
+  #about-button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 }
 
@@ -329,6 +358,27 @@
   }
 }
 
+/* Extra small screens: fix overflow */
+@media (max-width: 360px) {
+  #message-form input,
+  #message-form textarea {
+    font-size: 0.86rem;
+    padding: 0.5rem 0.52rem;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .message-form .button {
+    font-size: 0.8rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  #message-panel {
+    padding: 0.62rem 0.54rem;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .message-form input:hover,
   .message-form textarea:hover {
@@ -352,6 +402,23 @@
   #buttons02 .button.n01:focus-visible {
     background-color: #2a2a2a !important;
     background: #2a2a2a !important;
+  }
+}
+
+/* Mobile: Ensure Add Friend button stays readable */
+@media (max-width: 480px) {
+  #buttons02 .button.n01 {
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Very small screens: prevent button text overflow */
+@media (max-width: 360px) {
+  #buttons02 .button.n01 {
+    font-size: 0.76rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 
