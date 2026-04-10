@@ -84,7 +84,7 @@ module.exports = async (req, res) => {
   }
 
   const apiKey = getEnv("LAST_FM_API_KEY");
-  const username = getEnv("LAST_FM_USERNAME", "ak6h");
+  const username = getEnv("LAST_FM_USERNAME", "gxth_akemi");
 
   if (!apiKey || !username) {
     res.status(500).json({ status: "error", message: "Missing Last.fm configuration" });
