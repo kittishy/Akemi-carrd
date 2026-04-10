@@ -11,6 +11,10 @@
   ],
   "routes": [
     {
+      "src": "/api/now-playing",
+      "dest": "/api/now-playing.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     },
