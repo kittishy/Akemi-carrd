@@ -632,6 +632,21 @@
     }
 
     /* --- Instances --- */
+    #container01 > .wrapper {
+      background-color: transparent;
+    }
+
+    #container01 > .wrapper > .inner {
+      --gutters: 0.375rem;
+      --padding-horizontal: 0rem;
+      --padding-vertical: 0.125rem;
+      padding: var(--padding-vertical) var(--padding-horizontal);
+    }
+
+    #container01 > .wrapper > .inner > :nth-child(1) {
+      width: 100%;
+    }
+
     #container02:not(:first-child) {
       margin-top: 0.125rem !important;
     }
@@ -905,6 +920,56 @@
       text-decoration: none;
       vertical-align: middle;
       white-space: nowrap;
+    }
+
+    #buttons01 {
+      --flex-alignment: flex-start;
+      --alignment: left;
+      gap: 0.75rem;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    #buttons01 li a {
+      display: inline-flex;
+      width: 5.625rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      padding: 0 0.375rem;
+      vertical-align: middle;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.875em;
+      font-weight: 600;
+      border-radius: 0;
+      transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    #buttons01 li a svg {
+      display: block;
+      fill: #000;
+      flex-grow: 0;
+      flex-shrink: 0;
+      height: 100%;
+      min-width: 16px;
+      pointer-events: none;
+      width: 1em;
+      margin-left: -0.125em;
+      margin-right: 0.5em;
+      transition: fill 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    #buttons01 li a .label {
+      direction: var(--site-language-direction);
+      overflow: hidden;
+    }
+
+    #buttons01 .button {
+      background-color: transparent;
+      color: #000;
     }
 
     #buttons02 {
@@ -1458,6 +1523,12 @@
         margin-top: -0.5rem !important;
       }
 
+      #container01 > .wrapper > .inner {
+        --gutters: 0.375rem;
+        --padding-horizontal: 0rem;
+        --padding-vertical: 0.125rem;
+      }
+
       #container02:not(:first-child) {
         margin-top: 0.125rem !important;
       }
@@ -1540,6 +1611,19 @@
         --gutters: 0.375rem;
         --padding-horizontal: 0.375rem;
         --padding-vertical: 0.125rem;
+      }
+
+      #buttons01 {
+        gap: 0.75rem;
+      }
+
+      #buttons01 li a {
+        letter-spacing: 0;
+        font-size: 0.875em;
+      }
+
+      #buttons01 li a svg {
+        width: 1em;
       }
 
       #buttons02 {
@@ -1677,6 +1761,7 @@
       --width: min(25rem, 92vw);
     }
 
+    #container01 > .wrapper,
     #container03 > .wrapper,
     #container06 > .wrapper,
     #container07 > .wrapper,
@@ -1842,6 +1927,19 @@
         --spacing: 0.55rem;
       }
 
+      /* Nav row — keep horizontal, bigger touch targets */
+      #container01.columns > .wrapper > .inner {
+        gap: 0.5rem;
+        padding: 0.35rem 0.5rem;
+      }
+
+      #buttons01 li a {
+        height: 2.25rem;
+        line-height: 2.25rem;
+        padding: 0 0.75rem;
+        font-size: 0.9em;
+      }
+
       /* Avatar */
       #image04 .frame {
         width: 5.75rem;
@@ -1898,6 +1996,38 @@
         --border-radius-bl: 0.625rem;
       }
 
+      /* ── HOME: Top Nav ── */
+      #container01.columns > .wrapper > .inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+        padding: 0.25rem 0.25rem;
+      }
+
+      #container01.columns > .wrapper > .inner > div {
+        width: auto !important;
+        padding: 0 !important;
+      }
+
+      #container01.columns > .wrapper > .inner > :first-child {
+        margin-left: 0;
+      }
+
+      #buttons01 {
+        --flex-alignment: flex-start;
+      }
+
+      #buttons01 li a {
+        width: auto;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        padding: 0 0.75rem;
+        font-size: 0.85rem;
+        border-radius: 0.375rem;
+        background: rgba(79, 115, 152, 0.06);
+      }
+
       /* ── HOME: Profile Header ── */
       #container02 > .wrapper {
         border-radius: 0.625rem 0.625rem 0 0;
@@ -1915,7 +2045,7 @@
       }
 
       #container02 > .wrapper > .inner {
-        padding-top: 0.3rem;
+        padding-top: 0.5rem;
         padding-bottom: 0.75rem;
         display: flex;
         flex-direction: column;
@@ -2229,34 +2359,6 @@
     }
 
     /* ==========================================================================
-       15.5 RESPONSIVE — Mid devices (481px to 767px)
-       Keeps status button compact to avoid overflow from base 100vw.
-       ========================================================================== */
-    @media (min-width: 481px) and (max-width: 767px) {
-      #buttons03 {
-        --flex-alignment: flex-end;
-        justify-content: flex-end;
-      }
-
-      #buttons03 li {
-        width: auto;
-      }
-
-      #buttons03 li a {
-        display: inline-flex;
-        width: 2.4rem;
-        min-width: 44px;
-        height: 2.75rem;
-        min-height: 44px;
-        line-height: 1;
-        padding: 0;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-    }
-
-    /* ==========================================================================
        16. RESPONSIVE — Horizontal adaptation (Tablet + Desktop)
        Keeps mobile behavior intact while widening composition.
        ========================================================================== */
@@ -2268,7 +2370,7 @@
       #main > .inner {
         --width: min(46rem, 92vw);
         --padding-horizontal: 1rem;
-        --padding-vertical: 0.7rem;
+        --padding-vertical: 0.95rem;
         --spacing: 0.5rem;
       }
 
@@ -2276,7 +2378,7 @@
       #home-section {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-        row-gap: 0.4rem;
+        row-gap: 0.6rem;
       }
 
       #container02 > .wrapper > .inner {
@@ -2284,7 +2386,7 @@
         flex-direction: column;
         align-items: center;
         row-gap: 0.35rem;
-        padding: 0.65rem 0.95rem 0.7rem;
+        padding: 0.85rem 0.95rem 0.7rem;
       }
 
       #divider01 {
@@ -2459,120 +2561,12 @@
 
     /* Touch-device overrides — larger hit areas */
     @media (hover: none) and (pointer: coarse) {
+      #buttons01 li a,
       #buttons02 li a,
       #buttons03 li a {
         min-height: 44px;
         min-width: 44px;
       }
-    }
-
-    /* ==========================================================================
-       18. WEATHER / TIME-OF-DAY AMBIENT THEME
-       ========================================================================== */
-    #weather-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 1.8s ease;
-    }
-    #weather-canvas.active { opacity: 1; }
-
-    /* — Night mode — */
-    body.sky-night {
-      --v2-bg: #1e1d1c;
-      --v2-bg-soft: #2a2827;
-      --v2-card: #262423;
-      --v2-surface: #2f2c2a;
-      --v2-border: #4a4541;
-      --v2-ink: #d8d3ce;
-      --v2-ink-strong: #ece8e3;
-      --v2-muted: #9a938c;
-      --v2-accent: #b8ad9f;
-      --v2-accent-soft: #3e3835;
-      --v2-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
-    }
-    body.sky-night {
-      background: radial-gradient(120% 110% at 6% 4%, #252322 0%, transparent 48%),
-                  radial-gradient(125% 120% at 92% 2%, #1a1917 0%, transparent 44%),
-                  linear-gradient(145deg, #222120 0%, #1e1d1c 58%, #191817 100%);
-    }
-    body.sky-night::before {
-      background-image: radial-gradient(rgba(220, 215, 208, 0.06) 0.5px, transparent 0.5px);
-      opacity: 0.22;
-    }
-    body.sky-night #main {
-      background: linear-gradient(180deg, #2a2827 0%, var(--v2-card) 100%);
-    }
-    body.sky-night #buttons02 .button,
-    body.sky-night #buttons03 .button {
-      background: linear-gradient(145deg, #332f2d 0%, #2a2726 100%);
-    }
-    body.sky-night .social-icon {
-      filter: grayscale(1) brightness(1.4);
-    }
-    body.sky-night a:hover > .social-icon,
-    body.sky-night a:focus-visible > .social-icon {
-      filter: grayscale(0.3) brightness(1.6);
-    }
-    body.sky-night #container02 > .wrapper {
-      filter: brightness(0.85);
-    }
-
-    /* — Dusk / golden-hour mode — */
-    body.sky-dusk {
-      --v2-bg: #d4cdc6;
-      --v2-bg-soft: #e8dfd6;
-      --v2-card: #f3ece4;
-      --v2-surface: #e0d5ca;
-      --v2-border: #b5a898;
-      --v2-accent: #9a7e68;
-      --v2-accent-soft: #e2cdb8;
-    }
-    body.sky-dusk {
-      background: radial-gradient(120% 110% at 6% 4%, #f5ebe0 0%, transparent 48%),
-                  radial-gradient(125% 120% at 92% 2%, #dfd0c0 0%, transparent 44%),
-                  linear-gradient(145deg, var(--v2-bg-soft) 0%, var(--v2-bg) 58%, #c9c0b6 100%);
-    }
-
-    /* — Rain overlay tint — */
-    body.weather-rain {
-      --v2-bg: #cccbc9;
-      --v2-bg-soft: #e0dfdd;
-      --v2-surface: #d6d4d1;
-      --v2-border: #a5a09b;
-      --v2-accent: #7d7770;
-    }
-    body.sky-night.weather-rain {
-      --v2-bg: #1b1a19;
-      --v2-bg-soft: #252423;
-      --v2-border: #3e3a37;
-    }
-
-    /* Smooth transitions for theme shifts */
-    body, body::before, #main, #buttons02 .button, #buttons03 .button,
-    #text01, #text05, #text07, #text02, #text04, #text06,
-    .social-icon, #container02 > .wrapper, #image04 .frame {
-      transition: background 1.6s ease, color 1.6s ease, border-color 1.6s ease,
-                  box-shadow 1.6s ease, filter 1.6s ease;
-    }
-
-    /* Weather badge (tiny, unobtrusive) */
-    #weather-badge {
-      position: fixed;
-      bottom: 0.6rem;
-      right: 0.6rem;
-      font-family: 'Archivo', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.03em;
-      color: var(--v2-muted);
-      opacity: 0.45;
-      z-index: 10;
-      pointer-events: none;
-      transition: color 1.6s ease, opacity 1.6s ease;
     }
   </style>
 
@@ -2601,12 +2595,17 @@
 </head>
 
 <body class="is-loading">
-  <canvas id="weather-canvas" aria-hidden="true"></canvas>
-  <div id="weather-badge" aria-hidden="true"></div>
   <!-- ============================================================
        SVG Icon Sprite Sheet
        ============================================================ -->
   <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" display="none" width="0" height="0">
+    <!-- Arrow Left -->
+    <symbol id="icon-arrow-left" viewBox="0 0 40 40">
+      <path d="M5.5,19.9c0-0.3,0.1-0.3,0.1-0.4L18.3,6.7c0.1-0.1,0.1-0.1,0.4-0.1c0.3,0,0.3,0.1,0.4,0.1l1.5,1.5c0.1,0.1,0.1,0.1,0.1,0.4 S20.6,8.9,20.6,9l-9.2,9.2h22.4c0.1,0,0.2,0,0.2,0c0,0,0,0,0,0c0.1,0.1,0.1,0.2,0.1,0.4v2.5c0,0.2-0.1,0.4-0.1,0.5c0,0-0.1,0-0.2,0 H11.4l9.2,9.2c0.1,0.1,0.1,0.1,0.1,0.4c0,0.3-0.1,0.3-0.1,0.4l-1.5,1.5c-0.1,0.1-0.1,0.1-0.4,0.1c-0.3,0-0.3-0.1-0.4-0.1L5.6,20.3 C5.6,20.2,5.5,20.2,5.5,19.9z" />
+    </symbol>
+
+
+
     <!-- Heart -->
     <symbol id="icon-heart" viewBox="0 0 40 40">
       <path d="M20.9,37L33,25.3c3-3,4.5-5.9,4.5-8.8c0-2.9-0.8-5.1-2.5-6.7c-1.6-1.6-3.9-2.4-6.8-2.4c-0.8,0-1.6,0.1-2.5,0.4 S24.1,8.5,23.3,9c-0.7,0.5-1.3,0.9-1.9,1.3c-0.5,0.4-1,0.9-1.5,1.3c-0.5-0.5-1-0.9-1.5-1.3C18,9.9,17.4,9.5,16.7,9 c-0.7-0.5-1.5-0.9-2.3-1.1s-1.7-0.4-2.5-0.4C9,7.5,6.7,8.3,5,9.9s-2.5,3.8-2.5,6.7c0,0.9,0.2,1.8,0.5,2.7c0.3,0.9,0.7,1.7,1,2.4 c0.4,0.6,0.8,1.3,1.3,1.9c0.5,0.6,0.9,1,1.1,1.3C6.7,25,6.9,25.2,7,25.3L19.1,37c0.2,0.2,0.5,0.4,0.9,0.4S20.6,37.3,20.9,37z" />
@@ -2642,6 +2641,28 @@
 
         <!-- ===== Home Section ===== -->
         <section id="home-section" class="active">
+
+          <!-- Top Nav: Back Button + Search Icon -->
+          <div id="container01" class="container columns">
+            <div class="wrapper">
+              <div class="inner">
+                <div>
+                  <ul id="buttons01" class="buttons">
+                    <li>
+                      <a href="#home" class="button n01" role="button">
+                        <svg aria-labelledby="nav-back-title">
+                          <title id="nav-back-title">Arrow Left (Light)</title>
+                          <use xlink:href="#icon-arrow-left"></use>
+                        </svg>
+                        <span class="label">八方美人</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
 
           <!-- Profile Header: Divider + Avatar + Name -->
           <div id="container02" class="container default">
@@ -2759,7 +2780,7 @@
                     <div class="wrapper">
                       <div class="inner">
                         <p id="text05">
-                          <span class="p"><strong>୨୧ : about me</strong><br />hey! i'm 22, a lesbian, and i've been messing with code since 2016. lately i'm either building in minecraft java, driving around night city in cyberpunk, or trying random games on my phone or pc.</span>
+                          <span class="p"><strong>୨୧ : about me</strong><br />hey! i'm 22, a lesbian, and i've been messing with code since 2016. lately i'm either building in minecraft, driving around night city in cyberpunk, or trying random games on my phone or pc.</span>
                           <span class="p">being neurodivergent shapes how i see things: a little chaotic, very curious, and always creative. i grew up speaking spanish at home, and english feels natural to me too.<br />
                           <strong>୨୧ : socials</strong><br />
                            <a href="https://kr.pinterest.com/gxth_akemi" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/pinterest-rounded-svgrepo-com.svg" alt="" />Pinterest</a>&nbsp;&nbsp;<a href="https://steamcommunity.com/profiles/76561199345609775/" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/steam-logo-svgrepo-com.svg" alt="" />Steam</a>&nbsp;&nbsp;<a href="https://x.com/gxth_akemi" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/twitter-rounded-svgrepo-com.svg" alt="" />Twitter</a>&nbsp;&nbsp;<a href="https://open.spotify.com/user/315sh472qwzqkmzubi3df2xdmbou?si=11855cc66064432b" target="_blank" rel="noopener noreferrer"><img class="social-icon" src="assets/images/spotify-svgrepo-com.svg" alt="" />Spotify</a></span>
@@ -2846,7 +2867,6 @@
       let timer = null;
       let etag = "";
       let inFlightController = null;
-      let isUpdating = false;
       let errorCount = 0;
       let lastPlayingAt = 0;
       let lastTrackKey = "";
@@ -2860,15 +2880,7 @@
         if (timer) {
           clearTimeout(timer);
         }
-        if (document.hidden) {
-          timer = null;
-          return;
-        }
-
-        timer = window.setTimeout(() => {
-          timer = null;
-          runUpdate();
-        }, withJitter(ms));
+        timer = window.setTimeout(runUpdate, withJitter(ms));
       };
 
       const setMode = (nextMode) => {
@@ -2921,7 +2933,7 @@
 
           const response = await fetch(endpoint, {
             method: "GET",
-            cache: "no-cache",
+            cache: "no-store",
             headers,
             signal: inFlightController.signal
           });
@@ -2957,15 +2969,8 @@
       };
 
       const runUpdate = async () => {
-        if (isUpdating) {
-          return;
-        }
-
         if (document.hidden) {
-          if (timer) {
-            clearTimeout(timer);
-            timer = null;
-          }
+          schedule(POLL_HIDDEN);
           return;
         }
 
@@ -2973,8 +2978,6 @@
           handleOffline();
           return;
         }
-
-        isUpdating = true;
 
         try {
           const payload = await fetchNowPlaying();
@@ -2997,11 +3000,7 @@
 
           setMode("spotify");
           schedule(POLL_IDLE);
-        } catch (error) {
-          if (error && error.name === "AbortError") {
-            return;
-          }
-
+        } catch (_error) {
           errorCount += 1;
           const errorPoll = Math.min(POLL_ERROR_BASE * Math.pow(2, errorCount - 1), POLL_ERROR_MAX);
 
@@ -3012,26 +3011,13 @@
 
           setMode("spotify");
           schedule(errorPoll);
-        } finally {
-          isUpdating = false;
         }
       };
 
       document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-          if (timer) {
-            clearTimeout(timer);
-            timer = null;
-          }
-
-          if (inFlightController) {
-            inFlightController.abort();
-          }
-
-          return;
+        if (!document.hidden) {
+          runUpdate();
         }
-
-        runUpdate();
       });
 
       window.addEventListener("online", runUpdate);
@@ -3157,294 +3143,6 @@
           button.focus({ preventScroll: true });
         }
       });
-    })();
-  </script>
-
-  <!-- ============================================================
-       Weather / Time-of-Day Ambient Engine
-       ============================================================ -->
-  <script>
-    (() => {
-      "use strict";
-
-      /* ---------- Respect reduced-motion ---------- */
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      /* ---------- Canvas setup ---------- */
-      const canvas = document.getElementById("weather-canvas");
-      const badge = document.getElementById("weather-badge");
-      if (!canvas) return;
-      const ctx = canvas.getContext("2d");
-      let cW, cH, dpr;
-      let particles = [];
-      let animId = null;
-      let currentEffect = null; // "rain" | "stars" | null
-
-      const resize = () => {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        cW = window.innerWidth;
-        cH = window.innerHeight;
-        canvas.width = cW * dpr;
-        canvas.height = cH * dpr;
-        canvas.style.width = cW + "px";
-        canvas.style.height = cH + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      };
-      resize();
-      window.addEventListener("resize", resize);
-
-      /* ---------- Particle limits (mobile-friendly) ---------- */
-      const isMobile = window.innerWidth < 768;
-      const MAX_RAIN = isMobile ? 40 : 80;
-      const MAX_STARS = isMobile ? 18 : 35;
-      const MAX_SHOOTING = isMobile ? 1 : 2;
-
-      /* ---------- Rain particles ---------- */
-      const spawnRain = () => ({
-        x: Math.random() * cW,
-        y: Math.random() * -cH,
-        len: 12 + Math.random() * 18,
-        speed: 4 + Math.random() * 4,
-        opacity: 0.08 + Math.random() * 0.12,
-        drift: -0.3 + Math.random() * 0.6
-      });
-
-      const drawRain = (dt) => {
-        const isNight = document.body.classList.contains("sky-night");
-        const strokeColor = isNight ? "rgba(180,175,168," : "rgba(80,76,72,";
-        for (let i = 0; i < particles.length; i++) {
-          const p = particles[i];
-          p.y += p.speed * (dt / 16);
-          p.x += p.drift * (dt / 16);
-          if (p.y > cH + 20) {
-            particles[i] = spawnRain();
-            particles[i].y = -10;
-          }
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x + p.drift * 2, p.y + p.len);
-          ctx.strokeStyle = strokeColor + p.opacity + ")";
-          ctx.lineWidth = 1;
-          ctx.stroke();
-        }
-      };
-
-      /* ---------- Star particles ---------- */
-      const spawnStar = () => ({
-        x: Math.random() * cW,
-        y: Math.random() * cH * 0.7,
-        r: 0.5 + Math.random() * 1.2,
-        baseOpacity: 0.15 + Math.random() * 0.35,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.3 + Math.random() * 0.6
-      });
-
-      const spawnShootingStar = () => ({
-        x: Math.random() * cW * 0.8,
-        y: Math.random() * cH * 0.3,
-        vx: 3 + Math.random() * 4,
-        vy: 1.5 + Math.random() * 2,
-        len: 40 + Math.random() * 60,
-        life: 0,
-        maxLife: 60 + Math.random() * 40,
-        opacity: 0.25 + Math.random() * 0.2,
-        shooting: true
-      });
-
-      let shootingStars = [];
-      let shootingTimer = 0;
-
-      const drawStars = (dt, elapsed) => {
-        for (const s of particles) {
-          const twinkle = Math.sin(elapsed * 0.001 * s.speed + s.phase) * 0.5 + 0.5;
-          const alpha = s.baseOpacity * (0.4 + twinkle * 0.6);
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(230,225,218," + alpha + ")";
-          ctx.fill();
-        }
-
-        /* Shooting stars */
-        shootingTimer += dt;
-        if (shootingTimer > 3000 + Math.random() * 5000 && shootingStars.length < MAX_SHOOTING) {
-          shootingStars.push(spawnShootingStar());
-          shootingTimer = 0;
-        }
-
-        for (let i = shootingStars.length - 1; i >= 0; i--) {
-          const ss = shootingStars[i];
-          ss.life += dt / 16;
-          ss.x += ss.vx * (dt / 16);
-          ss.y += ss.vy * (dt / 16);
-          const progress = ss.life / ss.maxLife;
-          const fade = progress < 0.3 ? progress / 0.3 : 1 - (progress - 0.3) / 0.7;
-          const alpha = ss.opacity * Math.max(0, fade);
-          ctx.beginPath();
-          ctx.moveTo(ss.x, ss.y);
-          ctx.lineTo(ss.x - ss.vx * (ss.len / ss.vx), ss.y - ss.vy * (ss.len / ss.vx));
-          const grad = ctx.createLinearGradient(ss.x, ss.y, ss.x - ss.vx * 3, ss.y - ss.vy * 3);
-          grad.addColorStop(0, "rgba(230,225,218," + alpha + ")");
-          grad.addColorStop(1, "rgba(230,225,218,0)");
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-          if (ss.life >= ss.maxLife) shootingStars.splice(i, 1);
-        }
-      };
-
-      /* ---------- Animation loop ---------- */
-      let lastTime = 0;
-      let startTime = 0;
-
-      const loop = (timestamp) => {
-        if (!startTime) startTime = timestamp;
-        const dt = Math.min(timestamp - (lastTime || timestamp), 50);
-        lastTime = timestamp;
-        const elapsed = timestamp - startTime;
-
-        ctx.clearRect(0, 0, cW, cH);
-
-        if (currentEffect === "rain") drawRain(dt);
-        else if (currentEffect === "stars") drawStars(dt, elapsed);
-
-        animId = requestAnimationFrame(loop);
-      };
-
-      const startEffect = (effect) => {
-        if (reduceMotion) return;
-        if (currentEffect === effect) return;
-        currentEffect = effect;
-        particles = [];
-        shootingStars = [];
-        shootingTimer = 0;
-        lastTime = 0;
-        startTime = 0;
-
-        if (effect === "rain") {
-          for (let i = 0; i < MAX_RAIN; i++) particles.push(spawnRain());
-        } else if (effect === "stars") {
-          for (let i = 0; i < MAX_STARS; i++) particles.push(spawnStar());
-        }
-
-        canvas.classList.add("active");
-        if (!animId) animId = requestAnimationFrame(loop);
-      };
-
-      const stopEffect = () => {
-        currentEffect = null;
-        particles = [];
-        shootingStars = [];
-        canvas.classList.remove("active");
-        if (animId) {
-          cancelAnimationFrame(animId);
-          animId = null;
-        }
-        ctx.clearRect(0, 0, cW, cH);
-      };
-
-      /* ---------- Pause when tab hidden ---------- */
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          if (animId) { cancelAnimationFrame(animId); animId = null; }
-        } else if (currentEffect) {
-          lastTime = 0;
-          animId = requestAnimationFrame(loop);
-        }
-      });
-
-      /* ---------- Weather / Time detection ---------- */
-      const WMO_RAIN = new Set([51,53,55,56,57,61,63,65,66,67,71,73,75,77,80,81,82,85,86,95,96,99]);
-
-      const getSkyPhase = (hour) => {
-        if (hour >= 6 && hour < 7) return "dusk";    // dawn
-        if (hour >= 7 && hour < 17) return "day";
-        if (hour >= 17 && hour < 19) return "dusk";   // sunset
-        return "night";
-      };
-
-      const applyTheme = (sky, isRaining) => {
-        const b = document.body;
-        b.classList.remove("sky-night", "sky-dusk", "weather-rain");
-
-        if (sky === "night") b.classList.add("sky-night");
-        else if (sky === "dusk") b.classList.add("sky-dusk");
-
-        if (isRaining) b.classList.add("weather-rain");
-
-        /* Pick effect */
-        if (isRaining) {
-          startEffect("rain");
-        } else if (sky === "night") {
-          startEffect("stars");
-        } else {
-          stopEffect();
-        }
-
-        /* Badge */
-        if (badge) {
-          const labels = [];
-          if (sky === "night") labels.push("night");
-          else if (sky === "dusk") labels.push("golden hour");
-          if (isRaining) labels.push("rain");
-          badge.textContent = labels.length ? labels.join(" · ") : "";
-        }
-      };
-
-      const detect = async () => {
-        try {
-          /* Step 1: IP geolocation (no permission needed) */
-          let geo;
-          try {
-            const geoRes = await fetch("https://ipapi.co/json/", { cache: "no-store" });
-            if (!geoRes.ok) throw new Error("geo fail");
-            const raw = await geoRes.json();
-            geo = { lat: raw.latitude, lon: raw.longitude, timezone: raw.timezone };
-          } catch {
-            /* Fallback: use device timezone and skip weather */
-            const sky = getSkyPhase(new Date().getHours());
-            applyTheme(sky, false);
-            return;
-          }
-
-          /* Step 2: Current local hour from timezone */
-          let localHour;
-          try {
-            const now = new Date();
-            const timeStr = now.toLocaleString("en-US", { timeZone: geo.timezone, hour: "numeric", hour12: false });
-            localHour = parseInt(timeStr, 10);
-          } catch {
-            localHour = new Date().getHours();
-          }
-
-          /* Step 3: Weather from Open-Meteo (free, no API key) */
-          const weatherRes = await fetch(
-            "https://api.open-meteo.com/v1/forecast?latitude=" + geo.lat +
-            "&longitude=" + geo.lon +
-            "&current_weather=true&timezone=auto",
-            { cache: "no-store" }
-          );
-          let isRaining = false;
-          if (weatherRes.ok) {
-            const w = await weatherRes.json();
-            const code = w.current_weather ? w.current_weather.weathercode : 0;
-            isRaining = WMO_RAIN.has(code);
-          }
-
-          const sky = getSkyPhase(localHour);
-          applyTheme(sky, isRaining);
-
-        } catch {
-          /* Fallback: use local device time, no weather effects */
-          const sky = getSkyPhase(new Date().getHours());
-          applyTheme(sky, false);
-        }
-      };
-
-      /* Run after a short delay so the page loads first */
-      window.setTimeout(detect, 800);
-
-      /* Re-check every 10 minutes */
-      window.setInterval(detect, 10 * 60 * 1000);
     })();
   </script>
 </body>
