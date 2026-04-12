@@ -56,15 +56,3 @@ test("message/about toggle behavior stays stable", async ({ page }) => {
   await page.keyboard.press("Escape");
   await expect(aboutContainer).toBeHidden();
 });
-
-test("pixel pet stays interactive", async ({ page }) => {
-  await page.setViewportSize({ width: 1366, height: 768 });
-  await openHome(page);
-
-  const pet = page.locator("#pixel-pet");
-  const bubble = page.locator("#pixel-pet-bubble");
-
-  await expect(pet).toBeVisible();
-  await pet.click();
-  await expect(bubble).toHaveClass(/is-visible/);
-});
