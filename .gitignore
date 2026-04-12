@@ -17,3 +17,6 @@
 .trae/
 .windsurf/
 .venv/
+node_modules/
+playwright-report/
+test-results/

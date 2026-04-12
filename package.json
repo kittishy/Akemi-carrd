@@ -1,0 +1,12 @@
+{
+  "name": "akemi-carrd",
+  "private": true,
+  "version": "1.0.0",
+  "description": "QA smoke package for Akemi carrd",
+  "scripts": {
+    "qa:smoke": "playwright test --project=chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2"
+  }
+}
