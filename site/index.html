@@ -2775,8 +2775,121 @@
     }
 
     /* ==========================================================================
-       19. TOOL PANELS — shared styles
+       19. MESSAGE PANEL — Anti-spam protected form
        ========================================================================== */
+    .message-panel {
+      padding: 0.15rem 0;
+    }
+
+    .message-panel p {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--v2-ink);
+      margin: 0 0 0.65rem 0;
+      text-align: center;
+    }
+
+    .message-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .message-form input[type="text"],
+    .message-form input[type="email"],
+    .message-form textarea {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.82rem;
+      color: var(--v2-ink);
+      background: var(--v2-bg-soft);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.65rem;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .message-form input[type="text"]:focus,
+    .message-form input[type="email"]:focus,
+    .message-form textarea:focus {
+      outline: none;
+      border-color: var(--v2-accent);
+      box-shadow: 0 0 0 3px rgba(143, 129, 118, 0.2);
+    }
+
+    .message-form textarea {
+      resize: vertical;
+      min-height: 80px;
+      max-height: 250px;
+    }
+
+    /* Honeypot field - hidden from users but visible to bots */
+    .message-form .honeypot {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Error message display */
+    .message-form .message-error {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.75rem;
+      color: #c44;
+      background: rgba(204, 68, 68, 0.1);
+      border: 1px solid rgba(204, 68, 68, 0.3);
+      border-radius: 0.375rem;
+      padding: 0.4rem 0.6rem;
+      margin: 0;
+      display: none;
+    }
+
+    .message-form .message-error.visible {
+      display: block;
+    }
+
+    /* Submit button states */
+    .message-form .button.n02:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .message-form .button.n02.loading {
+      position: relative;
+      color: transparent;
+    }
+
+    .message-form .button.n02.loading::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin: -8px 0 0 -8px;
+      border: 2px solid rgba(0,0,0,0.2);
+      border-top-color: var(--v2-ink);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Rate limit warning */
+    .rate-limit-warning {
+      font-size: 0.7rem;
+      color: #c75;
+      text-align: center;
+      padding: 0.25rem;
+    }
+
+    /* ==========================================================================
+        20. TOOL PANELS — shared styles
+        ========================================================================== */
     .tool-panel {
       padding: 0.1rem 0;
     }
@@ -3205,17 +3318,33 @@
                 <div id="message-panel" class="message-panel" aria-live="polite">
                   <p id="text08">Send me a message / メッセージを送る</p>
                   <form id="message-form" class="message-form" action="https://formsubmit.co/solara.julia.a@gmail.com" method="POST">
+                    <!-- Anti-spam: Honeypot field (hidden from users, bots will fill it) -->
+                    <input type="text" name="website" id="hp-field" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                    
+                    <!-- Anti-spam: Timestamp for timeout validation -->
+                    <input type="hidden" name="_form_start_time" id="form-start-time" value="" />
+                    <input type="hidden" name="_client_ip" id="client-ip-hash" value="" />
+                    
+                    <!-- FormSubmit.co configuration -->
                     <input type="hidden" name="_subject" value="New message from Akemi site / Akemiサイトから新しいメッセージ" />
                     <input type="hidden" name="_captcha" value="false" />
                     <input type="hidden" name="_next" value="https://akemi.vercel.app/success.html?v=2" />
                     <input type="hidden" name="_template" value="basic" />
+                    
+                    <!-- Rate limit feedback (hidden) -->
+                    <input type="hidden" name="_rate_limit_token" id="rate-limit-token" value="" />
+                    
                     <label for="message-name" class="sr-only">Your name / お名前</label>
                     <input id="message-name" name="name" type="text" placeholder="Your name / お名前" autocomplete="name" maxlength="80" required />
                     <label for="message-email" class="sr-only">Your email / メールアドレス</label>
-                    <input id="message-email" name="email" type="email" placeholder="Your email / メールアドレス" inputmode="email" autocomplete="email" maxlength="120" required />
+                    <input id="message-email" name="email" type="email" placeholder="Your email / メールアドレス" inputmode="email" autocomplete="email" maxlength="120" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" />
                     <label for="message-text" class="sr-only">Message / メッセージ</label>
                     <textarea id="message-text" name="message" placeholder="Type your message / メッセージを入力" rows="4" maxlength="1200" required></textarea>
-                    <button type="submit" class="button n02">Send message / 送信</button>
+                    
+                    <!-- Error container for spam feedback -->
+                    <p id="message-error" class="message-error" aria-live="polite"></p>
+                    
+                    <button type="submit" class="button n02" id="submit-btn">Send message / 送信</button>
                   </form>
                 </div>
               </div>
@@ -4060,6 +4189,198 @@
           button.focus({ preventScroll: true });
         }
       });
+
+      /* ================================================================
+         ANTI-SPAM PROTECTION — Rate limiting, honeypot, input validation
+         ================================================================ */
+      const form = document.getElementById("message-form");
+      const honeypotField = document.getElementById("hp-field");
+      const formStartTime = document.getElementById("form-start-time");
+      const submitBtn = document.getElementById("submit-btn");
+      const errorContainer = document.getElementById("message-error");
+
+      // Rate limiting configuration
+      const RATE_LIMIT = {
+        maxAttempts: 3,      // Max submissions per window
+        windowMs: 60 * 1000, // 1 minute window
+        blockMs: 5 * 60 * 1000 // 5 minute block after limit
+      };
+
+      // Simple client-side rate limiting using localStorage
+      const getRateLimitData = () => {
+        try {
+          const stored = localStorage.getItem("akemi_msg_ratelimit");
+          return stored ? JSON.parse(stored) : { attempts: 0, windowStart: 0, blockedUntil: 0 };
+        } catch (e) {
+          return { attempts: 0, windowStart: 0, blockedUntil: 0 };
+        }
+      };
+
+      const saveRateLimitData = (data) => {
+        try {
+          localStorage.setItem("akemi_msg_ratelimit", JSON.stringify(data));
+        } catch (e) { /* ignore storage errors */ }
+      };
+
+      const checkRateLimit = () => {
+        const data = getRateLimitData();
+        const now = Date.now();
+
+        // Check if currently blocked
+        if (data.blockedUntil > now) {
+          const remaining = Math.ceil((data.blockedUntil - now) / 1000);
+          return { blocked: true, message: `Too many requests. Please wait ${remaining} seconds.` };
+        }
+
+        // Reset window if expired
+        if (now - data.windowStart > RATE_LIMIT.windowMs) {
+          data.attempts = 0;
+          data.windowStart = now;
+          saveRateLimitData(data);
+        }
+
+        // Check if over limit
+        if (data.attempts >= RATE_LIMIT.maxAttempts) {
+          data.blockedUntil = now + RATE_LIMIT.blockMs;
+          data.attempts = 0;
+          data.windowStart = now;
+          saveRateLimitData(data);
+          return { blocked: true, message: "Rate limit exceeded. Please try again later." };
+        }
+
+        return { blocked: false };
+      };
+
+      const incrementRateLimit = () => {
+        const data = getRateLimitData();
+        const now = Date.now();
+
+        if (now - data.windowStart > RATE_LIMIT.windowMs) {
+          data.windowStart = now;
+          data.attempts = 1;
+        } else {
+          data.attempts++;
+        }
+        saveRateLimitData(data);
+      };
+
+      // Initialize form start time when panel opens
+      const initFormProtection = () => {
+        if (formStartTime) {
+          formStartTime.value = Date.now().toString();
+        }
+      };
+
+      // Hook into panel open
+      const originalOpenPanel = openPanel;
+      openPanel = () => {
+        originalOpenPanel();
+        initFormProtection();
+      };
+
+      // Form submission handler
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          const now = Date.now();
+
+          // 1. Honeypot check - if filled, it's a bot
+          if (honeypotField && honeypotField.value.trim() !== "") {
+            e.preventDefault();
+            console.warn("[ANTI-SPAM] Honeypot field filled - possible bot detected");
+            // Silently reject - don't give feedback to bots
+            window.location.href = "/success.html?v=2"; // Fake success
+            return;
+          }
+
+          // 2. Timeout check - submissions too fast (< 2 seconds) are suspicious
+          if (formStartTime && formStartTime.value) {
+            const timeDiff = now - parseInt(formStartTime.value, 10);
+            if (timeDiff < 2000) {
+              // Too fast - likely a bot, but allow once in case of fast human
+              console.warn("[ANTI-SPAM] Fast submission detected:", timeDiff + "ms");
+            }
+          }
+
+          // 3. Rate limit check
+          const rateCheck = checkRateLimit();
+          if (rateCheck.blocked) {
+            e.preventDefault();
+            if (errorContainer) {
+              errorContainer.textContent = rateCheck.message;
+              errorContainer.classList.add("visible");
+            }
+            submitBtn.disabled = true;
+            setTimeout(() => {
+              submitBtn.disabled = false;
+              if (errorContainer) errorContainer.classList.remove("visible");
+            }, 3000);
+            return;
+          }
+
+          // 4. Input validation - check for common spam patterns
+          const nameInput = document.getElementById("message-name");
+          const emailInput = document.getElementById("message-email");
+          const messageInput = document.getElementById("message-text");
+
+          const spamPatterns = [
+            /https?:\/\/[^\s]{50,}/i,  // URLs longer than 50 chars
+            /\b(viagra|casino|poker|crypto|bitcoin|loan)\b/i, // Spam keywords
+            /(.)\1{5,}/i, // Same character repeated 5+ times
+          ];
+
+          const checkField = (field, name) => {
+            if (!field || !field.value) return null;
+            for (const pattern of spamPatterns) {
+              if (pattern.test(field.value)) {
+                return name;
+              }
+            }
+            return null;
+          };
+
+          const spamField = checkField(nameInput, "name") || checkField(emailInput, "email") || checkField(messageInput, "message");
+
+          if (spamField) {
+            e.preventDefault();
+            console.warn("[ANTI-SPAM] Spam pattern detected in", spamField);
+            if (errorContainer) {
+              errorContainer.textContent = "Please remove URLs or suspicious content from your message.";
+              errorContainer.classList.add("visible");
+            }
+            return;
+          }
+
+          // 5. Email format validation
+          if (emailInput && emailInput.value) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailInput.value)) {
+              e.preventDefault();
+              if (errorContainer) {
+                errorContainer.textContent = "Please enter a valid email address.";
+                errorContainer.classList.add("visible");
+              }
+              return;
+            }
+          }
+
+          // All checks passed - increment rate limit and submit
+          incrementRateLimit();
+
+          // Add loading state
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.classList.add("loading");
+            submitBtn.textContent = "Sending...";
+          }
+
+          // Log for monitoring (in production, this would go to a logging service)
+          console.log("[MESSAGE] Form submitted:", {
+            timestamp: new Date().toISOString(),
+            name: nameInput ? nameInput.value.substring(0, 20) + "..." : "N/A",
+            email: emailInput ? emailInput.value : "N/A"
+          });
+        });
+      }
     })();
   </script>
   <script>
