@@ -1,0 +1,45 @@
+- generic [ref=e5]:
+  - generic [ref=e8]:
+    - img "Profile portrait of Akemi" [ref=e11]
+    - heading "Akemi." [level=1] [ref=e12]
+  - paragraph [ref=e16]:
+    - generic [ref=e17]:
+      - text: 🕊️┆
+      - strong [ref=e18]: 明美
+      - text: ， 現実 —She/Her ִ ࣪𖤐
+      - text: ˖ ✦ ›
+      - img "Transgender pride flag" [ref=e19]
+      - img "Lesbian pride flag" [ref=e20]
+      - text: 𓂃 ★ @ak6h
+      - strong [ref=e21]: dc
+  - generic [ref=e24]:
+    - list [ref=e26]:
+      - listitem [ref=e27]:
+        - button "User Add Friend" [ref=e28] [cursor=pointer]:
+          - img "User"
+          - generic [ref=e29]: Add Friend
+      - listitem [ref=e30]:
+        - button "Message Message" [ref=e31] [cursor=pointer]:
+          - img "Message"
+          - generic [ref=e32]: Message
+    - list [ref=e34]:
+      - listitem [ref=e35]:
+        - generic [ref=e36]:
+          - button "More options" [ref=e37] [cursor=pointer]: ●●●
+          - text: Tools
+  - generic "Music status" [ref=e42]:
+    - article "Now playing on Spotify via Last.fm" [ref=e43]:
+      - img "Current track artwork" [ref=e44]
+      - generic [ref=e45]:
+        - paragraph [ref=e46]: Listening
+        - paragraph [ref=e48]: Shoka
+        - paragraph [ref=e49]: Ado
+        - link "Open on Last.fm" [ref=e50] [cursor=pointer]:
+          - /url: https://www.last.fm/music/Ado/_/Shoka
+  - generic "Discord activities" [ref=e55]:
+    - article "Playing Watch Dogs" [ref=e56]:
+      - img "Watch Dogs" [ref=e58]
+      - generic [ref=e59]:
+        - paragraph [ref=e60]: Playing
+        - paragraph [ref=e62]: Watch Dogs
+        - paragraph [ref=e63]: 03:03:02 elapsed
