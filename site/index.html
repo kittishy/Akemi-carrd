@@ -3456,6 +3456,18 @@
       const DEFAULT_ART = "assets/images/profile.jpeg";
       const endpoint = "/api/now-playing";
 
+      // Attach the fallback onerror handler immediately so the initial
+      // profile.jpeg src (set in HTML) and any early track art loads are
+      // protected before writeTrack() is ever called.
+      art.onerror = function () {
+        if (!this.src.endsWith(DEFAULT_ART) && !this.src.includes(DEFAULT_ART)) {
+          this.onerror = null;
+          this.src = DEFAULT_ART;
+        } else {
+          this.onerror = null;
+        }
+      };
+
       let mode = "spotify";
       let timer = null;
       let etag = "";
@@ -3463,6 +3475,8 @@
       let errorCount = 0;
       let lastPlayingAt = 0;
       let lastTrackKey = "";
+      let lastTrackImage = "";
+      let lastTrackUrl = "";
 
       const withJitter = (ms) => {
         const jitter = Math.round(ms * 0.1 * Math.random());
@@ -3499,25 +3513,30 @@
         }
 
         const nextTrackKey = [nextTrack.artist, nextTrack.name, nextTrack.album].filter(Boolean).join("::");
-        if (nextTrackKey === lastTrackKey) {
+        const nextTrackUrl = nextTrack.lastfmUrl || "https://www.last.fm";
+        const nextTrackImage = nextTrack.imageUrl || DEFAULT_ART;
+        if (nextTrackKey === lastTrackKey && nextTrackUrl === lastTrackUrl && nextTrackImage === lastTrackImage) {
           return;
         }
 
         lastTrackKey = nextTrackKey;
+        lastTrackUrl = nextTrackUrl;
+        lastTrackImage = nextTrackImage;
         track.textContent = nextTrack.name || "Unknown track";
         artist.textContent = nextTrack.artist || "Unknown artist";
-        link.href = nextTrack.lastfmUrl || "https://www.last.fm";
-        const newSrc = nextTrack.imageUrl || DEFAULT_ART;
+        link.href = nextTrackUrl;
+        // Re-wire onerror each time the track changes in case the browser
+        // cleared it after a previous error resolution.
         art.onerror = function () {
           // Guard: avoid infinite loop if DEFAULT_ART itself somehow fails
-          if (this.src !== DEFAULT_ART && !this.src.endsWith(DEFAULT_ART)) {
+          if (!this.src.endsWith(DEFAULT_ART) && !this.src.includes(DEFAULT_ART)) {
             this.onerror = null;
             this.src = DEFAULT_ART;
           } else {
             this.onerror = null;
           }
         };
-        art.src = newSrc;
+        art.src = nextTrackImage;
       };
 
       const fetchNowPlaying = async () => {
@@ -3572,10 +3591,12 @@
       };
 
       const runUpdate = async () => {
-        // Guard: never run while tab is hidden or offline — callers are
-        // responsible for only invoking runUpdate when appropriate, but
-        // this acts as a belt-and-suspenders safety net.
+        // Guard: if the tab is hidden, reschedule at the long interval and
+        // return early — this keeps the loop alive so it resumes promptly
+        // once the visibilitychange handler fires and calls runUpdate()
+        // directly, while avoiding unnecessary background requests.
         if (document.hidden) {
+          schedule(POLL_HIDDEN);
           return;
         }
 

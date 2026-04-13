@@ -266,6 +266,44 @@ test("Last.fm playing: #now-playing-link href points to Last.fm track URL", asyn
   expect(href).toBe(trackUrl);
 });
 
+test("Last.fm playing: artwork updates even when the same track keeps playing", async ({ page }) => {
+  let callCount = 0;
+  await stubWebSocket(page);
+  await page.route("**/api/now-playing", async (route) => {
+    callCount += 1;
+    const track = defaultTrack();
+    track.imageUrl = callCount === 1 ? "" : "https://example.com/fixed-art.jpg";
+
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ status: "playing", track })
+    });
+  });
+  await page.route("**/api.lanyard.rest/v1/users/**", async (route) => {
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ success: true, data: { activities: [] } }) });
+  });
+  await page.route("**/open.spotify.com/**", (route) => route.abort());
+
+  await page.goto("/site/index.html", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#home-section")).toBeVisible();
+  await expect(page.locator("#now-playing-art")).toHaveAttribute("src", /assets\/images\/profile\.jpeg/, { timeout: 5000 });
+
+  await page.evaluate(() => window.dispatchEvent(new Event("online")));
+  await expect(page.locator("#now-playing-art")).toHaveAttribute("src", "https://example.com/fixed-art.jpg", { timeout: 5000 });
+});
+
+test("Last.fm playing: artwork falls back when remote art fails to load", async ({ page }) => {
+  await openHome(page, {
+    nowPlayingStatus: "playing",
+    nowPlayingTrack: { ...defaultTrack(), imageUrl: "https://example.com/broken-art.jpg" }
+  });
+
+  await expect(page.locator("#container06.is-now-playing")).toBeVisible({ timeout: 5000 });
+  await page.locator("#now-playing-art").evaluate((img) => img.dispatchEvent(new Event("error")));
+  await expect(page.locator("#now-playing-art")).toHaveAttribute("src", /assets\/images\/profile\.jpeg/);
+});
+
 test("Last.fm playing: #now-playing-card is visible (not display:none) when playing", async ({ page }) => {
   await openHome(page, {
     nowPlayingStatus: "playing",

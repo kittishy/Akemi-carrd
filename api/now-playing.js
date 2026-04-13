@@ -2,14 +2,12 @@ const LASTFM_BASE_URL = "https://ws.audioscrobbler.com/2.0/";
 const API_METHOD = "user.getrecenttracks";
 const REQUEST_TIMEOUT_MS = 4500;
 
-// ── Server-side stale-while-revalidate cache ──────────────────────────────
-// Vercel reuses warm function instances. Holding the last good payload in
-// module scope means most requests return from memory (<5ms) while the
-// upstream Last.fm call refreshes data in the background.
-// On a cold start the first request still waits for Last.fm as before.
+// ── Server-side short-lived cache ──────────────────────────────────────────
+// Vercel reuses warm function instances. Keep a very small in-memory cache so
+// bursts of requests do not hammer Last.fm, but always revalidate quickly
+// enough for the client poller to observe track changes near real-time.
 let _serverCache = null;   // { payload, etag, fetchedAt }
-let _revalidating = false;
-const SERVER_CACHE_TTL_MS = 12000; // 12s — shorter than the 15s client poll
+const SERVER_CACHE_TTL_MS = 4000;
 
 const getEnv = (name, fallback = "") => {
   const value = process.env[name];
@@ -138,31 +136,31 @@ const fetchFromLastFm = async (apiKey, username) => {
   }
 };
 
-// ── SWR wrapper: return cached data immediately, refresh in background ────
-const getWithSWR = async (apiKey, username) => {
+const getCachedNowPlaying = async (apiKey, username) => {
   const now = Date.now();
 
-  // Fresh cache hit → return immediately, no upstream call at all
   if (_serverCache && (now - _serverCache.fetchedAt) < SERVER_CACHE_TTL_MS) {
     return _serverCache;
   }
 
-  // Stale cache exists and no revalidation in flight → serve stale now,
-  // kick off background refresh so the NEXT request gets fresh data
-  if (_serverCache && !_revalidating) {
-    _revalidating = true;
-    fetchFromLastFm(apiKey, username)
-      .then((result) => { _serverCache = result; })
-      .catch(() => { /* keep serving stale on upstream errors */ })
-      .finally(() => { _revalidating = false; });
+  try {
+    const result = await fetchFromLastFm(apiKey, username);
+    _serverCache = result;
+    return result;
+  } catch (error) {
+    if (_serverCache) {
+      return {
+        ..._serverCache,
+        payload: {
+          ..._serverCache.payload,
+          isStale: true,
+          updatedAt: new Date().toISOString()
+        }
+      };
+    }
 
-    return { ..._serverCache, payload: { ..._serverCache.payload, isStale: true } };
+    throw error;
   }
-
-  // Cold start or revalidation already in flight with no cache → must await
-  const result = await fetchFromLastFm(apiKey, username);
-  _serverCache = result;
-  return result;
 };
 
 module.exports = async (req, res) => {
@@ -181,9 +179,9 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { payload, etag } = await getWithSWR(apiKey, username);
+    const { payload, etag } = await getCachedNowPlaying(apiKey, username);
 
-    res.setHeader("Cache-Control", "public, max-age=10, stale-while-revalidate=30");
+    res.setHeader("Cache-Control", "private, no-store, max-age=0, must-revalidate");
     res.setHeader("ETag", etag);
 
     if (req.headers["if-none-match"] === etag) {
