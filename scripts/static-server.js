@@ -20,7 +20,13 @@ const contentTypeByExt = {
 
 const server = http.createServer((req, res) => {
   const reqPath = decodeURIComponent((req.url || "/").split("?")[0]);
-  const requested = reqPath === "/" ? "/site/index.html" : reqPath;
+  // Map root to site/index.html, add "site" prefix for other paths
+  let requested = reqPath;
+  if (requested === "/") {
+    requested = "/site/index.html";
+  } else if (!requested.startsWith("/site/")) {
+    requested = "/site" + requested;
+  }
   const filePath = path.resolve(root, `.${requested}`);
 
   if (!filePath.startsWith(root)) {
@@ -32,7 +38,7 @@ const server = http.createServer((req, res) => {
   fs.stat(filePath, (statErr, stats) => {
     if (statErr || !stats.isFile()) {
       res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
-      res.end("Not found");
+      res.end("Not found: " + requested);
       return;
     }
 

@@ -1,0 +1,31 @@
+[   10150ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/override.css:0
+[   10158ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/profile.jpeg:0
+[   10159ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/transgender-flag-svgrepo-com.svg:0
+[   10159ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/lesbian-pride-pink-flag.svg:0
+[   10166ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/pinterest-rounded-svgrepo-com.svg:0
+[   10167ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/steam-logo-svgrepo-com.svg:0
+[   10462ms] [ERROR] Failed to find a valid digest in the 'integrity' attribute for resource 'https://fonts.googleapis.com/css2?display=swap&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900' with computed SHA-384 integrity 'ZYzMVCXwkfzGGz4qirb+9kUEEDWnRFQhJ71YYY7ZIrlziWps8JSMgbll41DUQGAk'. The resource has been blocked. @ http://127.0.0.1:4173/:0
+[   10464ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/new%20banner.png:0
+[   10467ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/twitter-rounded-svgrepo-com.svg:0
+[   10472ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/spotify-svgrepo-com.svg:0
+[   10475ms] [WARNING] Allow attribute will take precedence over 'allowfullscreen'. @ http://127.0.0.1:4173/:3563
+[   10580ms] TypeError: Assignment to constant variable.
+    at http://127.0.0.1:4173/:4306:17
+    at http://127.0.0.1:4173/:4414:7
+[   10593ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/api/now-playing:0
+[   14589ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/favicon.ico:0
+[   14594ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4173/assets/images/favicon-32.png:0
+[   14733ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14733ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14734ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14734ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14734ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14734ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14734ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14734ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14735ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14735ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14735ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14735ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14735ms] [ERROR] Permissions policy violation: encrypted-media is not allowed in this document. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0
+[   14735ms] [WARNING] Encrypted Media access has been blocked because of a Feature Policy applied to the current document. See https://crbug.com/414348233 for more details. @ https://embed-cdn.spotifycdn.com/_next/static/chunks/3327.b77ca16d39519caf.js:0

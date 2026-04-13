@@ -1,0 +1,58 @@
+- generic [ref=e2]:
+  - button "Alternar tema" [ref=e3]:
+    - img [ref=e4]
+    - img [ref=e10]
+  - generic [ref=e14]:
+    - generic [ref=e17]:
+      - img "Profile portrait of Akemi" [ref=e20]
+      - heading "Akemi." [level=1] [ref=e21]
+    - paragraph [ref=e25]:
+      - generic [ref=e26]:
+        - text: 🕊️┆
+        - strong [ref=e27]: 明美
+        - text: ， 現実 —She/Her ִ ࣪𖤐
+        - text: ˖ ✦ ›
+        - img "Transgender pride flag" [ref=e28]
+        - img "Lesbian pride flag" [ref=e29]
+        - text: 𓂃 ★ @ak6h
+        - strong [ref=e30]: dc
+    - generic [ref=e33]:
+      - list [ref=e35]:
+        - listitem [ref=e36]:
+          - button "User Add Friend" [ref=e37] [cursor=pointer]:
+            - img "User"
+            - generic [ref=e38]: Add Friend
+        - listitem [ref=e39]:
+          - button "Message Message" [ref=e40] [cursor=pointer]:
+            - img "Message"
+            - generic [ref=e41]: Message
+      - list [ref=e43]:
+        - listitem [ref=e44]:
+          - generic [ref=e45]:
+            - button "More options" [ref=e46] [cursor=pointer]: ●●●
+            - text: Tools
+    - generic "Music status" [ref=e51]:
+      - iframe [ref=e52]:
+        - generic [active] [ref=f2e1]:
+          - generic [ref=f2e6]:
+            - button "Play on Spotify" [ref=f2e10] [cursor=pointer]:
+              - img [ref=f2e11]
+            - generic [ref=f2e13]:
+              - heading "I Really Want To Stay At Your House - Acoustic" [level=1] [ref=f2e14]:
+                - link "I Really Want To Stay At Your House - Acoustic" [ref=f2e18] [cursor=pointer]:
+                  - /url: https://open.spotify.com/track/62wMiHeHq8kWkaBA5cLhWv?go=1&sp_cid=d52accdb89ecb1d75a1f4a14a59d2374&utm_source=embed_player_p&utm_medium=desktop
+              - generic [ref=f2e19]:
+                - list "Tags" [ref=f2e20]:
+                  - generic "Preview" [ref=f2e21]
+                - heading "Lunity" [level=2] [ref=f2e22]:
+                  - link "Lunity" [ref=f2e27] [cursor=pointer]:
+                    - /url: https://open.spotify.com/artist/2OgKPh1xCLvA9C8CXfFABo?go=1&sp_cid=d52accdb89ecb1d75a1f4a14a59d2374
+              - button "Save on Spotify" [ref=f2e29] [cursor=pointer]:
+                - img [ref=f2e31]
+                - generic [ref=f2e34]: Save on Spotify
+            - generic [ref=f2e35]:
+              - button "More" [ref=f2e37] [cursor=pointer]:
+                - img [ref=f2e38]
+              - button "Play" [ref=f2e41] [cursor=pointer]:
+                - img [ref=f2e42]
+          - alert [ref=f2e44]
