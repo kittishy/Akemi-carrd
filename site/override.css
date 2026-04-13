@@ -671,3 +671,116 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ==========================================================================
+   FIX 1: ●●● ABOUT BUTTON — Proper button appearance
+   The base `index.html` rule sets `#buttons03 li a { width: 100vw }` which
+   makes the button stretch full-viewport-width at every breakpoint before
+   the 768px override kicks in.  We override width here so it always renders
+   as a compact pill button matching the "Message" / "Add Friend" style.
+   ========================================================================== */
+
+/* Always-on compact size: kill the 100vw base width */
+#buttons03 li a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 2.75rem !important;
+  min-width: 2.75rem !important;
+  height: 1.875rem !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-size: 0.75em !important;
+  font-weight: 500 !important;
+  border-radius: 0.25rem !important;
+  /* Match gradient background from #buttons02 .button */
+  background: linear-gradient(145deg, #f4f0ec 0%, #e6e0da 100%) !important;
+  color: var(--v2-ink, #3a3530) !important;
+  border: 1px solid rgba(184, 177, 171, 0.8) !important;
+  box-shadow: 0 1px 3px rgba(22, 22, 22, 0.07) !important;
+}
+
+/* Mobile breakpoint: taller touch target (mirrors #buttons02 mobile sizing) */
+@media (max-width: 768px) {
+  #buttons03 li a {
+    width: 2.75rem !important;
+    min-width: 44px !important;
+    height: 2.75rem !important;
+    min-height: 44px !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.06em !important;
+    /* Slightly more transparent on mobile to match the inline style override */
+    background: linear-gradient(145deg, rgba(244, 240, 236, 0.72) 0%, rgba(230, 224, 218, 0.9) 100%) !important;
+    color: var(--v2-muted, #7a746e) !important;
+    border: 1px solid rgba(184, 177, 171, 0.8) !important;
+    box-shadow: 0 1px 4px rgba(22, 22, 22, 0.07) !important;
+  }
+}
+
+/* Desktop (≥ 768px): compact height matching desktop #buttons02 li a (1.875rem) */
+@media (min-width: 768px) {
+  #buttons03 li a {
+    width: 2.4rem !important;
+    min-width: 2.4rem !important;
+    height: 1.875rem !important;
+    min-height: unset !important;
+    border-radius: 0.25rem !important;
+    background: linear-gradient(145deg, #f4f0ec 0%, #e6e0da 100%) !important;
+    color: var(--v2-ink, #3a3530) !important;
+    border: 1px solid rgba(184, 177, 171, 0.75) !important;
+    box-shadow: 0 1px 3px rgba(22, 22, 22, 0.06) !important;
+    letter-spacing: 0.06em !important;
+    font-size: 0.66rem !important;
+  }
+}
+
+/* ==========================================================================
+   FIX 2: ABOUT PANEL LAYOUT — Constrain nested containers
+   #container11 > .wrapper > .inner inherits --padding-horizontal which can
+   push child container wrappers wider than the available space.  We ensure
+   #about-panel and its children (container08 / container09) are fully
+   box-contained and never overflow the card.
+   ========================================================================== */
+
+/* The outer transparent wrapper already has padding via --padding-horizontal.
+   The about-panel div must fill 100% of its parent without adding extra space. */
+#about-panel {
+  width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure both child containers sit flush inside #about-panel */
+#about-panel > #container08,
+#about-panel > #container09 {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  /* Remove any auto-margins that could shift width calculations */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* The .wrapper divs inside container08/09 must also be fully contained */
+#about-panel > #container08 > .wrapper,
+#about-panel > #container09 > .wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* The .inner divs must not add extra horizontal padding that breaks layout */
+#about-panel > #container08 > .wrapper > .inner,
+#about-panel > #container09 > .wrapper > .inner {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Tighten the outer container11 inner padding so the card sits cleanly */
+#container11 > .wrapper > .inner {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
