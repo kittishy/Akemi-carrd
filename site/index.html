@@ -2645,6 +2645,340 @@
         min-width: 44px;
       }
     }
+
+    /* ==========================================================================
+       18. DOTS MENU — Discord-style dropdown
+       ========================================================================== */
+    #dots-menu-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    #dots-menu {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      right: 0;
+      z-index: 9000;
+      min-width: 11rem;
+      background: var(--v2-card);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.5rem;
+      box-shadow: var(--v2-shadow);
+      padding: 0.25rem 0;
+      transform-origin: bottom right;
+      /* entry animation */
+      animation: dotsMenuIn 0.15s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    }
+
+    #dots-menu[hidden] {
+      display: none;
+    }
+
+    @keyframes dotsMenuIn {
+      from { opacity: 0; transform: scale(0.88) translateY(4px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0); }
+    }
+
+    #dots-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #dots-menu li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .dots-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
+      padding: 0.45rem 0.85rem;
+      background: none;
+      border: none;
+      border-radius: 0;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--v2-ink);
+      text-align: left;
+      cursor: pointer;
+      transition: background 120ms ease, color 120ms ease;
+      white-space: nowrap;
+    }
+
+    .dots-menu-item:hover,
+    .dots-menu-item:focus-visible {
+      background: var(--v2-accent-soft);
+      color: var(--v2-ink-strong);
+      outline: none;
+    }
+
+    .dots-menu-item .dmi-icon {
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      width: 1.1em;
+      text-align: center;
+      opacity: 0.75;
+    }
+
+    /* separator */
+    .dots-menu-sep {
+      height: 1px;
+      background: var(--v2-border);
+      margin: 0.25rem 0.6rem;
+    }
+
+    /* ==========================================================================
+       19. TOOL PANELS — shared styles
+       ========================================================================== */
+    .tool-panel {
+      padding: 0.1rem 0;
+    }
+
+    .tool-panel-title {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--v2-muted);
+      margin: 0 0 0.75rem 0;
+    }
+
+    /* shared input / select / textarea */
+    .tool-input,
+    .tool-select,
+    .tool-textarea {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.82rem;
+      color: var(--v2-ink);
+      background: var(--v2-bg-soft);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.375rem;
+      padding: 0.45rem 0.65rem;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .tool-input:focus,
+    .tool-select:focus,
+    .tool-textarea:focus {
+      outline: none;
+      border-color: var(--v2-accent);
+      box-shadow: 0 0 0 2px var(--v2-accent-soft);
+    }
+
+    .tool-textarea {
+      resize: vertical;
+      min-height: 6rem;
+      line-height: 1.55;
+    }
+
+    .tool-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .tool-row > * {
+      flex: 1 1 8rem;
+    }
+
+    .tool-label {
+      display: block;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--v2-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .tool-btn {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--v2-ink);
+      background: linear-gradient(145deg, #f4f0ec 0%, #e6e0da 100%);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.375rem;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: background 150ms ease, transform 120ms ease;
+      white-space: nowrap;
+      min-height: 44px;
+    }
+
+    .tool-btn:hover {
+      background: linear-gradient(145deg, #ede8e2 0%, #d8d0c8 100%);
+    }
+
+    .tool-btn:active {
+      transform: scale(0.97);
+    }
+
+    .tool-output {
+      margin-top: 0.75rem;
+      padding: 0.65rem 0.75rem;
+      background: var(--v2-surface);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.375rem;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.82rem;
+      color: var(--v2-ink);
+      line-height: 1.6;
+    }
+
+    .tool-output:empty { display: none; }
+
+    /* ── Timezone Converter ── */
+    #tz-result {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    /* ── Color Palette ── */
+    .palette-swatches {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .palette-swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .palette-swatch-color {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+
+    .palette-swatch-hex {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--v2-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .palette-swatch:hover .palette-swatch-hex {
+      color: var(--v2-ink-strong);
+    }
+
+    .palette-copy-hint {
+      font-size: 0.68rem;
+      color: var(--v2-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* ── Char Counter ── */
+    .char-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .char-stat {
+      background: var(--v2-surface);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.65rem;
+      text-align: center;
+    }
+
+    .char-stat-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--v2-ink-strong);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .char-stat-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--v2-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Unit Converter ── */
+    .unit-tabs {
+      display: flex;
+      gap: 0.3rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .unit-tab {
+      font-family: "Archivo", sans-serif;
+      font-size: 0.73rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--v2-border);
+      border-radius: 0.3rem;
+      background: var(--v2-bg-soft);
+      color: var(--v2-muted);
+      cursor: pointer;
+      transition: background 120ms ease, color 120ms ease;
+    }
+
+    .unit-tab[aria-selected="true"] {
+      background: var(--v2-accent-soft);
+      color: var(--v2-ink-strong);
+      border-color: var(--v2-accent);
+    }
+
+    .unit-results {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.65rem;
+    }
+
+    .unit-result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.6rem;
+      background: var(--v2-surface);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.3rem;
+      font-size: 0.82rem;
+    }
+
+    .unit-result-name {
+      color: var(--v2-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .unit-result-value {
+      font-weight: 700;
+      color: var(--v2-ink-strong);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #dots-menu {
+        animation: none !important;
+      }
+    }
   </style>
 
   <!-- NoScript Fallback -->
@@ -2767,7 +3101,19 @@
                 <div>
                   <ul id="buttons03" class="buttons">
                     <li>
-                      <a href="#about-panel" id="about-button" class="button n01" role="button" aria-controls="container11" aria-expanded="false" aria-label="About me" title="About me">●●●</a>
+                      <div id="dots-menu-wrapper">
+                        <a href="#about-panel" id="about-button" class="button n01" role="button" aria-haspopup="true" aria-expanded="false" aria-label="More options" title="More options">●●●</a>
+                        <nav id="dots-menu" role="navigation" aria-label="More options menu" hidden>
+                          <ul>
+                            <li><button class="dots-menu-item" data-panel="container11" data-scroll="about-panel"><span class="dmi-icon" aria-hidden="true">◉</span>About</button></li>
+                            <li><div class="dots-menu-sep" role="separator"></div></li>
+                            <li><button class="dots-menu-item" data-panel="container-tz" data-scroll="tz-panel"><span class="dmi-icon" aria-hidden="true">🕐</span>Timezone</button></li>
+                            <li><button class="dots-menu-item" data-panel="container-palette" data-scroll="palette-panel"><span class="dmi-icon" aria-hidden="true">🎨</span>Color Palette</button></li>
+                            <li><button class="dots-menu-item" data-panel="container-counter" data-scroll="counter-panel"><span class="dmi-icon" aria-hidden="true">✦</span>Word Counter</button></li>
+                            <li><button class="dots-menu-item" data-panel="container-units" data-scroll="units-panel"><span class="dmi-icon" aria-hidden="true">⇄</span>Unit Converter</button></li>
+                          </ul>
+                        </nav>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -2843,6 +3189,114 @@
           </div>
 
 
+
+          <!-- ================================================================
+               TOOL PANELS — opened from the ●●● menu
+               ================================================================ -->
+
+          <!-- Timezone Converter -->
+          <div id="container-tz" class="container default" hidden>
+            <div class="wrapper">
+              <div class="inner">
+                <div id="tz-panel" class="tool-panel" aria-live="polite" aria-label="Timezone Converter">
+                  <p class="tool-panel-title">Timezone Converter</p>
+                  <div class="tool-row">
+                    <div>
+                      <label class="tool-label" for="tz-time">Time</label>
+                      <input id="tz-time" class="tool-input" type="time" value="12:00" />
+                    </div>
+                    <div>
+                      <label class="tool-label" for="tz-date">Date</label>
+                      <input id="tz-date" class="tool-input" type="date" />
+                    </div>
+                  </div>
+                  <div class="tool-row" style="margin-top:0.5rem">
+                    <div>
+                      <label class="tool-label" for="tz-from">From timezone</label>
+                      <select id="tz-from" class="tool-select"></select>
+                    </div>
+                    <div>
+                      <label class="tool-label" for="tz-to">To timezone</label>
+                      <select id="tz-to" class="tool-select"></select>
+                    </div>
+                  </div>
+                  <div id="tz-result" class="tool-output" aria-live="polite"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Color Palette Generator -->
+          <div id="container-palette" class="container default" hidden>
+            <div class="wrapper">
+              <div class="inner">
+                <div id="palette-panel" class="tool-panel" aria-live="polite" aria-label="Color Palette Generator">
+                  <p class="tool-panel-title">Color Palette Generator</p>
+                  <div class="tool-row">
+                    <div style="flex:1 1 auto">
+                      <label class="tool-label" for="palette-word">Word or mood</label>
+                      <input id="palette-word" class="tool-input" type="text" placeholder="e.g. ocean, cozy, rage…" maxlength="60" autocomplete="off" />
+                    </div>
+                    <div style="flex:0 0 auto;align-self:flex-end">
+                      <button id="palette-btn" class="tool-btn">Generate</button>
+                    </div>
+                  </div>
+                  <div id="palette-output" aria-live="polite">
+                    <div class="palette-swatches" id="palette-swatches"></div>
+                    <p class="palette-copy-hint" id="palette-hint" hidden>Click a swatch to copy the hex code.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Character / Word Counter -->
+          <div id="container-counter" class="container default" hidden>
+            <div class="wrapper">
+              <div class="inner">
+                <div id="counter-panel" class="tool-panel" aria-label="Character and Word Counter">
+                  <p class="tool-panel-title">Character &amp; Word Counter</p>
+                  <label class="tool-label" for="counter-text">Paste or type your text</label>
+                  <textarea id="counter-text" class="tool-textarea" placeholder="Start typing…" aria-label="Text to analyse" rows="5"></textarea>
+                  <div class="char-stats" aria-live="polite" aria-atomic="true">
+                    <div class="char-stat"><span class="char-stat-value" id="cs-chars">0</span><span class="char-stat-label">Characters</span></div>
+                    <div class="char-stat"><span class="char-stat-value" id="cs-nospace">0</span><span class="char-stat-label">No spaces</span></div>
+                    <div class="char-stat"><span class="char-stat-value" id="cs-words">0</span><span class="char-stat-label">Words</span></div>
+                    <div class="char-stat"><span class="char-stat-value" id="cs-lines">0</span><span class="char-stat-label">Lines</span></div>
+                    <div class="char-stat"><span class="char-stat-value" id="cs-sentences">0</span><span class="char-stat-label">Sentences</span></div>
+                    <div class="char-stat"><span class="char-stat-value" id="cs-read">0 sec</span><span class="char-stat-label">Read time</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unit Converter -->
+          <div id="container-units" class="container default" hidden>
+            <div class="wrapper">
+              <div class="inner">
+                <div id="units-panel" class="tool-panel" aria-label="Unit Converter">
+                  <p class="tool-panel-title">Unit Converter</p>
+                  <div class="unit-tabs" role="tablist" id="unit-tabs">
+                    <button class="unit-tab" role="tab" aria-selected="true" data-category="weight">Weight</button>
+                    <button class="unit-tab" role="tab" aria-selected="false" data-category="temp">Temperature</button>
+                    <button class="unit-tab" role="tab" aria-selected="false" data-category="length">Length</button>
+                  </div>
+                  <div class="tool-row">
+                    <div>
+                      <label class="tool-label" for="unit-value">Value</label>
+                      <input id="unit-value" class="tool-input" type="number" placeholder="0" step="any" inputmode="decimal" />
+                    </div>
+                    <div>
+                      <label class="tool-label" for="unit-from">From unit</label>
+                      <select id="unit-from" class="tool-select"></select>
+                    </div>
+                  </div>
+                  <div class="unit-results" id="unit-results" aria-live="polite"></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Spotify Player -->
           <div id="container06" class="container columns">
@@ -3462,13 +3916,18 @@
       };
 
       const openPanel = () => {
-        // Hide About panel if open
-        const aboutContainer = document.getElementById("container11");
+        // Hide all tool panels (About + tools) if open
+        const ALL_TOOL_PANEL_IDS = ["container11", "container-tz", "container-palette", "container-counter", "container-units"];
+        ALL_TOOL_PANEL_IDS.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.hidden = true;
+        });
         const aboutButton = document.getElementById("about-button");
-        if (aboutContainer && !aboutContainer.hidden) {
-          aboutContainer.hidden = true;
-          if (aboutButton) aboutButton.setAttribute("aria-expanded", "false");
-        }
+        if (aboutButton) aboutButton.setAttribute("aria-expanded", "false");
+        // Also close the dots menu if open
+        const dotsMenu = document.getElementById("dots-menu");
+        if (dotsMenu) dotsMenu.hidden = true;
+
         container.hidden = false;
         setExpanded(true);
         panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
@@ -3505,55 +3964,519 @@
     })();
   </script>
   <script>
+    /* ================================================================
+       DOTS MENU — controller for the ●●● button dropdown
+       ================================================================ */
     (() => {
-      const button = document.getElementById("about-button");
-      const container = document.getElementById("container11");
-      const panel = document.getElementById("about-panel");
+      const button    = document.getElementById("about-button");
+      const menu      = document.getElementById("dots-menu");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      if (!button || !container || !panel) {
-        return;
-      }
+      if (!button || !menu) return;
 
-      const setExpanded = (isExpanded) => {
-        button.setAttribute("aria-expanded", String(isExpanded));
+      /* IDs of all tool panels (including the existing about panel) */
+      const ALL_PANEL_IDS = [
+        "container11",
+        "container-tz",
+        "container-palette",
+        "container-counter",
+        "container-units"
+      ];
+
+      /* Close every tool panel and reset about-button aria-expanded */
+      const closeAllPanels = () => {
+        ALL_PANEL_IDS.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.hidden = true;
+        });
+        button.setAttribute("aria-expanded", "false");
       };
 
-      const openPanel = () => {
-        // Hide Message panel if open
-        const msgContainer = document.getElementById("container10");
-        const msgButton = document.getElementById("message-button");
-        if (msgContainer && !msgContainer.hidden) {
-          msgContainer.hidden = true;
-          if (msgButton) msgButton.setAttribute("aria-expanded", "false");
+      /* Also sync Message panel close */
+      const closeMsgPanel = () => {
+        const c = document.getElementById("container10");
+        const b = document.getElementById("message-button");
+        if (c && !c.hidden) {
+          c.hidden = true;
+          if (b) b.setAttribute("aria-expanded", "false");
         }
-        container.hidden = false;
-        setExpanded(true);
-        panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
       };
 
-      const closePanel = () => {
-        container.hidden = true;
-        setExpanded(false);
+      /* Open the dropdown menu */
+      const openMenu = () => {
+        menu.hidden = false;
+        button.setAttribute("aria-expanded", "true");
+        /* focus first item */
+        const first = menu.querySelector(".dots-menu-item");
+        if (first) first.focus();
       };
 
-      button.addEventListener("click", (event) => {
-        event.preventDefault();
+      /* Close the dropdown menu */
+      const closeMenu = () => {
+        menu.hidden = true;
+        button.setAttribute("aria-expanded", "false");
+      };
 
-        if (container.hidden) {
-          openPanel();
+      /* Toggle dropdown on button click */
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (menu.hidden) {
+          openMenu();
         } else {
-          closePanel();
+          closeMenu();
           button.focus({ preventScroll: true });
         }
       });
 
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && !container.hidden) {
-          closePanel();
-          button.focus({ preventScroll: true });
+      /* Handle clicks on menu items */
+      menu.addEventListener("click", (e) => {
+        const item = e.target.closest(".dots-menu-item");
+        if (!item) return;
+
+        const panelId  = item.dataset.panel;
+        const scrollId = item.dataset.scroll;
+
+        closeMenu();
+        closeAllPanels();
+        closeMsgPanel();
+
+        const container = document.getElementById(panelId);
+        const scrollEl  = scrollId ? document.getElementById(scrollId) : null;
+
+        if (!container) return;
+
+        container.hidden = false;
+        /* For the About panel, keep aria-expanded on #about-button in sync
+           so the existing smoke test (container11 visible after click) passes */
+        if (panelId === "container11") {
+          button.setAttribute("aria-expanded", "true");
+        }
+
+        const target = scrollEl || container;
+        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      });
+
+      /* Close on Escape */
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          if (!menu.hidden) {
+            closeMenu();
+            button.focus({ preventScroll: true });
+          } else {
+            /* Close any open tool panel */
+            const anyOpen = ALL_PANEL_IDS.some((id) => {
+              const el = document.getElementById(id);
+              return el && !el.hidden;
+            });
+            if (anyOpen) {
+              closeAllPanels();
+              button.focus({ preventScroll: true });
+            }
+          }
         }
       });
+
+      /* Close when clicking outside the menu wrapper */
+      document.addEventListener("click", (e) => {
+        const wrapper = document.getElementById("dots-menu-wrapper");
+        if (wrapper && !wrapper.contains(e.target) && !menu.hidden) {
+          closeMenu();
+        }
+      });
+
+      /* Keyboard navigation inside menu (ArrowUp / ArrowDown / Tab) */
+      menu.addEventListener("keydown", (e) => {
+        const items = Array.from(menu.querySelectorAll(".dots-menu-item"));
+        const idx = items.indexOf(document.activeElement);
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          items[(idx + 1) % items.length].focus();
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          items[(idx - 1 + items.length) % items.length].focus();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    /* ================================================================
+       TIMEZONE CONVERTER
+       ================================================================ */
+    (() => {
+      const TIMEZONES = [
+        "UTC",
+        "America/New_York",
+        "America/Chicago",
+        "America/Denver",
+        "America/Los_Angeles",
+        "America/Sao_Paulo",
+        "America/Argentina/Buenos_Aires",
+        "America/Toronto",
+        "America/Mexico_City",
+        "Europe/London",
+        "Europe/Paris",
+        "Europe/Berlin",
+        "Europe/Madrid",
+        "Europe/Rome",
+        "Europe/Moscow",
+        "Europe/Istanbul",
+        "Asia/Dubai",
+        "Asia/Kolkata",
+        "Asia/Bangkok",
+        "Asia/Jakarta",
+        "Asia/Singapore",
+        "Asia/Shanghai",
+        "Asia/Tokyo",
+        "Asia/Seoul",
+        "Australia/Sydney",
+        "Pacific/Auckland",
+        "Pacific/Honolulu"
+      ];
+
+      const fromSel = document.getElementById("tz-from");
+      const toSel   = document.getElementById("tz-to");
+      const timeIn  = document.getElementById("tz-time");
+      const dateIn  = document.getElementById("tz-date");
+      const result  = document.getElementById("tz-result");
+
+      if (!fromSel || !toSel || !timeIn || !dateIn || !result) return;
+
+      /* Populate selects */
+      const populate = () => {
+        const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        TIMEZONES.forEach((tz) => {
+          const o1 = document.createElement("option");
+          o1.value = o1.textContent = tz;
+          if (tz === localTz) o1.selected = true;
+          fromSel.appendChild(o1);
+
+          const o2 = document.createElement("option");
+          o2.value = o2.textContent = tz;
+          if (tz === "UTC") o2.selected = true;
+          toSel.appendChild(o2);
+        });
+      };
+
+      /* Set today's date as default */
+      const todayISO = () => {
+        const d = new Date();
+        return d.toISOString().slice(0, 10);
+      };
+
+      /* Convert and display */
+      const convert = () => {
+        const timeVal = timeIn.value || "12:00";
+        const dateVal = dateIn.value || todayISO();
+        const fromTz  = fromSel.value;
+        const toTz    = toSel.value;
+
+        try {
+          /* Build a date in the from-timezone */
+          const [h, m] = timeVal.split(":").map(Number);
+          const [yr, mo, dy] = dateVal.split("-").map(Number);
+
+          /* Use Intl to get UTC offset of the from-zone at that date */
+          const isoString = `${dateVal}T${timeVal}:00`;
+          /* Parse as local then adjust — simplest cross-browser approach */
+          const tempDate = new Date(`${dateVal}T${timeVal}:00`);
+
+          /* Get the formatted time in target TZ */
+          const opts = {
+            timeZone: toTz,
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+          };
+
+          /* We interpret the entered time as being in fromTz.
+             Strategy: find what UTC instant corresponds to that local time in fromTz. */
+          const fromFormatter = new Intl.DateTimeFormat("en-CA", {
+            timeZone: fromTz,
+            year: "numeric", month: "2-digit", day: "2-digit",
+            hour: "2-digit", minute: "2-digit", second: "2-digit",
+            hour12: false
+          });
+
+          /* Create a reference Date by treating the input as UTC, then offset */
+          const utcDate = new Date(Date.UTC(yr, mo - 1, dy, h, m, 0));
+          /* Get what the fromTz clock reads for utcDate */
+          const parts = fromFormatter.formatToParts(utcDate);
+          const p = {};
+          parts.forEach(({ type, value }) => { p[type] = value; });
+          const clockH  = parseInt(p.hour  === "24" ? "0" : p.hour,  10);
+          const clockM  = parseInt(p.minute, 10);
+          const clockD  = parseInt(p.day,    10);
+          const clockMo = parseInt(p.month,  10);
+          const clockYr = parseInt(p.year,   10);
+
+          /* Diff between what we wanted and what the clock shows (minutes) */
+          const wantedMinutes = h * 60 + m;
+          const clockMinutes  = clockH * 60 + clockM;
+          const dayDiffMs     = (clockD - dy) * 86400000 + (clockMo - mo) * 2678400000;
+          const diffMinutes   = wantedMinutes - clockMinutes;
+
+          const adjustedUTC = new Date(utcDate.getTime() - diffMinutes * 60000 - dayDiffMs);
+
+          /* Finally format the adjusted UTC in target timezone */
+          const display = new Intl.DateTimeFormat("en-US", opts).format(adjustedUTC);
+          result.textContent = display;
+        } catch (err) {
+          result.textContent = "Could not convert — check your inputs.";
+        }
+      };
+
+      populate();
+      dateIn.value = todayISO();
+
+      [timeIn, dateIn, fromSel, toSel].forEach((el) => {
+        el.addEventListener("change", convert);
+        el.addEventListener("input",  convert);
+      });
+      convert();
+    })();
+  </script>
+
+  <script>
+    /* ================================================================
+       COLOR PALETTE GENERATOR
+       ================================================================ */
+    (() => {
+      const wordInput = document.getElementById("palette-word");
+      const btn       = document.getElementById("palette-btn");
+      const swatches  = document.getElementById("palette-swatches");
+      const hint      = document.getElementById("palette-hint");
+
+      if (!wordInput || !btn || !swatches) return;
+
+      /* Deterministic hash → number */
+      const hash = (str) => {
+        let h = 2166136261;
+        for (let i = 0; i < str.length; i++) {
+          h ^= str.charCodeAt(i);
+          h = (h * 16777619) >>> 0;
+        }
+        return h;
+      };
+
+      /* HSL → Hex */
+      const hslToHex = (h, s, l) => {
+        s /= 100; l /= 100;
+        const a = s * Math.min(l, 1 - l);
+        const f = (n) => {
+          const k = (n + h / 30) % 12;
+          const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+          return Math.round(255 * color).toString(16).padStart(2, "0");
+        };
+        return `#${f(0)}${f(8)}${f(4)}`;
+      };
+
+      const generate = () => {
+        const word = wordInput.value.trim().toLowerCase() || "akemi";
+        const base = hash(word);
+
+        const colors = Array.from({ length: 5 }, (_, i) => {
+          const seed  = hash(word + i);
+          const hue   = (base + i * 72 + (seed % 30)) % 360;
+          const sat   = 30 + (seed % 40);   /* 30–70 */
+          const light = 48 + (seed % 30);   /* 48–78 */
+          return hslToHex(hue, sat, light);
+        });
+
+        swatches.innerHTML = "";
+        colors.forEach((hex) => {
+          const btn = document.createElement("button");
+          btn.className = "palette-swatch";
+          btn.type = "button";
+          btn.setAttribute("aria-label", `Copy color ${hex}`);
+          btn.title = `Click to copy ${hex}`;
+
+          const swatch = document.createElement("div");
+          swatch.className = "palette-swatch-color";
+          swatch.style.background = hex;
+
+          const label = document.createElement("span");
+          label.className = "palette-swatch-hex";
+          label.textContent = hex;
+
+          btn.appendChild(swatch);
+          btn.appendChild(label);
+          swatches.appendChild(btn);
+
+          btn.addEventListener("click", () => {
+            navigator.clipboard.writeText(hex).then(() => {
+              const orig = label.textContent;
+              label.textContent = "copied!";
+              window.setTimeout(() => { label.textContent = orig; }, 1200);
+            }).catch(() => {});
+          });
+        });
+
+        if (hint) hint.hidden = false;
+      };
+
+      btn.addEventListener("click", generate);
+      wordInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") { e.preventDefault(); generate(); }
+      });
+    })();
+  </script>
+
+  <script>
+    /* ================================================================
+       CHARACTER / WORD COUNTER
+       ================================================================ */
+    (() => {
+      const textarea  = document.getElementById("counter-text");
+      const csChars   = document.getElementById("cs-chars");
+      const csNospace = document.getElementById("cs-nospace");
+      const csWords   = document.getElementById("cs-words");
+      const csLines   = document.getElementById("cs-lines");
+      const csSent    = document.getElementById("cs-sentences");
+      const csRead    = document.getElementById("cs-read");
+
+      if (!textarea) return;
+
+      const update = () => {
+        const text = textarea.value;
+
+        const chars    = text.length;
+        const nospace  = text.replace(/\s/g, "").length;
+        const words    = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+        const lines    = text === "" ? 0 : text.split(/\n/).length;
+        const sentences = text.trim() === "" ? 0 : (text.match(/[.!?]+(\s|$)/g) || []).length;
+
+        /* avg 200 wpm */
+        const readSec  = Math.round((words / 200) * 60);
+        const readStr  = readSec < 60
+          ? `${readSec} sec`
+          : `${Math.floor(readSec / 60)}m ${readSec % 60}s`;
+
+        if (csChars)   csChars.textContent   = chars.toLocaleString();
+        if (csNospace) csNospace.textContent  = nospace.toLocaleString();
+        if (csWords)   csWords.textContent    = words.toLocaleString();
+        if (csLines)   csLines.textContent    = lines.toLocaleString();
+        if (csSent)    csSent.textContent     = sentences.toLocaleString();
+        if (csRead)    csRead.textContent     = readStr;
+      };
+
+      textarea.addEventListener("input", update);
+      update();
+    })();
+  </script>
+
+  <script>
+    /* ================================================================
+       UNIT CONVERTER
+       ================================================================ */
+    (() => {
+      const CATEGORIES = {
+        weight: {
+          label: "Weight",
+          units: [
+            { id: "kg",  label: "Kilograms (kg)",  toBase: (v) => v,            fromBase: (v) => v },
+            { id: "g",   label: "Grams (g)",        toBase: (v) => v / 1000,     fromBase: (v) => v * 1000 },
+            { id: "lb",  label: "Pounds (lb)",      toBase: (v) => v * 0.453592, fromBase: (v) => v / 0.453592 },
+            { id: "oz",  label: "Ounces (oz)",      toBase: (v) => v * 0.0283495,fromBase: (v) => v / 0.0283495 },
+            { id: "t",   label: "Metric tons (t)",  toBase: (v) => v * 1000,     fromBase: (v) => v / 1000 }
+          ]
+        },
+        temp: {
+          label: "Temperature",
+          units: [
+            { id: "C",  label: "Celsius (°C)",    toBase: (v) => v,                    fromBase: (v) => v },
+            { id: "F",  label: "Fahrenheit (°F)", toBase: (v) => (v - 32) * 5 / 9,    fromBase: (v) => v * 9 / 5 + 32 },
+            { id: "K",  label: "Kelvin (K)",       toBase: (v) => v - 273.15,          fromBase: (v) => v + 273.15 }
+          ]
+        },
+        length: {
+          label: "Length",
+          units: [
+            { id: "m",   label: "Meters (m)",       toBase: (v) => v,            fromBase: (v) => v },
+            { id: "cm",  label: "Centimeters (cm)", toBase: (v) => v / 100,      fromBase: (v) => v * 100 },
+            { id: "mm",  label: "Millimeters (mm)", toBase: (v) => v / 1000,     fromBase: (v) => v * 1000 },
+            { id: "km",  label: "Kilometers (km)",  toBase: (v) => v * 1000,     fromBase: (v) => v / 1000 },
+            { id: "in",  label: "Inches (in)",      toBase: (v) => v * 0.0254,   fromBase: (v) => v / 0.0254 },
+            { id: "ft",  label: "Feet (ft)",        toBase: (v) => v * 0.3048,   fromBase: (v) => v / 0.3048 },
+            { id: "mi",  label: "Miles (mi)",       toBase: (v) => v * 1609.34,  fromBase: (v) => v / 1609.34 }
+          ]
+        }
+      };
+
+      const tabs      = document.getElementById("unit-tabs");
+      const valueIn   = document.getElementById("unit-value");
+      const fromSel   = document.getElementById("unit-from");
+      const resultsEl = document.getElementById("unit-results");
+
+      if (!tabs || !valueIn || !fromSel || !resultsEl) return;
+
+      let currentCategory = "weight";
+
+      const fmt = (n) => {
+        if (!isFinite(n)) return "—";
+        if (Math.abs(n) >= 1e6 || (Math.abs(n) < 0.0001 && n !== 0)) {
+          return n.toExponential(4);
+        }
+        const s = parseFloat(n.toPrecision(7)).toString();
+        return s;
+      };
+
+      const populateFromSel = () => {
+        fromSel.innerHTML = "";
+        CATEGORIES[currentCategory].units.forEach((u) => {
+          const o = document.createElement("option");
+          o.value = u.id;
+          o.textContent = u.label;
+          fromSel.appendChild(o);
+        });
+      };
+
+      const convert = () => {
+        const rawVal = parseFloat(valueIn.value);
+        if (isNaN(rawVal)) { resultsEl.innerHTML = ""; return; }
+
+        const cat   = CATEGORIES[currentCategory];
+        const fromU = cat.units.find((u) => u.id === fromSel.value);
+        if (!fromU) return;
+
+        const base = fromU.toBase(rawVal);
+
+        resultsEl.innerHTML = cat.units
+          .filter((u) => u.id !== fromSel.value)
+          .map((u) => {
+            const converted = u.fromBase(base);
+            return `<div class="unit-result-row">
+              <span class="unit-result-name">${u.label}</span>
+              <span class="unit-result-value">${fmt(converted)}</span>
+            </div>`;
+          })
+          .join("");
+      };
+
+      /* Tab switching */
+      tabs.addEventListener("click", (e) => {
+        const tab = e.target.closest(".unit-tab");
+        if (!tab) return;
+        const cat = tab.dataset.category;
+        if (!CATEGORIES[cat]) return;
+
+        Array.from(tabs.querySelectorAll(".unit-tab")).forEach((t) => {
+          t.setAttribute("aria-selected", t === tab ? "true" : "false");
+        });
+
+        currentCategory = cat;
+        populateFromSel();
+        convert();
+      });
+
+      fromSel.addEventListener("change", convert);
+      valueIn.addEventListener("input", convert);
+
+      populateFromSel();
     })();
   </script>
 </body>

@@ -43,16 +43,24 @@ test("message/about toggle behavior stays stable", async ({ page }) => {
 
   const messageButton = page.locator("#message-button");
   const aboutButton = page.locator("#about-button");
+  const dotsMenu = page.locator("#dots-menu");
   const messageContainer = page.locator("#container10");
   const aboutContainer = page.locator("#container11");
 
+  // Open the message panel
   await messageButton.click();
   await expect(messageContainer).toBeVisible();
 
+  // Open the dots menu
   await aboutButton.click();
+  await expect(dotsMenu).toBeVisible();
+
+  // Click the About item in the dropdown — opens container11, closes message panel
+  await page.locator(".dots-menu-item[data-panel='container11']").click();
   await expect(aboutContainer).toBeVisible();
   await expect(messageContainer).toBeHidden();
 
+  // Escape closes the about panel
   await page.keyboard.press("Escape");
   await expect(aboutContainer).toBeHidden();
 });
