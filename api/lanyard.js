@@ -33,7 +33,7 @@ const resolveAssetUrl = (applicationId, assetKey) => {
     return `https://i.scdn.co/image/${assetKey.replace("spotify:", "")}`;
   }
   if (/^\d+$/.test(assetKey) && applicationId) {
-    return `https://cdn.discordapp.com/app-assets/${applicationId}/${assetKey}.png`;
+    return `https://cdn.discordapp.com/app-assets/${applicationId}/${assetKey}.png?size=512`;
   }
   return "";
 };
@@ -48,9 +48,9 @@ const normalizeActivity = (activity) => {
     safeText(activity.assets && activity.assets.large_image)
   );
 
-  // Fallback: use Discord app icon via dcdn.dstn.to proxy when no Rich Presence assets
+  // Fallback: use our HD icon proxy (tries Discord CDN 512px first, dcdn.dstn.to last)
   if (!largeImage && applicationId) {
-    largeImage = `https://dcdn.dstn.to/app-icons/${applicationId}`;
+    largeImage = `/api/app-icon?id=${applicationId}`;
   }
 
   const smallImage = resolveAssetUrl(

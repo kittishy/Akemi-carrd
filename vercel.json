@@ -19,6 +19,10 @@
       "dest": "/api/lanyard.js"
     },
     {
+      "src": "/api/app-icon",
+      "dest": "/api/app-icon.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     },

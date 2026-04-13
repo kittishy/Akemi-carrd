@@ -897,10 +897,11 @@
       width: 4rem;
       height: 4rem;
       border-radius: 0.5rem;
-      object-fit: cover;
-      background: #d4ccc4;
+      object-fit: contain;
+      background: linear-gradient(145deg, #ebe7e3 0%, #ddd7d0 100%);
       border: 1px solid rgba(22, 22, 22, 0.12);
-      position: relative;
+      padding: 0.3rem;
+      box-shadow: inset 0 1px 3px rgba(22, 22, 22, 0.06);
     }
 
     .activity-art-wrapper {
@@ -917,9 +918,10 @@
       width: 1.4rem;
       height: 1.4rem;
       border-radius: 50%;
-      object-fit: cover;
+      object-fit: contain;
       border: 2px solid #e7e0d8;
-      background: #d4ccc4;
+      background: linear-gradient(145deg, #ebe7e3 0%, #ddd7d0 100%);
+      padding: 0.1rem;
     }
 
     .activity-label {
@@ -2851,7 +2853,7 @@
                     <article id="now-playing-card" aria-label="Now playing on Spotify via Last.fm">
                       <img id="now-playing-art" class="now-playing-art" src="assets/images/profile.jpeg" alt="Current track artwork" loading="lazy" decoding="async" />
                       <div>
-                        <p class="now-playing-label"><span class="now-playing-pulse" aria-hidden="true"></span>Now playing</p>
+                        <p class="now-playing-label"><span class="now-playing-pulse" aria-hidden="true"></span>Listening</p>
                         <p id="now-playing-track" class="now-playing-track">Loading track...</p>
                         <p id="now-playing-artist" class="now-playing-artist">Checking Last.fm</p>
                         <a id="now-playing-link" class="now-playing-link" href="https://www.last.fm" target="_blank" rel="noopener noreferrer">Open on Last.fm</a>
@@ -3135,7 +3137,7 @@
           return "https://i.scdn.co/image/" + key.replace("spotify:", "");
         }
         if (/^\d+$/.test(key) && appId) {
-          return "https://cdn.discordapp.com/app-assets/" + appId + "/" + key + ".png";
+          return "https://cdn.discordapp.com/app-assets/" + appId + "/" + key + ".png?size=512";
         }
         return "";
       }
@@ -3165,9 +3167,9 @@
         var details = safeText(activity.details);
         var state = safeText(activity.state);
         var largeImage = resolveAssetUrl(appId, activity.assets && safeText(activity.assets.large_image));
-        // Fallback: use Discord app icon via dcdn.dstn.to proxy when no Rich Presence assets
+        // Fallback: use HD app icon from Discord via our serverless proxy
         if (!largeImage && appId) {
-          largeImage = "https://dcdn.dstn.to/app-icons/" + appId;
+          largeImage = "/api/app-icon?id=" + appId;
         }
         var smallImage = resolveAssetUrl(appId, activity.assets && safeText(activity.assets.small_image));
         var largeText = activity.assets ? safeText(activity.assets.large_text) : "";
