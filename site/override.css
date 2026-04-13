@@ -784,3 +784,27 @@ a {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+/* ==========================================================================
+   FIX: DOTS MENU — z-index stacking context over activity widget
+   Root cause: every .container uses position: relative, which creates a
+   stacking context. DOM siblings that appear AFTER #container03 (e.g.
+   #container06 Spotify card, #container-lanyard Discord activity card) paint
+   on top of it, burying the #dots-menu dropdown even though it has
+   z-index: 9000 — because that value is scoped inside #container03's own
+   stacking context.
+   Fix: elevate #container03 above its siblings by giving it an explicit
+   z-index. z-index: 10 is enough to beat any plain position:relative sibling
+   and is far below the dots-menu's own 9000 (which stays internal).
+   #dots-menu-wrapper also gets position: relative + z-index: 9999 so the
+   dropdown itself escapes any inner stacking contexts within the column cell.
+   ========================================================================== */
+#container03 {
+  position: relative;
+  z-index: 10;
+}
+
+#dots-menu-wrapper {
+  position: relative;
+  z-index: 9999;
+}
