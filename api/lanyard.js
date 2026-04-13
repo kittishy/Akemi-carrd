@@ -43,10 +43,16 @@ const normalizeActivity = (activity) => {
   const label = ACTIVITY_TYPE_LABELS[type] || "Playing";
   const applicationId = safeText(activity.application_id);
 
-  const largeImage = resolveAssetUrl(
+  let largeImage = resolveAssetUrl(
     applicationId,
     safeText(activity.assets && activity.assets.large_image)
   );
+
+  // Fallback: use Discord app icon via dcdn.dstn.to proxy when no Rich Presence assets
+  if (!largeImage && applicationId) {
+    largeImage = `https://dcdn.dstn.to/app-icons/${applicationId}`;
+  }
+
   const smallImage = resolveAssetUrl(
     applicationId,
     safeText(activity.assets && activity.assets.small_image)

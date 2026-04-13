@@ -3165,6 +3165,10 @@
         var details = safeText(activity.details);
         var state = safeText(activity.state);
         var largeImage = resolveAssetUrl(appId, activity.assets && safeText(activity.assets.large_image));
+        // Fallback: use Discord app icon via dcdn.dstn.to proxy when no Rich Presence assets
+        if (!largeImage && appId) {
+          largeImage = "https://dcdn.dstn.to/app-icons/" + appId;
+        }
         var smallImage = resolveAssetUrl(appId, activity.assets && safeText(activity.assets.small_image));
         var largeText = activity.assets ? safeText(activity.assets.large_text) : "";
         var smallText = activity.assets ? safeText(activity.assets.small_text) : "";
