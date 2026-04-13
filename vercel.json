@@ -15,6 +15,10 @@
       "dest": "/api/now-playing.js"
     },
     {
+      "src": "/api/lanyard",
+      "dest": "/api/lanyard.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     },
