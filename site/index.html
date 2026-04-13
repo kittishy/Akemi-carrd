@@ -2975,7 +2975,17 @@
         track.textContent = nextTrack.name || "Unknown track";
         artist.textContent = nextTrack.artist || "Unknown artist";
         link.href = nextTrack.lastfmUrl || "https://www.last.fm";
-        art.src = nextTrack.imageUrl || DEFAULT_ART;
+        const newSrc = nextTrack.imageUrl || DEFAULT_ART;
+        art.onerror = function () {
+          // Guard: avoid infinite loop if DEFAULT_ART itself somehow fails
+          if (this.src !== DEFAULT_ART && !this.src.endsWith(DEFAULT_ART)) {
+            this.onerror = null;
+            this.src = DEFAULT_ART;
+          } else {
+            this.onerror = null;
+          }
+        };
+        art.src = newSrc;
       };
 
       const fetchNowPlaying = async () => {
@@ -3227,7 +3237,15 @@
         img.loading = "lazy";
         img.decoding = "async";
         img.fetchPriority = "low";
-        img.onerror = function () { this.src = DEFAULT_ART; };
+        img.onerror = function () {
+          // Guard: avoid infinite loop if DEFAULT_ART itself somehow fails
+          if (this.src !== DEFAULT_ART && !this.src.endsWith(DEFAULT_ART)) {
+            this.onerror = null;
+            this.src = DEFAULT_ART;
+          } else {
+            this.onerror = null;
+          }
+        };
         artWrapper.appendChild(img);
 
         if (smallImage) {

@@ -20,6 +20,17 @@ const safeText = (value) => {
   return typeof value === "string" ? value.trim() : "";
 };
 
+// Known Last.fm placeholder image hashes — these are served when no real art exists.
+// Treat them as absent so callers fall back to DEFAULT_ART.
+const LASTFM_PLACEHOLDER_HASHES = new Set([
+  "2a96cbd8b46e442fc41c2b86b821562f"
+]);
+
+const isLastfmPlaceholder = (url) => {
+  if (!url) return false;
+  return Array.from(LASTFM_PLACEHOLDER_HASHES).some((hash) => url.includes(hash));
+};
+
 const extractImageUrl = (track) => {
   if (!track || !Array.isArray(track.image)) {
     return "";
@@ -29,11 +40,17 @@ const extractImageUrl = (track) => {
   for (const size of preferred) {
     const image = track.image.find((entry) => entry && entry.size === size && safeText(entry["#text"]));
     if (image) {
-      return safeText(image["#text"]);
+      const url = safeText(image["#text"]);
+      if (url && !isLastfmPlaceholder(url)) {
+        return url;
+      }
     }
   }
 
-  const first = track.image.find((entry) => entry && safeText(entry["#text"]));
+  const first = track.image.find((entry) => {
+    const url = entry && safeText(entry["#text"]);
+    return url && !isLastfmPlaceholder(url);
+  });
   return first ? safeText(first["#text"]) : "";
 };
 
