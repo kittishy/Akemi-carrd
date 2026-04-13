@@ -18,6 +18,17 @@ const safeText = (value) => {
   return typeof value === "string" ? value.trim() : "";
 };
 
+/**
+ * Sanitize any string value to prevent XSS when outputting to clients.
+ */
+const sanitizeOutput = (value) => {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "number") return value;
+  if (typeof value === "boolean") return value;
+  if (typeof value !== "string") return String(value);
+  return value.replace(/[<>&"'`]/g, "").substring(0, 1000);
+};
+
 // Known Last.fm placeholder image hashes — these are served when no real art exists.
 // Treat them as absent so callers fall back to DEFAULT_ART.
 const LASTFM_PLACEHOLDER_HASHES = new Set([
@@ -73,9 +84,9 @@ const normalizePayload = (track) => {
   return {
     status: "playing",
     track: {
-      name: trackName,
-      artist: artistName,
-      album: albumName,
+      name: sanitizeOutput(trackName),
+      artist: sanitizeOutput(artistName),
+      album: sanitizeOutput(albumName),
       imageUrl,
       lastfmUrl: trackUrl
     },

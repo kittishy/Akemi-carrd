@@ -32,7 +32,19 @@ const ACTIVITY_TYPE_LABELS = {
 };
 
 const safeText = (value) =>
-  typeof value === "string" ? value.trim() : "";
+  typeof value === "string" ? value.trim().replace(/[<>\"'&]/g, "") : "";
+
+/**
+ * Sanitize any string value to prevent XSS when outputting to clients.
+ * Allows only safe characters: letters, numbers, spaces, and basic punctuation.
+ */
+const sanitizeOutput = (value) => {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "number") return value;
+  if (typeof value === "boolean") return value;
+  if (typeof value !== "string") return String(value);
+  return value.replace(/[<>&"'`]/g, "").substring(0, 1000);
+};
 
 // ── Resolve app icon to a direct CDN URL (with in-process cache) ──────────
 // Replaces the /api/app-icon proxy redirect with a server-side lookup so the
@@ -114,14 +126,14 @@ const normalizeActivity = async (activity) => {
   return {
     type,
     label,
-    name: safeText(activity.name),
-    details: safeText(activity.details),
-    state: safeText(activity.state),
+    name: sanitizeOutput(activity.name),
+    details: sanitizeOutput(activity.details),
+    state: sanitizeOutput(activity.state),
     largeImage,
     smallImage,
-    largeText: safeText(activity.assets && activity.assets.large_text),
-    smallText: safeText(activity.assets && activity.assets.small_text),
-    applicationId,
+    largeText: sanitizeOutput(activity.assets && activity.assets.large_text),
+    smallText: sanitizeOutput(activity.assets && activity.assets.small_text),
+    applicationId: sanitizeOutput(applicationId),
     timestamps: activity.timestamps || null,
     createdAt: activity.created_at || null
   };
