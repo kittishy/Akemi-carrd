@@ -2664,7 +2664,7 @@
       border: 1px solid var(--v2-border);
       border-radius: 0.5rem;
       box-shadow: var(--v2-shadow);
-      padding: 0.25rem 0;
+      padding: 0.35rem 0 0.4rem;
       transform-origin: bottom right;
       /* entry animation */
       animation: dotsMenuIn 0.15s cubic-bezier(0.34, 1.4, 0.64, 1) both;
@@ -2694,25 +2694,29 @@
       display: flex;
       align-items: center;
       gap: 0.55rem;
-      width: 100%;
-      padding: 0.45rem 0.85rem;
-      background: none;
-      border: none;
-      border-radius: 0;
+      width: calc(100% - 1rem);
+      margin: 0.18rem 0.5rem;
+      padding: 0.5rem 0.85rem;
+      background: linear-gradient(145deg, #f4f0ec 0%, #e6e0da 100%);
+      border: 1px solid var(--v2-border);
+      border-radius: 0.5rem;
       font-family: "Archivo", sans-serif;
       font-size: 0.82rem;
       font-weight: 500;
       color: var(--v2-ink);
       text-align: left;
       cursor: pointer;
-      transition: background 120ms ease, color 120ms ease;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
       white-space: nowrap;
+      box-sizing: border-box;
     }
 
     .dots-menu-item:hover,
     .dots-menu-item:focus-visible {
-      background: var(--v2-accent-soft);
+      background: linear-gradient(145deg, #ede8e2 0%, #d4ccc4 100%);
       color: var(--v2-ink-strong);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(22, 22, 22, 0.12);
       outline: none;
     }
 
@@ -2721,7 +2725,7 @@
       flex-shrink: 0;
       width: 1.1em;
       text-align: center;
-      opacity: 0.75;
+      opacity: 0.7;
     }
 
     /* separator */
@@ -2729,6 +2733,45 @@
       height: 1px;
       background: var(--v2-border);
       margin: 0.25rem 0.6rem;
+    }
+
+    /* labeled separator — shows a section header in place of a plain rule */
+    .dots-menu-sep[data-label] {
+      position: relative;
+      height: auto;
+      padding: 0.5rem 0.85rem 0.1rem;
+      background: none;
+      margin: 0;
+    }
+    .dots-menu-sep[data-label]::before {
+      content: attr(data-label);
+      display: block;
+      font-family: "Archivo", sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--v2-muted);
+    }
+
+    /* primary / featured item in the dots menu (About) */
+    .dots-menu-item--primary {
+      background: linear-gradient(145deg, #2e2b2b 0%, #1c1a1a 100%);
+      border-color: #1a1818;
+      color: #f5f2ee;
+      font-weight: 700;
+      margin-top: 0.35rem;
+      margin-bottom: 0.25rem;
+    }
+    .dots-menu-item--primary .dmi-icon {
+      opacity: 0.9;
+    }
+    .dots-menu-item--primary:hover,
+    .dots-menu-item--primary:focus-visible {
+      background: linear-gradient(145deg, #3d3939 0%, #282525 100%);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(22, 22, 22, 0.22);
     }
 
     /* ==========================================================================
@@ -3140,8 +3183,8 @@
                         <a href="#about-panel" id="about-button" class="button n01" role="button" aria-haspopup="true" aria-expanded="false" aria-label="More options" title="More options">●●●</a>
                         <nav id="dots-menu" role="navigation" aria-label="More options menu" hidden>
                           <ul>
-                            <li><button class="dots-menu-item" data-panel="container11" data-scroll="about-panel"><span class="dmi-icon" aria-hidden="true">◉</span>About</button></li>
-                            <li><div class="dots-menu-sep" role="separator"></div></li>
+                            <li><button class="dots-menu-item dots-menu-item--primary" data-panel="container11" data-scroll="about-panel"><span class="dmi-icon" aria-hidden="true">◉</span>About</button></li>
+                            <li><div class="dots-menu-sep" role="separator" data-label="Tools"></div></li>
                             <li><button class="dots-menu-item" data-panel="container-tz" data-scroll="tz-panel"><span class="dmi-icon" aria-hidden="true">🕐</span>Timezone</button></li>
                             <li><button class="dots-menu-item" data-panel="container-palette" data-scroll="palette-panel"><span class="dmi-icon" aria-hidden="true">🎨</span>Color Palette</button></li>
                             <li><button class="dots-menu-item" data-panel="container-counter" data-scroll="counter-panel"><span class="dmi-icon" aria-hidden="true">✦</span>Word Counter</button></li>
