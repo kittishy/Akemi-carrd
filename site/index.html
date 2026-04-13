@@ -2974,6 +2974,41 @@
       color: var(--v2-ink-strong);
     }
 
+    /* ── Dots menu: tablet (768px–1024px) ──────────────────────────── */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      #dots-menu {
+        min-width: 12.5rem;
+      }
+
+      .dots-menu-item {
+        min-height: 44px;
+        font-size: 0.88rem;
+        padding: 0.55rem 1rem;
+      }
+    }
+
+    /* ── Dots menu: small tablet / large phone (≤ 767px) ────────────── */
+    @media (max-width: 767px) {
+      #dots-menu {
+        min-width: min(14rem, 80vw);
+        border-radius: 0.75rem;
+      }
+
+      .dots-menu-item {
+        min-height: 48px;
+        font-size: 0.95rem;
+        padding: 0.65rem 1.1rem;
+      }
+
+      .dots-menu-item .dmi-icon {
+        font-size: 1.1rem;
+      }
+
+      .dots-menu-sep {
+        margin: 0.3rem 0.8rem;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       #dots-menu {
         animation: none !important;
