@@ -1,6 +1,17 @@
 const DISCORD_USER_ID = "334980960351158276";
 const LANYARD_API = "https://api.lanyard.rest/v1/users/";
+const DISCORD_RPC_API = "https://discord.com/api/v10/applications";
+const DISCORD_CDN = "https://cdn.discordapp.com/app-icons";
+const ICON_SIZE = 512;
 const REQUEST_TIMEOUT_MS = 4500;
+const ICON_RESOLVE_TIMEOUT_MS = 2000; // tight budget — icon lookup is best-effort
+
+// ── Server-side icon hash cache ───────────────────────────────────────────
+// App icons almost never change. Cache resolved CDN URLs for 24h so repeated
+// calls within the same warm function instance skip the Discord RPC round-trip.
+// Key: applicationId → value: { url, cachedAt }
+const _iconCache = new Map();
+const ICON_CACHE_TTL_MS = 86400_000; // 24 hours
 
 /**
  * Discord activity types (from Discord Gateway docs):
@@ -23,6 +34,47 @@ const ACTIVITY_TYPE_LABELS = {
 const safeText = (value) =>
   typeof value === "string" ? value.trim() : "";
 
+// ── Resolve app icon to a direct CDN URL (with in-process cache) ──────────
+// Replaces the /api/app-icon proxy redirect with a server-side lookup so the
+// client receives a final cdn.discordapp.com URL and only needs one hop.
+const resolveIconUrl = async (applicationId) => {
+  if (!applicationId) return "";
+
+  // Return cached URL if still fresh
+  const cached = _iconCache.get(applicationId);
+  if (cached && (Date.now() - cached.cachedAt) < ICON_CACHE_TTL_MS) {
+    return cached.url;
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), ICON_RESOLVE_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(`${DISCORD_RPC_API}/${applicationId}/rpc`, {
+      method: "GET",
+      signal: controller.signal
+    });
+
+    if (!response.ok) throw new Error(`Discord RPC ${response.status}`);
+
+    const data = await response.json();
+    const iconHash = data && typeof data.icon === "string" ? data.icon.trim() : "";
+    const url = iconHash
+      ? `${DISCORD_CDN}/${applicationId}/${iconHash}.png?size=${ICON_SIZE}`
+      : `https://dcdn.dstn.to/app-icons/${applicationId}`;
+
+    _iconCache.set(applicationId, { url, cachedAt: Date.now() });
+    return url;
+  } catch (_err) {
+    // On failure fall back to dcdn (same as app-icon.js error path)
+    const fallback = `https://dcdn.dstn.to/app-icons/${applicationId}`;
+    _iconCache.set(applicationId, { url: fallback, cachedAt: Date.now() });
+    return fallback;
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
 const resolveAssetUrl = (applicationId, assetKey) => {
   if (!assetKey) return "";
   if (assetKey.startsWith("mp:external/")) {
@@ -38,7 +90,7 @@ const resolveAssetUrl = (applicationId, assetKey) => {
   return "";
 };
 
-const normalizeActivity = (activity) => {
+const normalizeActivity = async (activity) => {
   const type = typeof activity.type === "number" ? activity.type : 0;
   const label = ACTIVITY_TYPE_LABELS[type] || "Playing";
   const applicationId = safeText(activity.application_id);
@@ -48,9 +100,10 @@ const normalizeActivity = (activity) => {
     safeText(activity.assets && activity.assets.large_image)
   );
 
-  // Fallback: use our HD icon proxy (tries Discord CDN 512px first, dcdn.dstn.to last)
+  // Fallback: resolve the icon hash server-side so the client gets a direct
+  // CDN URL instead of going through the /api/app-icon redirect proxy.
   if (!largeImage && applicationId) {
-    largeImage = `/api/app-icon?id=${applicationId}`;
+    largeImage = await resolveIconUrl(applicationId);
   }
 
   const smallImage = resolveAssetUrl(
@@ -114,9 +167,14 @@ module.exports = async (req, res) => {
     const allActivities = Array.isArray(data.activities) ? data.activities : [];
 
     // Filter out: Spotify/Listening (type 2) and Custom Status (type 4)
-    const activities = allActivities
-      .filter((a) => a.type !== 2 && a.type !== 4)
-      .map(normalizeActivity);
+    // normalizeActivity is now async (resolves icon URLs server-side), so
+    // run all normalisations in parallel — icon lookups have their own 2s
+    // timeout and won't block the response beyond REQUEST_TIMEOUT_MS.
+    const activities = await Promise.all(
+      allActivities
+        .filter((a) => a.type !== 2 && a.type !== 4)
+        .map(normalizeActivity)
+    );
 
     const payload = {
       status: "ok",

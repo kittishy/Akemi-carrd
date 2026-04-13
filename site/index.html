@@ -3030,8 +3030,10 @@
       };
 
       const runUpdate = async () => {
+        // Guard: never run while tab is hidden or offline — callers are
+        // responsible for only invoking runUpdate when appropriate, but
+        // this acts as a belt-and-suspenders safety net.
         if (document.hidden) {
-          schedule(POLL_HIDDEN);
           return;
         }
 
@@ -3075,13 +3077,40 @@
         }
       };
 
+      // Visibility-aware polling: fully pause the timer while the tab is
+      // hidden and resume with an immediate fetch the moment it becomes
+      // visible again.  This prevents wasted background requests and
+      // guarantees the card shows fresh data as soon as the user returns.
       document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          // Tab went to background — kill the pending poll entirely.
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          // Also abort any in-flight request we no longer need.
+          if (inFlightController) {
+            inFlightController.abort();
+            inFlightController = null;
+          }
+        } else {
+          // Tab came back to foreground — fetch immediately, then resume
+          // normal interval scheduling from inside runUpdate.
+          runUpdate();
+        }
+      });
+
+      // Network recovery: when the browser comes back online and the tab
+      // is visible, fetch immediately (mirrors the Lanyard WS reconnect
+      // pattern).  If the tab is hidden we do nothing — the
+      // visibilitychange handler will trigger a fresh fetch when the user
+      // returns to the tab.
+      window.addEventListener("online", function () {
         if (!document.hidden) {
           runUpdate();
         }
       });
 
-      window.addEventListener("online", runUpdate);
       window.addEventListener("offline", handleOffline);
 
       runUpdate();
@@ -3107,6 +3136,11 @@
       var container = document.getElementById("lanyard-activities");
 
       if (!container) return;
+
+      // Respect reduced-motion preference: throttle the 1s elapsed clock to
+      // 10s for users who are sensitive to constantly-changing numbers.
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var ELAPSED_TICK_MS = reduceMotion ? 10000 : 1000;
 
       var ACTIVITY_LABELS = {
         0: "Playing",
@@ -3188,8 +3222,11 @@
         img.className = "activity-art";
         img.src = largeImage || DEFAULT_ART;
         img.alt = largeText || name;
+        img.width = 64;
+        img.height = 64;
         img.loading = "lazy";
         img.decoding = "async";
+        img.fetchPriority = "low";
         img.onerror = function () { this.src = DEFAULT_ART; };
         artWrapper.appendChild(img);
 
@@ -3198,8 +3235,11 @@
           smallImg.className = "activity-art-small";
           smallImg.src = smallImage;
           smallImg.alt = smallText || "";
+          smallImg.width = 22;
+          smallImg.height = 22;
           smallImg.loading = "lazy";
           smallImg.decoding = "async";
+          smallImg.fetchPriority = "low";
           smallImg.onerror = function () { this.style.display = "none"; };
           artWrapper.appendChild(smallImg);
         }
@@ -3252,7 +3292,7 @@
             elapsedEl.textContent = formatElapsed(diff);
           };
           updateElapsed();
-          var timerId = setInterval(updateElapsed, 1000);
+          var timerId = setInterval(updateElapsed, ELAPSED_TICK_MS);
           elapsedTimers.push(timerId);
           info.appendChild(elapsedEl);
         }
@@ -3366,9 +3406,14 @@
       fetchREST();
       connectWS();
 
-      // Reconnect WS when tab becomes visible
+      // Reconnect WS when tab becomes visible.
+      // Always close-and-reconnect unconditionally — on iOS Safari the socket
+      // can show readyState OPEN for up to 800ms after the OS killed the TCP
+      // connection server-side during backgrounding. Waiting for onclose means
+      // up to one full heartbeat interval (30s) of missed updates. The extra
+      // handshake cost of an unnecessary reconnect is one round-trip.
       document.addEventListener("visibilitychange", function () {
-        if (!document.hidden && (!ws || ws.readyState !== WebSocket.OPEN)) {
+        if (!document.hidden) {
           connectWS();
         }
       });

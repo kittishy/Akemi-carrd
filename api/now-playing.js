@@ -2,6 +2,15 @@ const LASTFM_BASE_URL = "https://ws.audioscrobbler.com/2.0/";
 const API_METHOD = "user.getrecenttracks";
 const REQUEST_TIMEOUT_MS = 4500;
 
+// ── Server-side stale-while-revalidate cache ──────────────────────────────
+// Vercel reuses warm function instances. Holding the last good payload in
+// module scope means most requests return from memory (<5ms) while the
+// upstream Last.fm call refreshes data in the background.
+// On a cold start the first request still waits for Last.fm as before.
+let _serverCache = null;   // { payload, etag, fetchedAt }
+let _revalidating = false;
+const SERVER_CACHE_TTL_MS = 12000; // 12s — shorter than the 15s client poll
+
 const getEnv = (name, fallback = "") => {
   const value = process.env[name];
   return typeof value === "string" ? value.trim() : fallback;
@@ -76,21 +85,8 @@ const buildEtag = (payload) => {
   return `W/"${Math.abs(hash)}"`;
 };
 
-module.exports = async (req, res) => {
-  if (req.method !== "GET") {
-    res.setHeader("Allow", "GET");
-    res.status(405).json({ status: "error", message: "Method not allowed" });
-    return;
-  }
-
-  const apiKey = getEnv("LAST_FM_API_KEY");
-  const username = getEnv("LAST_FM_USERNAME", "gxth_akemi");
-
-  if (!apiKey || !username) {
-    res.status(500).json({ status: "error", message: "Missing Last.fm configuration" });
-    return;
-  }
-
+// ── Upstream fetch (isolated so it can be called async in background) ────
+const fetchFromLastFm = async (apiKey, username) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
@@ -113,9 +109,62 @@ module.exports = async (req, res) => {
     }
 
     const data = await response.json();
-    const track = data && data.recenttracks && Array.isArray(data.recenttracks.track) ? data.recenttracks.track[0] : null;
+    const track = data && data.recenttracks && Array.isArray(data.recenttracks.track)
+      ? data.recenttracks.track[0]
+      : null;
     const payload = normalizePayload(track);
     const etag = buildEtag(payload);
+
+    return { payload, etag, fetchedAt: Date.now() };
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+// ── SWR wrapper: return cached data immediately, refresh in background ────
+const getWithSWR = async (apiKey, username) => {
+  const now = Date.now();
+
+  // Fresh cache hit → return immediately, no upstream call at all
+  if (_serverCache && (now - _serverCache.fetchedAt) < SERVER_CACHE_TTL_MS) {
+    return _serverCache;
+  }
+
+  // Stale cache exists and no revalidation in flight → serve stale now,
+  // kick off background refresh so the NEXT request gets fresh data
+  if (_serverCache && !_revalidating) {
+    _revalidating = true;
+    fetchFromLastFm(apiKey, username)
+      .then((result) => { _serverCache = result; })
+      .catch(() => { /* keep serving stale on upstream errors */ })
+      .finally(() => { _revalidating = false; });
+
+    return { ..._serverCache, payload: { ..._serverCache.payload, isStale: true } };
+  }
+
+  // Cold start or revalidation already in flight with no cache → must await
+  const result = await fetchFromLastFm(apiKey, username);
+  _serverCache = result;
+  return result;
+};
+
+module.exports = async (req, res) => {
+  if (req.method !== "GET") {
+    res.setHeader("Allow", "GET");
+    res.status(405).json({ status: "error", message: "Method not allowed" });
+    return;
+  }
+
+  const apiKey = getEnv("LAST_FM_API_KEY");
+  const username = getEnv("LAST_FM_USERNAME", "gxth_akemi");
+
+  if (!apiKey || !username) {
+    res.status(500).json({ status: "error", message: "Missing Last.fm configuration" });
+    return;
+  }
+
+  try {
+    const { payload, etag } = await getWithSWR(apiKey, username);
 
     res.setHeader("Cache-Control", "public, max-age=10, stale-while-revalidate=30");
     res.setHeader("ETag", etag);
@@ -135,7 +184,5 @@ module.exports = async (req, res) => {
       updatedAt: new Date().toISOString(),
       isStale: true
     });
-  } finally {
-    clearTimeout(timeout);
   }
 };
