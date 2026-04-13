@@ -41,7 +41,10 @@
 
 #main > .inner > section.active {
   display: block !important;
-  overflow-x: hidden;
+  /* overflow-x: clip prevents horizontal overflow painting without creating a scroll
+     container (unlike overflow-x: hidden which implicitly sets overflow-y: auto and
+     would cause a scrollbar when #dots-menu extends downward past the section). */
+  overflow-x: clip;
   /* Creamy appear transition */
   transition: opacity var(--duration-normal) var(--ease-cream), 
               transform var(--duration-normal) var(--ease-cream);
