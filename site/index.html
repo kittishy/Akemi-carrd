@@ -45,7 +45,8 @@
     (() => {
       const key = "theme";
       const saved = localStorage.getItem(key);
-      const pref = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      // Default to light theme, only use saved preference if explicitly set
+      const pref = saved ? saved : "light";
       if (pref === "dark") document.documentElement.setAttribute("data-theme", "dark");
     })();
   </script>
