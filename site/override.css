@@ -811,3 +811,101 @@ a {
   position: relative;
   z-index: 9999;
 }
+
+/* ==========================================================================
+   RTL SUPPORT — Arabic (dir="rtl")
+   Mirrors margins, paddings, text alignment, and flex directions
+   for proper right-to-left reading.
+   ========================================================================== */
+[dir="rtl"] body {
+  text-align: right;
+}
+
+[dir="rtl"] .buttons li {
+  direction: rtl;
+}
+
+/* Now-playing card: flip layout */
+[dir="rtl"] #now-playing-card {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] #now-playing-card > div {
+  text-align: right;
+}
+
+[dir="rtl"] .now-playing-label {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+/* Activity cards: flip layout */
+[dir="rtl"] .activity-card {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .activity-card .activity-info {
+  text-align: right;
+}
+
+[dir="rtl"] .activity-art-wrapper {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+
+/* Tool panels */
+[dir="rtl"] .tool-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .tool-label {
+  text-align: right;
+}
+
+[dir="rtl"] .tool-input,
+[dir="rtl"] .tool-select,
+[dir="rtl"] .tool-textarea {
+  text-align: right;
+}
+
+/* Unit tabs */
+[dir="rtl"] .unit-tabs {
+  flex-direction: row-reverse;
+}
+
+/* Char stats */
+[dir="rtl"] .char-stats {
+  flex-direction: row-reverse;
+}
+
+/* Dots menu */
+[dir="rtl"] .dots-menu-item {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .dmi-icon {
+  margin-left: 0.5em;
+  margin-right: 0;
+}
+
+/* Message panel */
+[dir="rtl"] .message-form input,
+[dir="rtl"] .message-form textarea {
+  text-align: right;
+}
+
+/* Palette swatches */
+[dir="rtl"] .palette-swatches {
+  flex-direction: row-reverse;
+}
+
+/* About section */
+[dir="rtl"] #about-panel {
+  text-align: right;
+}
+
+[dir="rtl"] .social-icon {
+  margin-left: 0.3em;
+  margin-right: 0;
+}
