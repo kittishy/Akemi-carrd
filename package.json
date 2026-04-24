@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "description": "QA smoke package for Akemi carrd",
   "scripts": {
-    "qa:smoke": "playwright test --project=chromium"
+    "qa:smoke": "playwright test --project=chromium",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "devDependencies": {
-    "@playwright/test": "^1.54.2"
+    "@playwright/test": "^1.54.2",
+    "wrangler": "^4.85.0"
   }
 }
