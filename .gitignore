@@ -21,3 +21,9 @@ node_modules/
 playwright-report/
 test-results/
 QA_CHECKLIST.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
