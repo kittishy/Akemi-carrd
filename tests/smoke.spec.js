@@ -1,6 +1,8 @@
 const { test, expect } = require("@playwright/test");
 
 const viewports = [
+  { width: 320, height: 740 },
+  { width: 360, height: 800 },
   { width: 390, height: 844 },
   { width: 600, height: 900 },
   { width: 767, height: 1024 },
@@ -63,4 +65,16 @@ test("message/about toggle behavior stays stable", async ({ page }) => {
   // Escape closes the about panel
   await page.keyboard.press("Escape");
   await expect(aboutContainer).toBeHidden();
+});
+
+test("dots menu moves focus into opened tool panels", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openHome(page);
+
+  await page.locator("#about-button").click();
+  await expect(page.locator("#dots-menu")).toBeVisible();
+
+  await page.locator(".dots-menu-item[data-panel='container-palette']").click();
+  await expect(page.locator("#container-palette")).toBeVisible();
+  await expect(page.locator("#palette-word")).toBeFocused();
 });

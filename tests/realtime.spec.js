@@ -283,10 +283,19 @@ test("Last.fm playing: artwork updates even when the same track keeps playing", 
   await page.route("**/api.lanyard.rest/v1/users/**", async (route) => {
     await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ success: true, data: { activities: [] } }) });
   });
+  await page.route("https://example.com/fixed-art.jpg", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "image/svg+xml",
+      body: '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>'
+    });
+  });
   await page.route("**/open.spotify.com/**", (route) => route.abort());
 
   await page.goto("/site/index.html", { waitUntil: "domcontentloaded" });
   await expect(page.locator("#home-section")).toBeVisible();
+  await expect(page.locator("#container06.is-now-playing")).toBeVisible({ timeout: 5000 });
+  await expect(page.locator("#now-playing-track")).toHaveText("Test Track", { timeout: 5000 });
   await expect(page.locator("#now-playing-art")).toHaveAttribute("src", /assets\/images\/profile\.jpeg/, { timeout: 5000 });
 
   await page.evaluate(() => window.dispatchEvent(new Event("online")));
