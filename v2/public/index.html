@@ -149,16 +149,19 @@
           data-testid="now-playing-card"
           aria-live="polite"
           aria-label="Now playing"
+          hidden
         >
-          <img class="status-art" id="now-playing-art" alt="" width="38" height="38" hidden />
-          <div class="status-text">
-            <div class="status-label">
-              <span class="status-pulse" aria-hidden="true"></span>
-              <span data-i18n="np.listening">Ouvindo</span>
+          <a class="status-link" id="now-playing-link" href="https://www.last.fm" target="_blank" rel="noopener noreferrer">
+            <img class="status-art" id="now-playing-art" alt="" width="38" height="38" hidden />
+            <div class="status-text">
+              <div class="status-label">
+                <span class="status-pulse" aria-hidden="true"></span>
+                <span data-i18n="np.listening">Ouvindo</span>
+              </div>
+              <div class="status-title" id="now-playing-track">—</div>
+              <div class="status-subtitle" id="now-playing-artist"></div>
             </div>
-            <div class="status-title" id="now-playing-track">—</div>
-            <div class="status-subtitle" id="now-playing-artist">sem atividade no momento</div>
-          </div>
+          </a>
         </div>
 
         <!-- Preenchido/ligado ao vivo em uma próxima etapa (Lanyard / Discord) -->
@@ -222,5 +225,9 @@
       </section>
     </main>
   </div>
+
+  <script src="js/now-playing.js" defer></script>
+  <script src="js/lanyard.js" defer></script>
+  <script src="js/message-form.js" defer></script>
 </body>
 </html>
