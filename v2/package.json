@@ -1,8 +1,8 @@
 {
-  "name": "akemi-carrd",
+  "name": "akemi-carrd-v2",
   "private": true,
-  "version": "1.0.0",
-  "description": "QA smoke package for Akemi carrd",
+  "version": "0.1.0",
+  "description": "QA smoke package for Akemi carrd (v2 - carrd novo, em desenvolvimento)",
   "scripts": {
     "qa:smoke": "playwright test --project=chromium"
   },
