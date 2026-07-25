@@ -97,7 +97,14 @@ Família única: **M PLUS Rounded 1c** (400/700/800), que cobre latino e japonê
 
 ## Layout
 
-Um único card compacto, sem scroll — tudo precisa caber na tela de um celular sem rolar. Densidade alta mas respirável: espaçamento generoso entre blocos (`spacing.lg`), compacto dentro deles (`spacing.sm`/`xs`). O quadriculado ocupa a página inteira por trás do card; os adesivos ficam espalhados nas bordas, nunca sobre texto legível.
+Um único card compacto, sem scroll — tudo precisa caber na tela sem rolar, em qualquer tamanho. Densidade alta mas respirável: espaçamento generoso entre blocos (`spacing.lg`), compacto dentro deles (`spacing.sm`/`xs`). O quadriculado ocupa a página inteira por trás do card; os adesivos ficam espalhados nas bordas, nunca sobre texto legível.
+
+O card tem duas formas, com a virada em **820px**:
+
+- **Retrato (< 820px)** — coluna única, o formato de sempre. O avatar "vaza" para fora da borda superior, como um adesivo colado meio torto por cima do card.
+- **Paisagem (≥ 820px)** — o mesmo card deitado, em duas colunas separadas por uma costura tracejada: **identidade** à esquerda (avatar, nome, pronomes, bio, about) e **presença** à direita (redes sociais, o que está tocando, atividade do Discord, ações). A costura faz o card ler como um canhoto de ingresso destacável, e não como um card de celular esticado. Aqui o avatar não vaza — o overhang só funciona no topo de um card em retrato.
+
+O conteúdo é agrupado no HTML nesses dois blocos (`.profile-identity` e `.profile-side`) em ambas as formas; no retrato eles são invisíveis e a página lê como uma lista só.
 
 ## Elevation & Depth
 

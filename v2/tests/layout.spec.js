@@ -43,3 +43,48 @@ test("core landmarks are present and accessible", async ({ page }) => {
   await expect(page.locator('[data-testid="profile-card"]')).toBeVisible();
   await expect(page.locator("h1.profile-name")).toHaveText("Akemi");
 });
+
+/*
+  Responsive shape: the card is a portrait phone card on small screens and a
+  landscape two-column card on desktop. 820px is the switch-over point.
+*/
+
+const columnGeometry = (page) =>
+  page.evaluate(() => {
+    const identity = document.querySelector('[data-testid="profile-identity"]').getBoundingClientRect();
+    const side = document.querySelector('[data-testid="profile-side"]').getBoundingClientRect();
+    return {
+      direction: getComputedStyle(document.querySelector(".profile-card")).flexDirection,
+      sideStartsAfterIdentity: side.left >= identity.right - 1,
+      sideBelowIdentity: side.top >= identity.bottom - 1
+    };
+  });
+
+test("desktop lays the card out horizontally in two columns", async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 });
+  await openHome(page);
+  const geo = await columnGeometry(page);
+  expect(geo.direction).toBe("row");
+  expect(geo.sideStartsAfterIdentity).toBe(true);
+});
+
+test("just below the desktop breakpoint the card stays a single column", async ({ page }) => {
+  await page.setViewportSize({ width: 800, height: 900 });
+  await openHome(page);
+  const geo = await columnGeometry(page);
+  expect(geo.direction).toBe("column");
+  expect(geo.sideBelowIdentity).toBe(true);
+});
+
+test("desktop fits on one screen even with the message panel open", async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 });
+  await openHome(page);
+  await page.click('[data-testid="message-button"]');
+  await expect(page.locator('[data-testid="message-panel"]')).toBeVisible();
+  const overflow = await page.evaluate(() => ({
+    x: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    y: document.documentElement.scrollHeight - document.documentElement.clientHeight
+  }));
+  expect(overflow.x).toBeLessThanOrEqual(1);
+  expect(overflow.y).toBeLessThanOrEqual(1);
+});

@@ -245,6 +245,21 @@ textarea:focus-visible {
   text-align: center;
 }
 
+/*
+  The two content groups. On mobile they're transparent wrappers: same
+  direction, same gap and same centering as the card itself, so the page
+  reads as one single column exactly like before they existed.
+*/
+.profile-identity,
+.profile-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  min-width: 0;
+}
+
 .profile-avatar-frame {
   width: clamp(72px, 20vw, 92px);
   height: clamp(72px, 20vw, 92px);
@@ -643,5 +658,57 @@ textarea:focus-visible {
 @media (max-height: 720px) {
   .profile-card {
     gap: var(--spacing-xs);
+  }
+}
+
+/* ---------- Desktop: landscape card ----------
+   Above 820px the card turns on its side: identity on the left, live status
+   and actions on the right, split by a dashed seam so it reads like a
+   tear-off ticket stub rather than a phone card stretched wide. */
+
+@media (min-width: 820px) {
+  .profile-card {
+    width: min(48rem, 100%);
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    transform: rotate(-0.6deg);
+  }
+
+  .profile-identity {
+    flex: 0 0 37%;
+    justify-content: center;
+    padding-right: var(--spacing-lg);
+    border-right: 2px dashed var(--color-grid);
+  }
+
+  .profile-side {
+    flex: 1 1 auto;
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+
+  /* Inside the card on desktop — the "peeking sticker" overhang only reads
+     well when the avatar sits at the very top of a portrait card. */
+  .profile-avatar-frame {
+    width: clamp(96px, 11vw, 116px);
+    height: clamp(96px, 11vw, 116px);
+    margin-top: 0;
+  }
+
+  .profile-name {
+    font-size: calc(var(--font-size-display) * 1.2);
+  }
+
+  .profile-bio,
+  .profile-about {
+    max-width: 26ch;
+  }
+
+  /* Keep the switch clear of the right column's first row. */
+  .lang-switch {
+    top: 0.75rem;
+    right: 0.75rem;
   }
 }
