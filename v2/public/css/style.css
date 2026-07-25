@@ -184,6 +184,41 @@ textarea:focus-visible {
   white-space: nowrap;
 }
 
+/* ---------- Language switch ---------- */
+
+.lang-switch {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: flex;
+  gap: 0.25rem;
+  z-index: 2;
+}
+
+.lang-btn {
+  font-family: var(--font-family);
+  font-size: 0.62rem;
+  font-weight: var(--font-weight-label);
+  letter-spacing: 0.03em;
+  color: var(--color-ink-soft);
+  background: var(--color-white);
+  border: none;
+  border-radius: var(--rounded-pill);
+  padding: 0.22rem 0.5rem;
+  box-shadow: var(--sticker-badge-shadow);
+  cursor: pointer;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.lang-btn:hover {
+  transform: translateY(-1px);
+}
+
+.lang-btn[aria-pressed="true"] {
+  color: var(--color-white);
+  background: var(--color-primary);
+}
+
 /* ---------- Profile card ---------- */
 
 .profile-card {

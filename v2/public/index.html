@@ -90,11 +90,17 @@
         <span class="sr-only">Foto de perfil (provisória)</span>
       </div>
 
-      <h1 class="profile-name" data-i18n="profile.name">Akemi</h1>
+      <div class="lang-switch" role="group" data-i18n-aria-label="lang.label" aria-label="Language">
+        <button type="button" class="lang-btn" data-lang="pt" aria-pressed="false">PT</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" class="lang-btn" data-lang="ja" aria-pressed="false">JA</button>
+      </div>
+
+      <h1 class="profile-name">Akemi</h1>
 
       <div class="profile-badges">
         <span class="sticker-badge">@ak6h</span>
-        <span class="sticker-badge" data-i18n="profile.pronouns">she/her</span>
+        <span class="sticker-badge">she/her</span>
         <span class="sticker-badge">wlw</span>
       </div>
 
@@ -103,10 +109,10 @@
         Base: perfil de Discord (ak6h, she/her, wlw, 疲れたわ, LoL + Minecraft)
         + about do v1 atualizado (23 anos, código desde 2016).
       -->
-      <p class="profile-bio" data-i18n="profile.bio">
+      <p class="profile-bio">
         疲れたわ ⁄⁄⁄ ✦ 23 anos, sempre online
       </p>
-      <p class="profile-about" data-i18n="profile.about">
+      <p class="profile-about">
         mexendo com código desde 2016, um pouco caótica e bem curiosa. nas horas vagas: League of Legends, Minecraft, ou algum joguinho aleatório no celular.
       </p>
 
@@ -226,6 +232,7 @@
     </main>
   </div>
 
+  <script src="js/i18n.js" defer></script>
   <script src="js/now-playing.js" defer></script>
   <script src="js/lanyard.js" defer></script>
   <script src="js/message-form.js" defer></script>
