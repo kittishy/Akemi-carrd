@@ -4,9 +4,10 @@
   exposes window.__t(key, fallback) synchronously so every other module can
   call it defensively before/after the DOM sweep runs.
 
-  Note: profile name, pronouns, bio and about-me are intentionally NOT
-  translated here (same choice v1 made) — they're fixed personal copy that
-  mixes scripts on purpose (e.g. "疲れたわ"), not UI chrome.
+  Pronouns, bio and about-me ARE translated (unlike v1, which left them
+  fixed) — only the decorative "疲れたわ" flourish in the bio stays in
+  Japanese across all three languages, since it's a stylistic signature,
+  not a sentence to translate.
 */
 (function () {
   "use strict";
@@ -16,6 +17,10 @@
 
   const translations = {
     pt: {
+      "profile.pronouns": "ela/dela",
+      "profile.bio": "疲れたわ ⁄⁄⁄ ✦ 23 anos, sempre online",
+      "profile.about":
+        "mexendo com código desde 2016, um pouco caótica e bem curiosa. nas horas vagas: League of Legends, Minecraft, ou algum joguinho aleatório no celular.",
       "np.listening": "Ouvindo",
       "np.unknownTrack": "Faixa desconhecida",
       "np.unknownArtist": "Artista desconhecido",
@@ -41,6 +46,10 @@
       "lang.label": "Idioma"
     },
     en: {
+      "profile.pronouns": "she/her",
+      "profile.bio": "疲れたわ ⁄⁄⁄ ✦ 23 years old, always online",
+      "profile.about":
+        "coding since 2016, a little chaotic and very curious. in my free time: League of Legends, Minecraft, or some random mobile game.",
       "np.listening": "Listening",
       "np.unknownTrack": "Unknown track",
       "np.unknownArtist": "Unknown artist",
@@ -66,6 +75,10 @@
       "lang.label": "Language"
     },
     ja: {
+      "profile.pronouns": "彼女",
+      "profile.bio": "疲れたわ ⁄⁄⁄ ✦ 23歳、いつもオンライン",
+      "profile.about":
+        "2016年からコードをいじってる、ちょっとカオスで好奇心旺盛。暇なときはLeague of Legends、Minecraft、またはスマホの適当なゲーム。",
       "np.listening": "聴いています",
       "np.unknownTrack": "不明な曲",
       "np.unknownArtist": "不明なアーティスト",
