@@ -20,7 +20,16 @@ module.exports = defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] }
+      use: {
+        ...devices["Desktop Chrome"],
+        // Only overridden when PLAYWRIGHT_CHROMIUM_PATH is set (e.g. sandboxes
+        // that ship a pre-installed browser at a non-standard path). Leave
+        // unset elsewhere so `npx playwright install`'s normal browser
+        // resolution keeps working for everyone else.
+        ...(process.env.PLAYWRIGHT_CHROMIUM_PATH
+          ? { launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH } }
+          : {})
+      }
     }
   ]
 });

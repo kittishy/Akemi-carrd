@@ -25,6 +25,17 @@ svg {
   max-width: 100%;
 }
 
+/*
+  Safety net: an author-stylesheet `display` on img/svg otherwise beats the
+  user-agent's default `[hidden] { display: none }` regardless of selector
+  specificity, since author rules always win over UA rules. Without this,
+  any hidden <img>/<svg> (e.g. #now-playing-art with no artwork) would still
+  render.
+*/
+[hidden] {
+  display: none !important;
+}
+
 a {
   color: var(--color-primary-deep);
 }

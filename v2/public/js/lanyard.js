@@ -98,6 +98,7 @@
 
     const card = document.createElement("article");
     card.className = "activity-card";
+    card.setAttribute("data-testid", "activity-card");
     card.setAttribute("aria-label", `${label} ${displayName}`);
 
     const artWrapper = document.createElement("div");
@@ -152,6 +153,7 @@
 
     const nameEl = document.createElement("p");
     nameEl.className = "activity-name";
+    nameEl.setAttribute("data-testid", "activity-name");
     nameEl.textContent = displayName;
     nameEl.title = displayName;
     info.appendChild(nameEl);
@@ -159,6 +161,7 @@
     if (details) {
       const detailsEl = document.createElement("p");
       detailsEl.className = "activity-details";
+      detailsEl.setAttribute("data-testid", "activity-details");
       detailsEl.textContent = details;
       detailsEl.title = details;
       info.appendChild(detailsEl);
@@ -167,6 +170,7 @@
     if (state) {
       const stateEl = document.createElement("p");
       stateEl.className = "activity-state";
+      stateEl.setAttribute("data-testid", "activity-state");
       stateEl.textContent = state;
       stateEl.title = state;
       info.appendChild(stateEl);
@@ -175,6 +179,7 @@
     if (startTimestamp) {
       const elapsedEl = document.createElement("p");
       elapsedEl.className = "activity-elapsed";
+      elapsedEl.setAttribute("data-testid", "activity-elapsed");
       const updateElapsed = () => {
         elapsedEl.textContent = formatElapsed(Date.now() - startTimestamp);
       };
