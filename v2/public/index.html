@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Akemi · あけみ</title>
+  <meta name="description" content="Perfil pessoal de Akemi — @ak6h" />
+  <meta name="theme-color" content="#fffbfc" />
+  <meta name="color-scheme" content="light" />
+
+  <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48" />
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="assets/favicon-48.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="stage">
+    <!-- Decorative stickers — purely visual, never block reading or navigation -->
+    <svg class="decor-sticker decor-sticker--cat" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <path d="M14 20 L20 6 L28 22 Z" fill="#fff" stroke="var(--color-primary)" stroke-width="2.5" stroke-linejoin="round" />
+      <path d="M50 20 L44 6 L36 22 Z" fill="#fff" stroke="var(--color-primary)" stroke-width="2.5" stroke-linejoin="round" />
+      <circle cx="32" cy="34" r="20" fill="#fff" stroke="var(--color-primary)" stroke-width="2.5" />
+      <path d="M24 32 Q26 29 28 32" fill="none" stroke="var(--color-ink)" stroke-width="2" stroke-linecap="round" />
+      <path d="M36 32 Q38 29 40 32" fill="none" stroke="var(--color-ink)" stroke-width="2" stroke-linecap="round" />
+      <circle cx="32" cy="38" r="1.6" fill="var(--color-strawberry)" />
+      <path d="M22 24 Q32 30 42 24" fill="none" stroke="var(--color-primary)" stroke-width="1.4" opacity="0.5" />
+      <circle cx="21" cy="39" r="3" fill="var(--color-strawberry)" opacity="0.55" />
+      <circle cx="43" cy="39" r="3" fill="var(--color-strawberry)" opacity="0.55" />
+    </svg>
+
+    <svg class="decor-sticker decor-sticker--strawberry" viewBox="0 0 48 56" aria-hidden="true" focusable="false">
+      <path d="M14 14 Q24 6 34 14" fill="none" stroke="var(--color-leaf)" stroke-width="3" stroke-linecap="round" />
+      <path d="M10 20 Q24 10 38 20 Q40 40 24 52 Q8 40 10 20 Z" fill="var(--color-strawberry)" stroke="#fff" stroke-width="3" stroke-linejoin="round" />
+      <circle cx="19" cy="27" r="1.4" fill="#fff" />
+      <circle cx="29" cy="27" r="1.4" fill="#fff" />
+      <circle cx="24" cy="34" r="1.4" fill="#fff" />
+      <circle cx="17" cy="37" r="1.4" fill="#fff" />
+      <circle cx="31" cy="37" r="1.4" fill="#fff" />
+      <circle cx="24" cy="44" r="1.4" fill="#fff" />
+    </svg>
+
+    <svg class="decor-sticker decor-sticker--flower" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+      <g fill="var(--color-lavender)" stroke="#fff" stroke-width="2">
+        <ellipse cx="22" cy="10" rx="7" ry="10" />
+        <ellipse cx="22" cy="34" rx="7" ry="10" />
+        <ellipse cx="10" cy="22" rx="10" ry="7" />
+        <ellipse cx="34" cy="22" rx="10" ry="7" />
+      </g>
+      <circle cx="22" cy="22" r="6" fill="var(--color-cream)" stroke="#fff" stroke-width="2" />
+    </svg>
+
+    <svg class="decor-sticker decor-sticker--flower-alt" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+      <g fill="var(--color-primary)" stroke="#fff" stroke-width="2" opacity="0.9">
+        <ellipse cx="22" cy="10" rx="7" ry="10" />
+        <ellipse cx="22" cy="34" rx="7" ry="10" />
+        <ellipse cx="10" cy="22" rx="10" ry="7" />
+        <ellipse cx="34" cy="22" rx="10" ry="7" />
+      </g>
+      <circle cx="22" cy="22" r="6" fill="#fff" />
+    </svg>
+
+    <span class="decor-sparkle decor-sparkle--1" aria-hidden="true">✦</span>
+    <span class="decor-sparkle decor-sparkle--2" aria-hidden="true">✦</span>
+    <span class="decor-sparkle decor-sparkle--3" aria-hidden="true">✦</span>
+
+    <!-- Main profile card -->
+    <main class="sticker-card profile-card" data-testid="profile-card">
+      <div class="profile-avatar-frame">
+        <!--
+          PLACEHOLDER: substituir por assets/avatar.png assim que a Julia enviar o arquivo novo.
+          Ilustração provisória só para o layout não ficar furado.
+        -->
+        <svg viewBox="0 0 92 92" aria-hidden="true" focusable="false">
+          <rect width="92" height="92" fill="var(--color-lavender)" />
+          <circle cx="46" cy="38" r="17" fill="var(--color-paper)" />
+          <circle cx="39" cy="37" r="2.2" fill="var(--color-ink)" />
+          <circle cx="53" cy="37" r="2.2" fill="var(--color-ink)" />
+          <path d="M40 45 Q46 49 52 45" fill="none" stroke="var(--color-ink)" stroke-width="2" stroke-linecap="round" />
+          <path d="M20 92 Q46 62 72 92 Z" fill="var(--color-paper)" />
+        </svg>
+        <span class="sr-only">Foto de perfil (provisória)</span>
+      </div>
+
+      <h1 class="profile-name" data-i18n="profile.name">Akemi</h1>
+
+      <div class="profile-badges">
+        <span class="sticker-badge">@ak6h</span>
+        <span class="sticker-badge" data-i18n="profile.pronouns">she/her</span>
+        <span class="sticker-badge">wlw</span>
+      </div>
+
+      <!--
+        RASCUNHO — texto de bio/about pendente de revisão com a Julia.
+        Base: perfil de Discord (ak6h, she/her, wlw, 疲れたわ, LoL + Minecraft)
+        + about do v1 atualizado (23 anos, código desde 2016).
+      -->
+      <p class="profile-bio" data-i18n="profile.bio">
+        疲れたわ ⁄⁄⁄ ✦ 23 anos, sempre online
+      </p>
+      <p class="profile-about" data-i18n="profile.about">
+        mexendo com código desde 2016, um pouco caótica e bem curiosa. nas horas vagas: League of Legends, Minecraft, ou algum joguinho aleatório no celular.
+      </p>
+
+      <div class="social-row">
+        <a
+          class="social-link"
+          href="https://kr.pinterest.com/gxth_akemi"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Pinterest"
+        ><span class="social-icon" style="--icon-src:url('/assets/icons/pinterest.svg')"></span></a>
+        <a
+          class="social-link"
+          href="https://steamcommunity.com/profiles/76561199345609775/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Steam"
+        ><span class="social-icon" style="--icon-src:url('/assets/icons/steam.svg')"></span></a>
+        <a
+          class="social-link"
+          href="https://x.com/gxth_akemi"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Twitter / X"
+        ><span class="social-icon" style="--icon-src:url('/assets/icons/twitter.svg')"></span></a>
+        <a
+          class="social-link"
+          href="https://open.spotify.com/user/315sh472qwzqkmzubi3df2xdmbou?si=11855cc66064432b"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Spotify"
+        ><span class="social-icon" style="--icon-src:url('/assets/icons/spotify.svg')"></span></a>
+      </div>
+
+      <div class="status-stack">
+        <!-- Preenchido/ligado ao vivo em uma próxima etapa (Last.fm) -->
+        <div
+          class="status-card"
+          id="now-playing-card"
+          data-testid="now-playing-card"
+          aria-live="polite"
+          aria-label="Now playing"
+        >
+          <img class="status-art" id="now-playing-art" alt="" width="38" height="38" hidden />
+          <div class="status-text">
+            <div class="status-label">
+              <span class="status-pulse" aria-hidden="true"></span>
+              <span data-i18n="np.listening">Ouvindo</span>
+            </div>
+            <div class="status-title" id="now-playing-track">—</div>
+            <div class="status-subtitle" id="now-playing-artist">sem atividade no momento</div>
+          </div>
+        </div>
+
+        <!-- Preenchido/ligado ao vivo em uma próxima etapa (Lanyard / Discord) -->
+        <div
+          class="activity-list"
+          id="lanyard-activities"
+          data-testid="lanyard-activities"
+          aria-live="polite"
+          aria-label="Discord activity"
+        ></div>
+      </div>
+
+      <div class="action-row">
+        <a
+          class="btn btn-primary"
+          href="https://discord.com/users/334980960351158276"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n="btn.addFriend"
+        >Add Friend</a>
+        <button
+          class="btn btn-ghost"
+          id="message-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="message-panel"
+          data-testid="message-button"
+          data-i18n="btn.message"
+        >Message</button>
+      </div>
+
+      <section class="message-panel sticker-card" id="message-panel" data-testid="message-panel" hidden>
+        <form class="message-form" id="message-form" action="https://formsubmit.co/akemi-contact-f8a3b4c9d5e6" method="POST">
+          <div class="message-field">
+            <label class="sr-only" for="message-name" data-i18n="msg.namePlaceholder">Your name</label>
+            <input class="message-input" id="message-name" name="name" type="text" maxlength="80" required data-i18n-placeholder="msg.namePlaceholder" placeholder="Your name" />
+          </div>
+          <div class="message-field">
+            <label class="sr-only" for="message-email" data-i18n="msg.emailPlaceholder">Your email</label>
+            <input class="message-input" id="message-email" name="email" type="email" maxlength="120" required data-i18n-placeholder="msg.emailPlaceholder" placeholder="Your email" />
+          </div>
+          <div class="message-field">
+            <label class="sr-only" for="message-text" data-i18n="msg.textPlaceholder">Message</label>
+            <textarea class="message-textarea" id="message-text" name="message" rows="3" maxlength="1200" required data-i18n-placeholder="msg.textPlaceholder" placeholder="Type your message"></textarea>
+          </div>
+
+          <div class="honeypot-field" aria-hidden="true">
+            <label for="message-website">Website</label>
+            <input id="message-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="_subject" value="New message from Akemi site" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="basic" />
+          <input type="hidden" name="_next" id="message-next" value="" />
+          <input type="hidden" name="_form_start_time" id="form-start-time" value="" />
+
+          <div class="message-error" id="message-error"></div>
+
+          <button class="btn btn-primary" type="submit" id="submit-btn" data-i18n="msg.submit">Send message</button>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

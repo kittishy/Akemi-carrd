@@ -13,7 +13,7 @@ module.exports = defineConfig({
   },
   webServer: {
     command: "node scripts/static-server.js",
-    url: "http://127.0.0.1:4173/site/index.html",
+    url: "http://127.0.0.1:4173/public/index.html",
     reuseExistingServer: true,
     timeout: 30_000
   },

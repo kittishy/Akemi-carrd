@@ -15,17 +15,19 @@ const contentTypeByExt = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
-  ".ico": "image/x-icon"
+  ".ico": "image/x-icon",
+  ".woff2": "font/woff2",
+  ".webp": "image/webp"
 };
 
 const server = http.createServer((req, res) => {
   const reqPath = decodeURIComponent((req.url || "/").split("?")[0]);
-  // Map root to site/index.html, add "site" prefix for other paths
+  // Map root to public/index.html, add "public" prefix for other paths
   let requested = reqPath;
   if (requested === "/") {
-    requested = "/site/index.html";
-  } else if (!requested.startsWith("/site/")) {
-    requested = "/site" + requested;
+    requested = "/public/index.html";
+  } else if (!requested.startsWith("/public/")) {
+    requested = "/public" + requested;
   }
   const filePath = path.resolve(root, `.${requested}`);
 
